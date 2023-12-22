@@ -10,6 +10,8 @@ import Contact from './container/Contact/Contact';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import Userroute from './routes/Userroute';
+import Adminroute from './routes/Adminroute'
 
 
 function App() {
@@ -18,20 +20,22 @@ function App() {
 
     <>
       <Provider store={store}>
-        <Header />
+        {/* <Header /> */}
         <Routes>
-          <Route exact path='/' element={<Index />} />
+          {/* <Route exact path='/' element={<Index />} /e
           <Route exact path='shop' element={<Shop />} />
           <Route exact path='testimonial' element={<Testimonial />} />
           <Route exact path='why' element={<Why />} />
-          <Route exact path='contact' element={<Contact />} />
+          <Route exact path='contact' element={<Contact />} /> */}
+          <Route exact path="/*" element={<Userroute />} />
+          <Route exact path="/admin/*" element={<Adminroute />} />
         </Routes>
-        <Index />
+        {/* <Index />
         <Shop></Shop>
         <Why />
         <Testimonial />
         <Contact />
-        <Footer />
+        <Footer /> */}
       </Provider>
     </>
 

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { toBeEnabled } from '@testing-library/jest-dom/matchers';
-import { forgetReqwest, loginReqwest, signupReqwest, signupreqwest } from '../../reducx/action/auth.action';
+// import { forgetReqwest, loginReqwest, signupReqwest, signupreqwest } from '../../reducx/action/auth.action';
 import { useDispatch } from 'react-redux';
+import { forgetReqwest, loginReqwest, signupReqwest } from '../../redux/action/auth.action';
 
 function Auth(props) {
 
@@ -13,7 +14,7 @@ function Auth(props) {
     if (type === 'login') {
         authobj = {
             email: yup.string().email("please enter valid email").required("please enter email"),
-            phone: yup.string().required("please enter phone")
+            phone: yup.string().required("please enter password")
         }
         inival = {
             email: '',
@@ -116,7 +117,7 @@ function Auth(props) {
                                             onBlur={handleBlur}
                                             errorText={errors.name && touched.name ? <span>{errors.name}</span> : ''}
                                         />
-                                        {errors.name && touched.name ? <InputError>{errors.name}</InputError> : null}
+                                        {/* {errors.name && touched.name ? <InputError>{errors.name}</InputError> : null} */}
                                     </div>
                                         : ''
                                 }

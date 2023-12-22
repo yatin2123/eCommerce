@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+// import { auth } from "../../firebase";
 
 export const signupAPI = (data) => {
     console.log(data);

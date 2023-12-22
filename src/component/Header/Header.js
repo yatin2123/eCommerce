@@ -44,11 +44,7 @@ function Header(props) {
                                 <NavLink className="nav-link scrollto" to="contact">Contact</NavLink>
                             </li>
                         </ul>
-                        {/* {auth.user ? <NavLink to="/" className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline" onClick={handleLogout()}>Logout</span>
-                    </NavLink> : <NavLink to="/auth" className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </NavLink>} */}
+                       
                         <div class="user_option">
                             {auth.user ? <NavLink to={"/"}><span onClick={handleLogout()}>Logout</span></NavLink> :
                                 <NavLink to={"/auth"}><span>Login/ Signup</span></NavLink>
