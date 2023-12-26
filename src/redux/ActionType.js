@@ -3,6 +3,10 @@
 
 export const SIGNUP_REQWEST = "SIGNUP_REQWEST";
 
+export const AAD_SHOP = "AAD_SHOP"
+
+export const GET_SHOP = "GET_SHOP"
+
 export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE";
 
 export const AUTH_ERROR = "AUTH_ERROR";

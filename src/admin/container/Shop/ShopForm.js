@@ -13,14 +13,6 @@ import { useParams } from 'react-router-dom';
 function ShopForm({onHandleSubmit, onupdte}) {
     const [open, setOpen] = React.useState(false);
 
-    useEffect(()=>{
-        if(onupdte){
-            handleClickOpen();
-            setValues(onupdte)
-        }
-    },[onupdte])
-
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -53,12 +45,6 @@ function ShopForm({onHandleSubmit, onupdte}) {
         onSubmit: (values, action) => {
             console.log(values);
             onHandleSubmit(values)
-
-            if (updte) {
-                // handleUpdate(values);
-            } else {
-                Tabledata(values)
-            }
 
             action.resetForm();
             handleClose();

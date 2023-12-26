@@ -103,7 +103,7 @@ export default function Doctor({ children }) {
     };
 
     const Iconlist = [
-        {lable:"Shop", icon:< ShoppingCartIcon/>, to: "/admin/Medisin"},
+        {lable:"Shop", icon:< ShoppingCartIcon/>, to: "/admin/shop"},
        
     ]
 
