@@ -15,39 +15,20 @@ const initialState = {
 
 export const addShopdata = createAsyncThunk(
 
-    'shop/add',
+    'category/add',
 
     async (data) => {
         console.log(data);
-        const rno = Math.floor(Math.random() * 100000);
-        const storageRef = ref(storage, 'shop/' + rno + "_" + data);
-        let shopdata = { ...data };
-        console.log(shopdata);
 
-        // 'file' comes from the Blob or File API
+        try {
+            const docRef = await addDoc(collection(db, "category"), data);
+            console.log("Document written with ID: ", docRef.id);
 
-        await uploadBytes(storageRef, data).then(async (snapshot) => {
-            console.log('Uploaded a blob or file!');
-            await getDownloadURL(snapshot.ref)
-                .then(async (url) => {
-                    console.log(url);
-                    try {
-                        const docRef = await addDoc(collection(db, "users"), {
-                            first: "Ada",
-                            last: "Lovelace",
-                            born: 1815
-                        });
-                        // console.log("Document written with ID: ", docRef.id);
-                    } catch (e) {
-                        console.error("Error adding document: ", e);
-                    }
+            return { ...data, id: docRef.id }
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
 
-                })
-            console.log(shopdata);
-        })
-            .catch((error) => console.log(error))
-
-        return shopdata;
     }
 )
 
@@ -66,4 +47,4 @@ export const shopSlice = createSlice({
     }
 })
 
-export default shopSlice.reducer
+export default shopSlice.reducer 

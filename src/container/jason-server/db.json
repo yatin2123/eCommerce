@@ -1,0 +1,26 @@
+{
+    "shop": [
+      {
+        "id": 2,
+        "name": "Jakafi",
+        "price": 85,
+        "expiry": 2023,
+        "desc": "Ruxolitinib, sold under the brand name Jakafi among others, is a medication used for the treatment of intermediate or high-risk myelofibrosis, a type of myeloproliferative neoplasm that affects the bone."
+      },
+      {
+        "id": 3,
+        "name": "Hydrea",
+        "price": 85,
+        "expiry": 2023,
+        "desc": "Hydrea (hydroxyurea) is an antineoplastic (anti-cancer) agent used to treat melanoma, resistant chronic myelocytic leukemia, and recurrent, metastatic, or inoperable carcinoma of the ovary and primary squamous cell (epidermoid) carcinomas of the head and neck."
+      },
+      {
+        "id": 4,
+        "name": "Hiprex",
+        "price": 85,
+        "expiry": 2023,
+        "desc": "Hexamethylenetetramine, also known as methenamine, hexamine, or urotropin, is a heterocyclic organic compound with the formula (CH₂)₆N₄. This white crystalline compound is highly soluble in water and polar organic solvents. It has a cage-like structure similar to adamantane"
+      }
+    ]
+
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -12,6 +12,13 @@ import { useParams } from 'react-router-dom';
 
 function ShopForm({onHandleSubmit, onupdte}) {
     const [open, setOpen] = React.useState(false);
+
+    // useEffect(()=>{
+        
+    //         handleClickOpen();
+    //         // setValues(onupdte)
+        
+    // },[])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -68,7 +75,7 @@ function ShopForm({onHandleSubmit, onupdte}) {
                     <TextField
 
                         margin="dense"
-                        id="name"
+                       
                         name="name"
                         label="Name"
                         type="text"
@@ -82,7 +89,7 @@ function ShopForm({onHandleSubmit, onupdte}) {
                     <TextField
 
                         margin="dense"
-                        id="price"
+                       
                         name="price"
                         label="Price"
                         type="text"
@@ -97,7 +104,7 @@ function ShopForm({onHandleSubmit, onupdte}) {
                     <TextField
 
                         margin="dense"
-                        id="date"
+                       
                         name="date"
                         label="date"
                         type="date"
