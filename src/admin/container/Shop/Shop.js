@@ -1,98 +1,158 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
-import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
-import { useEffect } from "react";
-
-import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 
-import ShopForm from "./ShopForm";
+import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addShopdata,
   deleteShopdata,
   getShopdata,
-  updateShopdata,
 } from "../../../container/slice/shop.slice";
+import { IconButton } from "@mui/material";
 
-export default function Shop() {
-  const [updte, setUpdate] = useState(false);
-
-  // const shop = useSelector(state => state.shop)
-  // console.log(shop);
+const ShopForm = () => {
+  const [open, setOpen] = React.useState(false);
 
   const shop = useSelector((state) => state.shop);
   console.log(shop);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
-    getShopdata();
+    dispatch(getShopdata());
   }, []);
 
-  const handleFormSubmit = (data) => {
-    if (updte) {
-      dispatch(updateShopdata(data));
-    } else {
-      dispatch(addShopdata(data));
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  const handleEdit = (data) => {
-    setUpdate(data);
+  const handleClose = () => {
+    setOpen(false);
   };
+  let shopSchema = yup.object().shape({
+    name: yup.string().required("please enter your name."),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+    },
+    validationSchema: shopSchema,
+
+    onSubmit: (values) => {
+      console.log(values);
+
+      dispatch(addShopdata(values));
+    },
+  });
 
   const handleDelete = (id) => {
-    console.log(id);
     dispatch(deleteShopdata(id));
   };
 
   const columns = [
-    { field: "name", headerName: "Name", width: 130 },
-    { field: "price", headerName: "Price", width: 130 },
-    { field: "date", headerName: "date", width: 130 },
+    {
+      field: "firstName",
+      headerName: "First name",
+      width: 150,
+      editable: true,
+    },
+
     {
       field: "Action",
       headerName: "Action",
 
-      renderCell: (params) => (
+      renderCell: (params) => {
         <>
-          <IconButton
-            aria-label="delete"
-            onClick={() => handleEdit(params.row)}
-          >
-            <EditIcon />
-          </IconButton>
-
           <IconButton
             aria-label="delete"
             onClick={() => handleDelete(params.row.id)}
           >
             <DeleteIcon />
           </IconButton>
-        </>
-      ),
+          {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
+        </>;
+      },
     },
   ];
 
+  const rows = [
+    { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
+    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
+    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
+    { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
+    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  ];
+
+  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
+    formik;
+
+  console.log(shop.shop);
   return (
-    <div>
-      <ShopForm onHandleSubmit={handleFormSubmit} onupdte={updte} />
-      <div style={{ height: 400, width: "100%" }}>
+    <form onSubmit={handleSubmit}>
+      <React.Fragment>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Open form dialog
+        </Button>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Subscribe</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To subscribe to this website, please enter your email address
+              here. We will send updates occasionally.
+            </DialogContentText>
+            <TextField
+              margin="dense"
+              id="name"
+              label="Email Address"
+              type="email"
+              fullWidth
+              variant="standard"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+            />
+            {errors.name && touched.name ? <span>{errors.name}</span> : null}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleSubmit}>ADD</Button>
+          </DialogActions>
+        </Dialog>
+      </React.Fragment>
+
+      <Box sx={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={shop.shop}
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
+              paginationModel: {
+                pageSize: 5,
+              },
             },
           }}
-          pageSizeOptions={[5, 10]}
+          pageSizeOptions={[5]}
           checkboxSelection
+          disableRowSelectionOnClick
         />
-      </div>
-    </div>
+      </Box>
+    </form>
   );
-}
+};
+
+export default ShopForm;
