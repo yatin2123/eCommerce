@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@mui/material/Button";
@@ -10,6 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
 
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
@@ -18,19 +19,23 @@ import {
   addShopdata,
   deleteShopdata,
   getShopdata,
+  updateShopdata,
 } from "../../../container/slice/shop.slice";
 import { IconButton } from "@mui/material";
 
 const ShopForm = () => {
   const [open, setOpen] = React.useState(false);
 
+  const [update, setUpdate] = useState(false)
+  // console.log(update);
+
   const shop = useSelector((state) => state.shop);
-  console.log(shop);
+  console.log(shop.shop);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getShopdata());
-  }, []);
+  }, [dispatch]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,10 +54,19 @@ const ShopForm = () => {
     },
     validationSchema: shopSchema,
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (data, action) => {
+      console.log(data);      
+      if (update) {
+        console.log(update);
+        dispatch(updateShopdata(data))
+      } else {
+        dispatch(addShopdata(data));
+      }
 
-      dispatch(addShopdata(values));
+      setValues(update)
+
+      action.resetForm();
+      handleClose()
     },
   });
 
@@ -60,45 +74,56 @@ const ShopForm = () => {
     dispatch(deleteShopdata(id));
   };
 
+  const handleEdite = (data) => {
+    console.log(data);
+    setUpdate(data)
+    setValues(data)
+    handleClickOpen()
+  }
+
   const columns = [
     {
-      field: "firstName",
+      field: "name",
       headerName: "First name",
       width: 150,
       editable: true,
     },
 
     {
-      field: "Action",
+      field: "action",
       headerName: "Action",
-
+      width: 130,
+      // disableColumnMenu: true,
       renderCell: (params) => {
-        <>
-          <IconButton
-            aria-label="delete"
-            onClick={() => handleDelete(params.row.id)}
-          >
-            <DeleteIcon />
-          </IconButton>
-          {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
-        </>;
+        return (
+          <>
+            <IconButton
+              aria-label="delete"
+              onClick={() => handleDelete(params.row.id)}
+            >
+
+              <DeleteIcon />
+
+            </IconButton>
+
+
+            <IconButton
+              aria-label="edite"
+              onClick={() => handleEdite(params.row)}
+            >
+
+              <EditIcon />
+
+            </IconButton>
+            {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
+          </>
+        )
+
       },
     },
   ];
 
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
-
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
+  const { handleSubmit, handleChange, handleBlur, values, errors, touched , setValues} =
     formik;
 
   console.log(shop.shop);
@@ -106,10 +131,10 @@ const ShopForm = () => {
     <form onSubmit={handleSubmit}>
       <React.Fragment>
         <Button variant="outlined" onClick={handleClickOpen}>
-          Open form dialog
+          category
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Subscribe</DialogTitle>
+          <DialogTitle>category</DialogTitle>
           <DialogContent>
             <DialogContentText>
               To subscribe to this website, please enter your email address
@@ -137,7 +162,7 @@ const ShopForm = () => {
 
       <Box sx={{ height: 400, width: "100%" }}>
         <DataGrid
-          rows={rows}
+          rows={shop.shop}
           columns={columns}
           initialState={{
             pagination: {

@@ -10,13 +10,13 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBQov3afa6bgnqpEDJAE42QwijgTAoJKIc",
+  apiKey: "AIzaSyDfMxnYFafe6r-LuNybpnV6cseYJ8iBAVM",
   authDomain: "project-f4c06.firebaseapp.com",
   projectId: "project-f4c06",
   storageBucket: "project-f4c06.appspot.com",
-  messagingSenderId: "590522682563",
-  appId: "1:590522682563:web:d49acbccabd91d15b2e676",
-  measurementId: "G-47YSS16LY2"
+  messagingSenderId: "180552207503",
+  appId: "1:180552207503:web:1b5e5444e5fd0690f9f4fa",
+  measurementId: "G-3W9HWN61CS"
 };
 
 // Initialize Firebase
@@ -25,3 +25,5 @@ const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+

@@ -82,9 +82,9 @@ export const shopSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addShopdata.fulfilled, (state, action) => {
       console.log(action.payload);
-      state.isLoding = false;
+    
       state.shop = state.shop.concat(action.payload);
-      state.error = null;
+     
     });
 
     builder.addCase(deleteShopdata.fulfilled, (state, action) => {
@@ -96,8 +96,9 @@ export const shopSlice = createSlice({
     });
 
     builder.addCase(updateShopdata.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.shop = state.shop.map((v) => {
-        if (v.id === action.payload) {
+        if (v.id === action.payload.id) {
           return action.payload;
         } else {
           return v;
