@@ -5,13 +5,11 @@ import { signupReducer } from "./auth.reducer";
 import alertSlice from "../../container/slice/alert.slice";
 import { shopReducer } from "./shop.reducer";
 import shopSlice from "../../container/slice/shop.slice";
+import subcategorySlice from "../../container/slice/subcategory.slice";
 
 export const rootReduce = combineReducers({
-   
-    auth: signupReducer,
-    alert: alertSlice,
-    shop: shopSlice
-    // shop: shopSlice
-    // shopadd : shopReducer
-    
-})
+  auth: signupReducer,
+  alert: alertSlice,
+  shop: shopSlice,
+  sbucategory: subcategorySlice,
+});
