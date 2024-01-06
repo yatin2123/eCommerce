@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,17 +10,32 @@ import DialogTitle from "@mui/material/DialogTitle";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import { addsubcategory } from "../../container/slice/subcategory.slice";
+import { addsubcategory, deletesubcategory, getsubcategory, updatesubcategory } from "../../container/slice/subcategory.slice";
+import { getShopdata } from "../../container/slice/shop.slice";
+import { IconButton } from "@mui/material";
 
 const Subcategory = () => {
   const [open, setOpen] = React.useState(false);
 
+  const [update, setUpdate] = useState(false)
+
   const subcategory = useSelector((state) => state.sbucategory);
   console.log(subcategory);
 
+  const shopdata = useSelector((state) => state.shop)
+  console.log(shopdata);
+
   const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(getsubcategory())
+  },[dispatch])
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,12 +58,38 @@ const Subcategory = () => {
       console.log("yyyyyyyyyyy");
       console.log(values);
 
-      dispatch(addsubcategory());
-      handleClose();
+      if(update){
+        dispatch(updatesubcategory())
+      } else{
+        dispatch(addsubcategory(values));
+      }
+
+      setValues(update)
+
+      action.resetForm()
     },
   });
 
+
+  const handleDelete = (id) => {
+    dispatch(deletesubcategory(id))
+  }
+
+  const handleEdite = (data) => {
+      setUpdate(data)
+      setValues(data)
+      handleClickOpen()
+  }
+
   const columns = [
+    {
+      
+      field: "name",
+      headerName: "Id",
+      width: 150,
+      editable: true,
+    },
+
     {
       field: "name",
       headerName: "First name",
@@ -56,37 +97,43 @@ const Subcategory = () => {
       editable: true,
     },
 
-    // {
-    //   field: "action",
-    //   headerName: "Action",
-    //   width: 130,
-    //   // disableColumnMenu: true,
-    //   renderCell: (params) => {
-    //     return (
-    //       <>
-    //         <IconButton
-    //           aria-label="delete"
-    //           onClick={() => handleDelete(params.row.id)}
-    //         >
+    {
+      field: "action",
+      headerName: "Action",
+      width: 130,
+      // disableColumnMenu: true,
+      renderCell: (params) => {
+        return (
+          <>
 
-    //           <DeleteIcon />
+            {
+              shopdata.shopdata.map((v) => v.id === subcategory.subcategory.id)
+            }
 
-    //         </IconButton>
 
-    //         <IconButton
-    //           aria-label="edite"
-    //           onClick={() => handleEdite(params.row)}
-    //         >
+            <IconButton
+              aria-label="delete"
+              onClick={() => handleDelete(params.row.id)}
+            >
 
-    //           <EditIcon />
+              <DeleteIcon />
 
-    //         </IconButton>
-    //         {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
-    //       </>
-    //     )
+            </IconButton>
 
-    //   },
-    // },
+            <IconButton
+              aria-label="edite"
+              onClick={() => handleEdite(params.row)}
+            >
+
+              <EditIcon />
+
+            </IconButton>
+            {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
+          </>
+        )
+
+      },
+    },
   ];
 
   const rows = [
@@ -101,7 +148,7 @@ const Subcategory = () => {
     { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
 
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
+  const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } =
     formik;
   return (
     <form onSubmit={handleSubmit}>
@@ -120,14 +167,17 @@ const Subcategory = () => {
             <select
               name="subcategory"
               id="subcategory"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.name}
+
             >
-              {/* <option value="0"></option> */}
-              {/* {subcategory.subcategory.map((v) => {
-                return <option value={v.id}>{v.name}</option>;
-              })} */}
+              <option value="0">select</option>
+            
+              {shopdata.shop.map((v) => {
+                console.log(v);
+                return(
+                  <option value={v.id}>{v.name}</option>
+                )
+                // return <option value={v.id}>{v.name}</option>;
+              })}
             </select>
             {errors.subcategory && touched.subcategory ? (
               <span>{errors.name}</span>
@@ -136,7 +186,7 @@ const Subcategory = () => {
             <TextField
               margin="dense"
               id="name"
-              label="Email Address"
+              label="Subcategory Name"
               type="name"
               fullWidth
               variant="standard"

@@ -143,7 +143,7 @@ const ShopForm = () => {
             <TextField
               margin="dense"
               id="name"
-              label="Email Address"
+              label="Category Name"
               type="email"
               fullWidth
               variant="standard"

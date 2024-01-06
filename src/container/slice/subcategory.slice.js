@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const initialState = {
@@ -25,6 +25,47 @@ export const addsubcategory = createAsyncThunk(
   }
 );
 
+export const getsubcategory = createAsyncThunk(
+  "subcategory/get",
+  async () => {
+    let data = [];
+
+    const querySnapshot = await getDoc(collection(db, "subcategory"));
+    querySnapshot.forEach((doc) => {
+      data.push({ ...doc.data(), id: doc.id });
+    });
+
+    return data;
+  }
+)
+
+export const deletesubcategory = createAsyncThunk(
+  "subcategory/delete",
+  async (id) => {
+
+    await deleteDoc(doc(db, "subcategory", id));
+
+    return id;
+
+  }
+)
+
+export const updatesubcategory = createAsyncThunk(
+  "subcategory/put",
+
+  async (data) => {
+
+    const washingtonRef = doc(db, "category", data.id);
+
+    let shopData = { ...data, id: data.id };
+    delete shopData.id;
+
+    await updateDoc(washingtonRef, shopData);
+    return data;
+
+  }
+)
+
 export const subcategorySlice = createSlice({
   name: "subcategory",
   initialState: initialState,
@@ -34,6 +75,24 @@ export const subcategorySlice = createSlice({
       console.log(action);
       state.subcategory = state.subcategory.concat(action.payload);
     });
+
+    builder.addCase(getsubcategory.fulfilled, (state, action) => {
+      state.subcategory = action.payload
+    })
+
+    builder.addCase(deletesubcategory.fulfilled, (state, action) => {
+      state.subcategory = state.subcategory.filter((v) => v.id !== action.payload)
+    })
+
+    builder.addCase(updatesubcategory.fulfilled, (state, action) => {
+      state.subcategory = state.subcategory.map((v) => {
+        if(v.id === action.payload.id){
+            return action.payload
+        } else {
+          return v
+        }
+      })
+    })
   },
 });
 
