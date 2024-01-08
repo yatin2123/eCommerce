@@ -35,7 +35,7 @@ const Subcategory = () => {
 
   useEffect(() => {
     dispatch(getsubcategory())
-  },[dispatch])
+  }, [dispatch])
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -54,14 +54,14 @@ const Subcategory = () => {
     },
 
     validationSchema: subcategorySchema,
-    onSubmit: (values, action) => {
+    onSubmit: (data, action) => {
       console.log("yyyyyyyyyyy");
-      console.log(values);
+      console.log(data);
 
-      if(update){
-        dispatch(updatesubcategory())
-      } else{
-        dispatch(addsubcategory(values));
+      if (update) {
+        dispatch(updatesubcategory(data))
+      } else {
+        dispatch(addsubcategory(data));
       }
 
       setValues(update)
@@ -76,23 +76,35 @@ const Subcategory = () => {
   }
 
   const handleEdite = (data) => {
-      setUpdate(data)
-      setValues(data)
-      handleClickOpen()
+    setUpdate(data)
+    setValues(data)
+    handleClickOpen()
   }
 
   const columns = [
     {
-      
-      field: "name",
-      headerName: "Id",
+
+      field: "name ",
+      headerName: "Category name",
       width: 150,
       editable: true,
+
+      renderCell: (params) => {
+        console.log(params);
+
+       let fdata =  shopdata.shop.filter((v) => v.id === params.row.id )
+
+        if (fdata.length > 0) {
+          return fdata[0];
+        } else {
+          return null ;
+        }
+      }
     },
 
     {
       field: "name",
-      headerName: "First name",
+      headerName: "subcategory name",
       width: 150,
       editable: true,
     },
@@ -105,11 +117,6 @@ const Subcategory = () => {
       renderCell: (params) => {
         return (
           <>
-
-            {
-              shopdata.shopdata.map((v) => v.id === subcategory.subcategory.id)
-            }
-
 
             <IconButton
               aria-label="delete"
@@ -136,18 +143,6 @@ const Subcategory = () => {
     },
   ];
 
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
-
   const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } =
     formik;
   return (
@@ -165,17 +160,19 @@ const Subcategory = () => {
             </DialogContentText>
 
             <select
-              name="subcategory"
-              id="subcategory"
+              name="subcategory_id"
+              id="subcategory_id"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.subcategory_id}
 
             >
               <option value="0">select</option>
-            
+
               {shopdata.shop.map((v) => {
                 console.log(v);
-                return(
-                  <option value={v.id}>{v.name}</option>
-                )
+                return <option value={v.id}>{v.name}</option>
+
                 // return <option value={v.id}>{v.name}</option>;
               })}
             </select>
@@ -194,7 +191,7 @@ const Subcategory = () => {
               onBlur={handleBlur}
               value={values.name}
             />
-            {errors.subcategory && touched.subcategory ? (
+            {errors.name && touched.name ? (
               <span>{errors.name}</span>
             ) : null}
           </DialogContent>

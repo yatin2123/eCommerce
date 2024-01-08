@@ -19,6 +19,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+import CategoryIcon from '@mui/icons-material/Category';
+
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { Link } from 'react-router-dom';
@@ -103,7 +105,9 @@ export default function Doctor({ children }) {
     };
 
     const Iconlist = [
-        {lable:"Shop", icon:< ShoppingCartIcon/>, to: "/admin/shop"},
+        {lable:"Category ", icon:<CategoryIcon/>, to: "/admin/shop"},
+
+        {lable:"Subcategory    ",  to: "/admin/subcategory"},
        
     ]
 
