@@ -16,6 +16,7 @@ export const addsubcategory = createAsyncThunk(
 
     try {
       const docRef = await addDoc(collection(db, "subcategory"), data);
+  
       console.log("Document written with ID: ", docRef.id);
 
       return { ...data, id: docRef.id };

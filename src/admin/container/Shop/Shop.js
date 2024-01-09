@@ -45,12 +45,12 @@ const ShopForm = () => {
     setOpen(false);
   };
   let shopSchema = yup.object().shape({
-    name: yup.string().required("please enter your name."),
+    cat_name: yup.string().required("please enter your name."),
   });
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      cat_name: "",
     },
     validationSchema: shopSchema,
 
@@ -83,7 +83,7 @@ const ShopForm = () => {
 
   const columns = [
     {
-      field: "name",
+      field: "cat_name",
       headerName: "First name",
       width: 150,
       editable: true,
@@ -142,16 +142,16 @@ const ShopForm = () => {
             </DialogContentText>
             <TextField
               margin="dense"
-              id="name"
+              id="cat_name"
               label="Category Name"
-              type="email"
+              type="text"
               fullWidth
               variant="standard"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.name}
+              value={values.cat_name}
             />
-            {errors.name && touched.name ? <span>{errors.name}</span> : null}
+            {errors.cat_name && touched.cat_name ? <span>{errors.cat_name}</span> : null}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

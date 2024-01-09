@@ -45,12 +45,14 @@ const Subcategory = () => {
   };
 
   let subcategorySchema = yup.object().shape({
-    name: yup.string().required("please enter your name"),
+    sub_name: yup.string().required("please enter your name"),
+   
   });
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      sub_name: "",
+      cart_id: ""
     },
 
     validationSchema: subcategorySchema,
@@ -65,7 +67,7 @@ const Subcategory = () => {
       }
 
       setValues(update)
-
+      handleClose();
       action.resetForm()
     },
   });
@@ -83,8 +85,7 @@ const Subcategory = () => {
 
   const columns = [
     {
-
-      field: "name ",
+      field: "cat_name",
       headerName: "Category name",
       width: 150,
       editable: true,
@@ -92,10 +93,11 @@ const Subcategory = () => {
       renderCell: (params) => {
         console.log(params);
 
-       let fdata =  shopdata.shop.filter((v) => v.id === params.row.id )
+       let fdata =  shopdata.shop.filter((v) => v.cart_id === params.row.cat_name)
+       console.log(fdata);
 
         if (fdata.length > 0) {
-          return fdata[0];
+          return fdata[0].cat_name;
         } else {
           return null ;
         }
@@ -103,7 +105,7 @@ const Subcategory = () => {
     },
 
     {
-      field: "name",
+      field: "sub_name",
       headerName: "subcategory name",
       width: 150,
       editable: true,
@@ -145,6 +147,7 @@ const Subcategory = () => {
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } =
     formik;
+    console.log(values);
   return (
     <form onSubmit={handleSubmit}>
       <React.Fragment>
@@ -160,44 +163,42 @@ const Subcategory = () => {
             </DialogContentText>
 
             <select
-              name="subcategory_id"
-              id="subcategory_id"
+             
+              id="cart_id"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.subcategory_id}
-
+              value={values.cart_id}
             >
               <option value="0">select</option>
 
               {shopdata.shop.map((v) => {
                 console.log(v);
-                return <option value={v.id}>{v.name}</option>
-
+                return <option value={v.id}>{v.cat_name}</option>
                 // return <option value={v.id}>{v.name}</option>;
               })}
             </select>
-            {errors.subcategory && touched.subcategory ? (
-              <span>{errors.name}</span>
-            ) : null}
+            {/* {errors.cart_id && touched.cart_id ? (
+              <span>{errors.cart_id }</span>
+            ) : null} */}
 
             <TextField
               margin="dense"
-              id="name"
+              id="sub_name"
               label="Subcategory Name"
-              type="name"
+              type="text"
               fullWidth
               variant="standard"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.name}
+              value={values.sub_name}
             />
-            {errors.name && touched.name ? (
-              <span>{errors.name}</span>
+            {errors.sub_name && touched.sub_name ? (
+              <span>{errors.sub_name}</span>
             ) : null}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSubmit}>Subscribe</Button>
+            <Button onClick={handleSubmit}>ADD</Button>
           </DialogActions>
         </Dialog>
       </React.Fragment>
