@@ -36,6 +36,7 @@ const Subcategory = () => {
   useEffect(() => {
     dispatch(getsubcategory())
   }, [dispatch])
+  
   const handleClickOpen = () => {
     setOpen(true);
   };

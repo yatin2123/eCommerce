@@ -108,6 +108,7 @@ export default function Doctor({ children }) {
         {lable:"Category ", icon:<CategoryIcon/>, to: "/admin/shop"},
 
         {lable:"Subcategory    ",  to: "/admin/subcategory"},
+        {lable:"Product",  to: "/admin/product"},
        
     ]
 

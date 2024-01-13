@@ -1,0 +1,256 @@
+
+import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog, { dialogClasses } from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useDispatch, useSelector } from 'react-redux';
+import { addproduct, deleteproduct, getproduct, updateproduct } from '../../../container/slice/product.slice';
+
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from '@mui/material';
+
+
+
+const ProductForm = () => {
+
+    const [open, setOpen] = React.useState(false);
+
+    const [update, setUpdate] = useState([])
+
+    const dispatch = useDispatch([])
+    const product = useSelector((state => state.product));
+    console.log(product);
+
+    const shop = useSelector((state => state.shop));
+    console.log(shop);
+
+    const subcategory = useSelector((state => state.sbucategory));
+    console.log(subcategory);
+
+    useEffect(() => {
+        dispatch(getproduct())
+    }, [dispatch])
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    let productschema = yup.object().shape({
+        pro_name: yup.string().required("please enter name"),
+        pro_des: yup.string().required("please enter des"),
+        pro_price: yup.number(),
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            pro_name: '',
+            pro_des: '',
+            pro_price: '',
+        },
+        validationSchema: productschema,
+        onSubmit: (data, action) => {
+            console.log('yyyyyyyyyyyyyyyyyyyyy');
+            console.log(values);
+
+            if(update){
+                dispatch(updateproduct(data))
+            } else {
+                dispatch(addproduct(data))
+            }
+           
+            setValues(update)
+            handleClose()
+            action.resetForm()
+        },
+    });
+
+    const handleDelete = (id) => {
+        dispatch(deleteproduct(id))
+    }
+
+    const handleEdite = (data) => {
+        setUpdate(data)
+        handleClickOpen();
+        setValues(data)
+    }
+    const columns = [
+
+        {
+            field: 'pro_name',
+            headerName: 'name',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'pro_des',
+            headerName: 'des',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'pro_price',
+            headerName: 'price',
+            type: 'number',
+            width: 110,
+            editable: true,
+        },
+        {
+            field:'action',
+            headerName: 'action',
+            renderCell: (params) => {
+                return (
+                  <>
+        
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => handleDelete(params.row.id)}
+                    >
+        
+                      <DeleteIcon/>
+        
+                    </IconButton>
+        
+                    <IconButton
+                      aria-label="edite"
+                      onClick={() => handleEdite(params.row)}
+                    >
+        
+                      <EditIcon />
+        
+                    </IconButton>
+                    {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
+                  </>
+                )
+        
+              },
+        }
+    ];
+
+    const { handleSubmit, handleChange, handleBlur, values, setValues } = formik;
+    return (
+        <form onSubmit={handleSubmit}>
+            <React.Fragment>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    Product
+                </Button>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Product</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            To subscribe to this website, please enter your email address
+                            here. We will send updates occasionally.
+                        </DialogContentText>
+
+                        <select
+
+                            id="cart_id"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.cart_id}
+                        >
+                            <option value="0">select</option>
+
+                            {shop.shop.map((v) => {
+                                console.log(v);
+                                return <option value={v.id}>{v.cat_name}</option>
+                                // return <option value={v.id}>{v.name}</option>;
+                            })}
+                        </select>
+
+                        <select
+
+                            id="cart_id"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.cart_id}
+                        >
+                            <option value="0">select</option>
+
+                            {subcategory.subcategory.map((v) => {
+                                console.log(v);
+                                return <option value={v.id}>{v.sub_name}</option>
+                                // return <option value={v.id}>{v.name}</option>;
+                            })}
+                        </select>
+
+                        <TextField
+                            margin="dense"
+                            id="pro_name"
+                            label="Product Name"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.pro_name}
+                        />
+
+
+                        <TextField
+                            margin="dense"
+                            id="pro_des"
+                            label="Product Name"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.pro_des}
+                        />
+
+                        <TextField
+                            margin="dense"
+                            id="pro_price"
+                            label="Product Price"
+                            type="number"
+                            fullWidth
+                            variant="standard"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.pro_price}
+                        />
+
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleSubmit}>ADD</Button>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment>
+
+            <Box sx={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={product.product}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: 5,
+                            },
+                        },
+                    }}
+                    pageSizeOptions={[5]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                />
+            </Box>
+        </form>
+    );
+};
+
+export default ProductForm;
