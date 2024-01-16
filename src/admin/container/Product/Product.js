@@ -61,18 +61,21 @@ const ProductForm = () => {
             pro_name: '',
             pro_des: '',
             pro_price: '',
+            file: ''
         },
         validationSchema: productschema,
         onSubmit: (data, action) => {
             console.log('yyyyyyyyyyyyyyyyyyyyy');
-            console.log(values);
+            console.log(data);
 
-            if(update){
-                dispatch(updateproduct(data))
-            } else {
-                dispatch(addproduct(data))
-            }
-           
+            // if (update) {
+            //     dispatch(updateproduct(data))
+            // } else {
+            //     dispatch(addproduct(data))
+            // }
+
+            dispatch(addproduct(data))
+
             setValues(update)
             handleClose()
             action.resetForm()
@@ -91,16 +94,38 @@ const ProductForm = () => {
     const columns = [
 
         {
-            field: 'pro_name',
-            headerName: 'name',
+            field: 'car_id',
+            headerName: 'product name',
             width: 150,
             editable: true,
+            renderCell: (params) => {
+                console.log(params);
+                let pData = shop.shop.filter((v) => v.id === params.row.cart_id)
+                console.log(pData);
+
+                if (pData.length > 0) {
+                    return pData[0].cat_name
+                } else {
+                    return null
+                }
+            },
         },
         {
-            field: 'pro_des',
-            headerName: 'des',
+            field: 'sub_id',
+            headerName: 'subcategory name',
             width: 150,
             editable: true,
+            renderCell: (params) => {
+                console.log(params);
+                let sData = subcategory.subcategory.filter((v) => v.id === params.row.sub_id)
+                console.log(sData);
+
+                if (sData.length > 0) {
+                    return sData[0].sub_name
+                } else {
+                    return null
+                }
+            },
         },
         {
             field: 'pro_price',
@@ -109,39 +134,43 @@ const ProductForm = () => {
             width: 110,
             editable: true,
         },
+
         {
-            field:'action',
+            field: 'file',
+            headerName: 'image',
+            width: 110,
+            editable: true,
+        },
+        {
+            field: 'action',
             headerName: 'action',
             renderCell: (params) => {
                 return (
-                  <>
-        
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => handleDelete(params.row.id)}
-                    >
-        
-                      <DeleteIcon/>
-        
-                    </IconButton>
-        
-                    <IconButton
-                      aria-label="edite"
-                      onClick={() => handleEdite(params.row)}
-                    >
-        
-                      <EditIcon />
-        
-                    </IconButton>
-                    {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
-                  </>
+                    <>
+
+                        <IconButton
+                            aria-label="delete"
+                            onClick={() => handleDelete(params.row.id)}
+                        >
+                            <DeleteIcon />
+
+                        </IconButton>
+
+                        <IconButton
+                            aria-label="edite"
+                            onClick={() => handleEdite(params.row)}
+                        >
+                            <EditIcon />
+                        </IconButton>
+                        {/* <button onClick={() => handleDelete(params.row.id)}>X</button> */}
+                    </>
                 )
-        
-              },
+
+            },
         }
     ];
 
-    const { handleSubmit, handleChange, handleBlur, values, setValues } = formik;
+    const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, setValues } = formik;
     return (
         <form onSubmit={handleSubmit}>
             <React.Fragment>
@@ -174,10 +203,10 @@ const ProductForm = () => {
 
                         <select
 
-                            id="cart_id"
+                            id="sub_id"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.cart_id}
+                            value={values.sub_id}
                         >
                             <option value="0">select</option>
 
@@ -204,7 +233,7 @@ const ProductForm = () => {
                         <TextField
                             margin="dense"
                             id="pro_des"
-                            label="Product Name"
+                            label="Product des"
                             type="text"
                             fullWidth
                             variant="standard"
@@ -224,6 +253,22 @@ const ProductForm = () => {
                             onBlur={handleBlur}
                             value={values.pro_price}
                         />
+
+                        <TextField
+                            name='file'
+                            type='file'
+                            fullWidth
+                            variant="standard"
+                            onChange={(event) => setFieldValue("file", event.target.files[0])}
+                        />
+
+                        {values.file && (
+                            <img
+                                src={typeof values.file === 'string' ? values.file : URL.createObjectURL(values.file)}
+                                width={"50px"}
+                                height={"50px"}
+                            />
+                        )}
 
                     </DialogContent>
                     <DialogActions>

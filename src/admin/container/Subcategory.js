@@ -86,7 +86,7 @@ const Subcategory = () => {
 
   const columns = [
     {
-      field: "cat_name",
+      field: "cat_id",
       headerName: "Category name",
       width: 150,
       editable: true,
@@ -94,12 +94,12 @@ const Subcategory = () => {
       renderCell: (params) => {
         console.log(params);
 
-       let fdata =  shopdata.shop.filter((v) => v.cart_id === params.row.cat_name)
+       let fdata =  shopdata.shop.filter((v) => v.id === params.row.cart_id)
        console.log(fdata);
 
         if (fdata.length > 0) {
           return fdata[0].cat_name;
-        } else {
+        } else {  
           return null ;
         }
       }

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import storage from "redux-persist/lib/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 const initialState = {
@@ -15,15 +17,34 @@ export const addproduct = createAsyncThunk(
     async (data) => {
         console.log(data);
 
-        try {
-            const docRef = await addDoc(collection(db, "produce"), data);
 
-            console.log("Document written with ID: ", docRef.id);
+        let aptdata = { ...data };
+        console.log(aptdata)
+        const rno = Math.floor(Math.random() * 100000);
+        console.log(rno);
+        const storageRef = ref(storage, 'appointment/' + rno + "_" + data.file.name);
+       
+        await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+            console.log('yyyyyyyyyyyyyyyyyyyyyyyy');
+            await getDownloadURL(snapshot.ref).then(async (url) => {
 
-            return { ...data, id: docRef.id };
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
+                let proapt = await addDoc(collection(db, "produce"), {...data, file: url, file_name: rno + '_' + data.file.name});
+                aptdata = { id: proapt.id, ...data, file: url, file_name: rno + '_' + data.file.name }
+            }) .catch((error) => console.log(error))
+
+        }) .catch((error) => console.log(error))
+
+        return aptdata;
+
+        // try {      
+        //     const docRef = await addDoc(collection(db, "produce"), data);
+
+        //     console.log("Document written with ID: ", docRef.id);
+
+        //     return { ...data, id: docRef.id };
+        // } catch (e) {
+        //     console.error("Error adding document: ", e);
+        // }
     }
 )
 
@@ -74,7 +95,7 @@ export const productSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(addproduct.fulfilled, (state, action) => {
-            console.log(action);
+            console.log(action);      
             state.product = state.product.concat(action.payload);
         });
 
