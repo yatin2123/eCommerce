@@ -54,6 +54,7 @@ const ProductForm = () => {
         pro_name: yup.string().required("please enter name"),
         pro_des: yup.string().required("please enter des"),
         pro_price: yup.number(),
+        file: yup.string(),
     });
 
     const formik = useFormik({
@@ -82,8 +83,8 @@ const ProductForm = () => {
         },
     });
 
-    const handleDelete = (id) => {
-        dispatch(deleteproduct(id))
+    const handleDelete = (data) => {
+        dispatch(deleteproduct(data))
     }
 
     const handleEdite = (data) => {
@@ -150,7 +151,7 @@ const ProductForm = () => {
 
                         <IconButton
                             aria-label="delete"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row)}
                         >
                             <DeleteIcon />
 
@@ -229,7 +230,21 @@ const ProductForm = () => {
                             value={values.pro_name}
                         />
 
+                        <TextField
+                            name='file'
+                            type='file'
+                            fullWidth
+                            variant="standard"
+                            onChange={(event) => setFieldValue("file", event.target.files[0])}
+                        />
 
+                        {values.file && (
+                            <img
+                                src={typeof values.file === 'string' ? values.file : URL.createObjectURL(values.file)}
+                                width={"50px"}
+                                height={"50px"}
+                            />
+                        )}
                         <TextField
                             margin="dense"
                             id="pro_des"
@@ -254,21 +269,7 @@ const ProductForm = () => {
                             value={values.pro_price}
                         />
 
-                        <TextField
-                            name='file'
-                            type='file'
-                            fullWidth
-                            variant="standard"
-                            onChange={(event) => setFieldValue("file", event.target.files[0])}
-                        />
 
-                        {values.file && (
-                            <img
-                                src={typeof values.file === 'string' ? values.file : URL.createObjectURL(values.file)}
-                                width={"50px"}
-                                height={"50px"}
-                            />
-                        )}
 
                     </DialogContent>
                     <DialogActions>
