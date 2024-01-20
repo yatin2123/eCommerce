@@ -25,7 +25,8 @@ const ProductForm = () => {
 
     const [open, setOpen] = React.useState(false);
 
-    const [update, setUpdate] = useState([])
+    const [update, setUpdate] = useState([]);
+    const [subdata, setSubdata] = useState([])
 
     const dispatch = useDispatch([])
     const product = useSelector((state => state.product));
@@ -66,7 +67,7 @@ const ProductForm = () => {
         },
         validationSchema: productschema,
         onSubmit: (data, action) => {
-            console.log('yyyyyyyyyyyyyyyyyyyyy');
+           
             console.log(data);
 
             // if (update) {
@@ -141,6 +142,12 @@ const ProductForm = () => {
             headerName: 'image',
             width: 110,
             editable: true,
+            renderCell: (params) => {
+                return (
+                   <img height={"100px"} src={(params.row.file)}/>
+                )
+
+            },
         },
         {
             field: 'action',
@@ -172,6 +179,20 @@ const ProductForm = () => {
     ];
 
     const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, setValues } = formik;
+
+    // const handlesubcat = (value) => {
+    //     console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+    //     console.log(value);
+
+    //     let fdata = subcategory.subcategory.filter((v) => v.cart_id === value)
+    //     console.log(fdata);
+    //     // setSubdata(fdata)
+    // }
+
+    const handleChange1 = (value) => {
+        console.log('iiiiiiiiiiiiii');
+        // Your implementation here
+    };
     return (
         <form onSubmit={handleSubmit}>
             <React.Fragment>
@@ -189,7 +210,11 @@ const ProductForm = () => {
                         <select
 
                             id="cart_id"
-                            onChange={handleChange}
+                            onChange={(event) => {
+                               
+                                handleChange1(event.target.value);
+                                // handlesubcat(event.target.value);
+                            }}
                             onBlur={handleBlur}
                             value={values.cart_id}
                         >
@@ -198,7 +223,7 @@ const ProductForm = () => {
                             {shop.shop.map((v) => {
                                 console.log(v);
                                 return <option value={v.id}>{v.cat_name}</option>
-                                // return <option value={v.id}>{v.name}</option>;
+                              
                             })}
                         </select>
 
@@ -214,7 +239,7 @@ const ProductForm = () => {
                             {subcategory.subcategory.map((v) => {
                                 console.log(v);
                                 return <option value={v.id}>{v.sub_name}</option>
-                                // return <option value={v.id}>{v.name}</option>;
+                               
                             })}
                         </select>
 

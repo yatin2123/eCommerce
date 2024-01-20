@@ -88,46 +88,81 @@ export const updateproduct = createAsyncThunk(
     async (data) => {
         console.log(data);
 
-        let prodata = { ...data };
-        console.log("Prodata:", prodata);
+        let prodata = []
 
-        const washingtonRef = doc(db, "product", data.id);
-
-        if(typeof data.file === 'string'){
+        if (typeof data.file === 'string') {
             console.log('rrrrrrrrrrrrrrrrrrrrrrr');
-            await updateDoc(washingtonRef,  { ...data, id: data.id });
-        } else{
-            const rno = Math.floor(Math.random() * 100000);
-            console.log(rno);
-    
-            const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
-            console.log("Storage Reference:", storageRef);
-    
-    
+            const washingtonRef = doc(db, "product", data.id);
+            let prodata = { ...data };
+            delete prodata.id;
+            console.log("Prodata:", prodata);
+
+            await updateDoc(washingtonRef, { ...data, id: data.id });
+        } else {
+
+            // const desertRef = ref(storage, 'product/' + data.file_name);
+            // console.log(desertRef);
+
+            // await deleteObject(desertRef).then(async (data) => {
+            //     const rno = Math.floor(Math.random() * 100000);
+            //     console.log(rno);
+
+            //     const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
+            //     console.log("Storage Reference:", storageRef);
+
+
+            //     // 'file' comes from the Blob or File API
+            //     console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+            //     await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+            //         console.log('Uploaded a blob or file!', snapshot);
+
+            //         await getDownloadURL(snapshot.ref)
+            //             .then(async (url) => {
+            //                 console.log(url);
+            //                 const washingtonRef = doc(db, "product", data.id);
+            //                 prodata = { ...data };
+            //                 delete prodata.id;
+
+            //                 await updateDoc(washingtonRef, { ...data, id: data.id });
+            //                 prodata.id = data.id
+            //             })
+            //         console.log(prodata);
+            //     })
+
+
+            // })
+
+            // const rno = Math.floor(Math.random() * 100000);
+            // console.log(rno);
+
+            // const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
+            // console.log("Storage Reference:", storageRef);
+
+
             // 'file' comes from the Blob or File API
-            console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
-            await uploadBytes(storageRef, data.file).then(async (snapshot) => {
-                console.log('Uploaded a blob or file!', snapshot);
-    
-                await getDownloadURL(snapshot.ref)
-                    .then(async (url) => {
-                        console.log(url);
-    
-                        let aptdoc = await addDoc(collection(db, "product"), { ...data, file: url, file_name: rno + '_' + data.file.name });
-                        console.log('aaaaaaaaaaaaaaaaa', aptdoc.id);
-    
-                        prodata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name }
-                    })
-                console.log(prodata);
-            }).catch((e) => console.log(e))
-            
+            // console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+            // await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+            //     console.log('Uploaded a blob or file!', snapshot);
+
+            //     await getDownloadURL(snapshot.ref)
+            //         .then(async (url) => {
+            //             console.log(url);
+
+            //             let aptdoc = await addDoc(collection(db, "product"), { ...data, file: url, file_name: rno + '_' + data.file.name });
+            //             console.log('aaaaaaaaaaaaaaaaa', aptdoc.id);
+
+            //             prodata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name }
+            //         })
+            //     console.log(prodata);
+            // })
+
         }
 
         return prodata
         // let productData =;
         // delete productData.id;
 
-       
+
         // return data;
     }
 )
