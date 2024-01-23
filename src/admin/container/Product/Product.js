@@ -178,21 +178,18 @@ const ProductForm = () => {
         }
     ];
 
+    const subcat = (value) => {
+        console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+        console.log(value);
+
+        let fdata = subcategory.subcategory.filter((v) => v.cart_id === value)
+        console.log(fdata);
+
+        setSubdata(fdata)
+    }
+    
     const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, setValues } = formik;
 
-    // const handlesubcat = (value) => {
-    //     console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
-    //     console.log(value);
-
-    //     let fdata = subcategory.subcategory.filter((v) => v.cart_id === value)
-    //     console.log(fdata);
-    //     // setSubdata(fdata)
-    // }
-
-    const handleChange1 = (value) => {
-        console.log('iiiiiiiiiiiiii');
-        // Your implementation here
-    };
     return (
         <form onSubmit={handleSubmit}>
             <React.Fragment>
@@ -212,7 +209,8 @@ const ProductForm = () => {
                             id="cart_id"
                             onChange={(event) => {
                                
-                                handleChange1(event.target.value);
+                                handleChange(event); 
+                                subcat(event.target.value);
                                 // handlesubcat(event.target.value);
                             }}
                             onBlur={handleBlur}
@@ -236,7 +234,7 @@ const ProductForm = () => {
                         >
                             <option value="0">select</option>
 
-                            {subcategory.subcategory.map((v) => {
+                            {subdata.map((v) => {
                                 console.log(v);
                                 return <option value={v.id}>{v.sub_name}</option>
                                

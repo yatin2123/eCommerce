@@ -100,6 +100,41 @@ export const updateproduct = createAsyncThunk(
             await updateDoc(washingtonRef, { ...data, id: data.id });
         } else {
 
+            const desertRef = ref(storage, 'product/' + data.file_name);
+            console.log(desertRef);
+
+            await deleteObject(desertRef).then(async (data) => {
+                const rno = Math.floor(Math.random() * 100000);
+                console.log(rno);
+        
+                const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
+                console.log("Storage Reference:", storageRef);
+        
+        
+                // 'file' comes from the Blob or File API
+                console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+                await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+                    console.log('Uploaded a blob or file!', snapshot);
+        
+                    await getDownloadURL(snapshot.ref)
+                        .then(async (url) => {
+                            console.log(url);
+        
+                            const washingtonRef = doc(db, "product", data.id);
+                            let prodata = { ...data };
+                            delete prodata.id;
+                            console.log("Prodata:", prodata);
+                
+                            await updateDoc(washingtonRef, { ...data, id: data.id });
+                            prodata.id = data.id
+                        })
+                    console.log(prodata);
+                }).catch((e) => console.log(e))
+
+            }).catch((error) => {
+                console.log(error);
+            });
+
             // const desertRef = ref(storage, 'product/' + data.file_name);
             // console.log(desertRef);
 
@@ -139,7 +174,7 @@ export const updateproduct = createAsyncThunk(
             // console.log("Storage Reference:", storageRef);
 
 
-            // 'file' comes from the Blob or File API
+
             // console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
             // await uploadBytes(storageRef, data.file).then(async (snapshot) => {
             //     console.log('Uploaded a blob or file!', snapshot);
