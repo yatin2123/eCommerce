@@ -7,6 +7,12 @@ function Header(props) {
     let auth = useSelector(state => state.auth)
 
 
+    const shop = useSelector(state => state.shop)
+    console.log(shop);
+
+    const sbucategory = useSelector(state => state.sbucategory);
+    console.log(sbucategory);
+
     const handleLogout = () => {
         console.log('yyyyyyyy');
     }
@@ -31,7 +37,63 @@ function Header(props) {
                             </li>
 
                             <li>
-                                <NavLink className="nav-link scrollto" to="shop">Shop</NavLink>
+                                <NavLink className="nav-link scrollto" to="shop"> <nav>
+                                    <div className="dropdown">
+                                        <button>Product <span className="fa fa-caret-right" /></button>
+                                        <div className="content">
+
+                                            <div className="row">
+                                                <div className="column">
+                                                    {shop.shop?.map(category => (
+                                                        console.log(category),
+                                                        <div className="column" key={category.id}>
+                                                            <h3>{category.cat_name}</h3>
+                                                            {category.sbucategory?.map(subcategory => (
+                                                                console.log(subcategory),
+                                                                <a href="#" key={subcategory.id}>{subcategory.sub_name}</a>
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                    {/* {
+                                                        sbucategory.sbucategory && sbucategory.sbucategory.map((v) => {
+                                                            return(
+                                                                <>
+                                                                    <h6>{v.sub_name}</h6>
+                                                                </>
+                                                            )
+                                                        })
+                                                    } */}
+                                                    {/* <a href="#">Playstation 4</a>
+                                                    <a href="#">Xbox One</a>
+                                                    <a href="#">Nintendo Switch</a>
+                                                    <a href="#">Retro Gaming</a> */}
+                                                </div>
+                                                {/* <div className="column">
+                                                    <h3>Women's</h3>
+                                                    <a href="#">Playstation 4</a>
+                                                    <a href="#">Playstation 3</a>
+                                                    <a href="#">Xbox One</a>
+                                                    <a href="#">Xbox 360</a>
+                                                    <a href="#">Nintendo Switch</a>
+                                                    <a href="#">PC Games</a>
+                                                </div>
+                                                <div className="column">
+                                                    <h3>Kid's</h3>
+                                                    <a href="#">Playstation 4</a>
+                                                    <a href="#">Playstation 3</a>
+                                                    <a href="#">Xbox One</a>
+                                                    <a href="#">Xbox 360</a>
+                                                    <a href="#">Nintendo Switch</a>
+                                                    <a href="#">Nintendo 3DS</a>
+                                                    <a href="#">Retro</a>
+                                                </div> */}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </nav></NavLink>
+
 
                             </li>
                             <li>
@@ -44,7 +106,7 @@ function Header(props) {
                                 <NavLink className="nav-link scrollto" to="contact">Contact</NavLink>
                             </li>
                         </ul>
-                       
+
                         <div class="user_option">
                             {auth.user ? <NavLink to={"/"}><span onClick={handleLogout()}>Logout</span></NavLink> :
                                 <NavLink to={"/auth"}><span>Login/ Signup</span></NavLink>
