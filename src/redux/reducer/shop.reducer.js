@@ -1,14 +1,14 @@
 import { AAD_SHOP } from "../ActionType";
 
 
-export const initialValues = {
+export const initialState = {
     isLoding: false,
     shop: [],
     error: null,
 }
 
 
-export const shopReducer = (state = initialValues, action) => {
+export const shopReducer = (state = initialState, action) => {
     console.log(action);
 
     switch(action.type){

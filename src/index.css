@@ -21,8 +21,11 @@ code {
 
 .megamenu {
   position: absolute;
-  width: 100%;
+  width: 400px;
   left: 0;
   right: 0;
   padding: 15px;
+}
+ul a {
+  margin-left: 30px;
 }

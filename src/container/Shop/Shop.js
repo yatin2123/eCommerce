@@ -2,11 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 function Shop(props) {
-    const shop = useSelector(state => state.shop);
-    console.log(shop);
-    
+    const subcategory = useSelector(state => state.sbucategory);
+    console.log(subcategory);
 
-  
     return (
         <div>
             <section className="shop_section layout_padding">
@@ -17,53 +15,50 @@ function Shop(props) {
                         </h2>
                     </div>
                     <div className="row">
-
-
                         {
-                            shop.shop.map((v) => {
+                            subcategory.subcategory.map((v) => {
                                 return (
                                     <>
                                         <div className="col-sm-6 col-md-4 col-lg-3">
-                                        <div className="box">
-                                            <a href>
-                                                <div className="img-box">
-                                                    <img src="images/p1.png" alt />
-                                                </div>
-                                                <div className="detail-box">
-                                                    <h6>
-                                                        {v.cat_name}
-                                                    </h6>
-                                                    <h6>
-                                                        Price
+                                            <div className="box">
+                                                <a href>
+                                                    <div className="img-box">
+                                                        <img src="images/p1.png" alt />
+                                                    </div>
+                                                    <div className="detail-box">
+                                                        <h6>
+                                                            {v.sub_name}
+                                                        </h6>
+                                                        <h6>
+                                                            Price
+                                                            <span>
+                                                                $200
+                                                            </span>
+                                                        </h6>
+                                                    </div>
+                                                    <div className="new">
                                                         <span>
-                                                            $200
+                                                            New
                                                         </span>
-                                                    </h6>
-                                                </div>
-                                                <div className="new">
-                                                    <span>
-                                                        New
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
 
                                     </>
-                                       
-                    )
 
-                                })
-                            }
+                                )
 
+                            })
+                        }
 
+                    </div>
+                    <div className="btn-box">
+                        <a href>
+                            View All Products
+                        </a>
+                    </div>
                 </div>
-                <div className="btn-box">
-                    <a href>
-                        View All Products
-                    </a>
-                </div>
-        </div>
             </section >
         </div >
 

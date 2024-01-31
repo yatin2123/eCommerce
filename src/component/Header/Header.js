@@ -1,28 +1,35 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { getShopdata } from "../../container/slice/shop.slice";
+import { getsubcategory } from "../../container/slice/subcategory.slice";
 
 function Header(props) {
-  let auth = useSelector((state) => state.auth);
-
+  const auth = useSelector((state) => state.auth);
   const shop = useSelector((state) => state.shop);
   console.log(shop);
-
-  const sbucategory = useSelector((state) => state.sbucategory);
+  const sbucategory = useSelector(state => state.sbucategory);
   console.log(sbucategory);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getsubcategory());
+    dispatch(getShopdata());
+  }, []);
 
   const handleLogout = () => {
-    console.log("yyyyyyyy");
+    console.log("Logging out...");
   };
+
   return (
     <div>
-      <header class="header_section">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+      <header className="header_section">
+        <nav className="navbar navbar-expand-lg custom_nav-container">
+          <a className="navbar-brand" href="index.html">
             <span>Giftos</span>
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -30,123 +37,63 @@ function Header(props) {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class=""></span>
+            <span className=""></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              {/* <li><NavLink className="nav-link scrollto" to="/">Home</NavLink></li> */}
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav">
               <li>
                 <NavLink className="nav-link scrollto" to="/">
                   Home
                 </NavLink>
               </li>
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link scrollto dropdown-toggle"
 
-              <li>
-                <NavLink className="nav-link scrollto" to="shop">
-                  {" "}
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-12">
-                        <nav className="navbar navbar-expand-lg navbar-light bg-light rounded">
-                          <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbar"
-                            aria-controls="navbars"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                          >
-                            <span className="navbar-toggler-icon" />
-                          </button>
-                          <div className="collapse navbar-collapse" id="navbar">
-                            <ul className="navbar-nav mr-auto">
-                              <li className="nav-item dropdown megamenu-li">
-                                <a
-                                  className="nav-link dropdown-toggle"
-                                  href
-                                  id="dropdown01"
-                                  data-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false"
-                                >
-                                  product
-                                </a>
-                                <div
-                                  className="dropdown-menu megamenu"
-                                  aria-labelledby="dropdown01"
-                                >
-                                  <div className="row">
-                                    <div className="col-sm-6 col-lg-3">
-                                      <h5>Men's</h5>
-                                      {sbucategory.sbucategory &&
-                                        sbucategory.sbucategory.map(
-                                          (sbucategoryItem, index) => {
-                                            console.log(
-                                              "sbucategoryItem:",
-                                              sbucategoryItem
-                                            ); // Debugging
-                                            const mencategory = shop.shop.find(
-                                              (category) =>
-                                                category.cat_name === "MENS"
-                                            );
-                                            console.log(
-                                              "mencategory:",
-                                              mencategory
-                                            ); // Debugging
-                                            if (
-                                              mencategory &&
-                                              sbucategoryItem.cart_id ===
-                                                mencategory.id
-                                            ) {
-                                              return (
-                                                <li key={index}>
-                                                  {sbucategoryItem.sub_name}
-                                                </li> // Ensure unique key prop
-                                              );
-                                            }
-                                          }
-                                        )}
-                                    </div>
-                                    {/* <div className="col-sm-6 col-lg-3">
-                                      <h5>Woman's</h5>
-                                      <a className="dropdown-item" href="#">
-                                        Another action
-                                      </a>
-                                      <a className="dropdown-item" href="#">
-                                        Something else here
-                                      </a>
-                                      <a className="dropdown-item" href="#">
-                                        Another action
-                                      </a>
-                                    </div>
-                                    <div className="col-sm-6 col-lg-3">
-                                      <h5>Kid's</h5>
-                                      <p>
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit. Necessitatibus in
-                                        veritatis, facilis eligendi sunt, culpa
-                                        autem harum porro earum.
-                                      </p>
-                                    </div> */}
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </nav>
-                      </div>
-                    </div>
-                  </div>
+                  id="dropdown01"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Shop
                 </NavLink>
+                <div className="dropdown-menu megamenu" aria-labelledby="dropdown01">
+                  <div className="row">
+
+                    <ul>
+                      {shop.shop.map((v) => {
+                        console.log(v);
+                        const subcat = sbucategory.subcategory.filter((c) => c.cart_id === v.id);
+                        console.log(subcat);
+
+                        return (
+                          <div key={v.id}>
+                          
+                              <NavLink key={v.id} className="menu-title category">
+                                {v.cat_name}
+                              </NavLink>
+                           
+
+                            {subcat.map((sub) => (
+                              <NavLink key={sub.id}  to={"shop"}  className="menu-title">
+                                {sub.sub_name}
+                              </NavLink>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
               </li>
+
               <li>
                 <NavLink className="nav-link scrollto" to="why">
                   Why Us
                 </NavLink>
               </li>
-              <li class="nav-item">
+              <li>
                 <NavLink className="nav-link scrollto" to="testimonial">
                   Testimonial
                 </NavLink>
@@ -158,10 +105,10 @@ function Header(props) {
               </li>
             </ul>
 
-            <div class="user_option">
+            <div className="user_option">
               {auth.user ? (
                 <NavLink to={"/"}>
-                  <span onClick={handleLogout()}>Logout</span>
+                  <span onClick={handleLogout}>Logout</span>
                 </NavLink>
               ) : (
                 <NavLink to={"/auth"}>
@@ -169,11 +116,11 @@ function Header(props) {
                 </NavLink>
               )}
               <a href="">
-                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <i className="fa fa-shopping-bag" aria-hidden="true"></i>
               </a>
-              <form class="form-inline ">
-                <button class="btn nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
+              <form className="form-inline">
+                <button className="btn nav_search-btn" type="submit">
+                  <i className="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
             </div>
