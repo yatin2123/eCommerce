@@ -3,24 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getsubcategory } from '../slice/subcategory.slice';
 import { useParams } from 'react-router-dom';
 
-function Shop(props) {
-
-    const [finaldata, setFinaldata] = useState([])
+function Mens(props) {
+   
     const dispatch = useDispatch()
     const subcategory = useSelector(state => state.sbucategory);
     console.log(subcategory);
 
-    const { id } = useParams()
-    console.log(id);
-    useEffect(()=>{
-        dispatch(getsubcategory())
-
-        const categorydata = subcategory.subcategory.filter((v) => v.id == id)
-        console.log(categorydata);
-        
-    },[])
     
-
+  
+    
     return (
         <div>
             <section className="shop_section layout_padding">
@@ -79,4 +70,4 @@ function Shop(props) {
     );
 }
 
-export default Shop;
+export default Mens;

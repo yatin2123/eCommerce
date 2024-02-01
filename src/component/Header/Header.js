@@ -50,7 +50,7 @@ function Header(props) {
               <li className="nav-item dropdown">
                 <NavLink
                   className="nav-link scrollto dropdown-toggle"
-
+                  to={"/shopdata"}
                   id="dropdown01"
                   data-toggle="dropdown"
                   aria-haspopup="true"
@@ -69,14 +69,13 @@ function Header(props) {
 
                         return (
                           <div key={v.id}>
-                          
-                              <NavLink key={v.id} className="menu-title category">
-                                {v.cat_name}
-                              </NavLink>
-                           
+
+                            <NavLink key={v.id} className="menu-title category" to={`/mens`}>
+                              {v.cat_name}
+                            </NavLink>
 
                             {subcat.map((sub) => (
-                              <NavLink key={sub.id}  to={"shop"}  className="menu-title">
+                              <NavLink key={sub.id} to={`/shopdata/${sub.id}`} className="menu-title">
                                 {sub.sub_name}
                               </NavLink>
                             ))}
@@ -89,17 +88,18 @@ function Header(props) {
               </li>
 
               <li>
-                <NavLink className="nav-link scrollto" to="why">
+                <NavLink className="nav-link scrollto" to="/why">
                   Why Us
                 </NavLink>
               </li>
               <li>
-                <NavLink className="nav-link scrollto" to="testimonial">
+                <NavLink className="nav-link scrollto" to="/testimonial">
                   Testimonial
                 </NavLink>
               </li>
+
               <li>
-                <NavLink className="nav-link scrollto" to="contact">
+                <NavLink className="nav-link scrollto" to="/contact">
                   Contact
                 </NavLink>
               </li>

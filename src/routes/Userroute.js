@@ -9,6 +9,10 @@ import Testimonial from "../container/Testimonial/Testimonial";
 import Contact from "../container/Contact/Contact";
 import Auth from "../container/Auth/Auth";
 
+import Shopdata from "../container/Shopdata/Shopdata";
+import Details from "../container/Details/Details";
+import Mens from "../container/Mens/Mens";
+
 function Userroute(props) {
   return (
     <div>
@@ -16,10 +20,13 @@ function Userroute(props) {
 
       <Routes>
         <Route exact path="/" element={<Index />} />
-        <Route exact path="shop" element={<Shop />} />
-        <Route exact path="why" element={<Why />} />
-        <Route exact path="testimonial" element={<Testimonial />} />
-        <Route exact path="contact" element={<Contact />} />
+        <Route exact path="/shop" element={<Shop />} />
+        <Route exact path="/mens" element={<Mens />} />
+        <Route exact path="/shopdata/:id" element={<Shopdata />} />
+        <Route exact path="/details/:id" element={<Details />} />
+        <Route exact path="/why" element={<Why />} />
+        <Route exact path="/testimonial" element={<Testimonial />} />
+        <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/auth" element={<Auth />} />
       </Routes>
 
