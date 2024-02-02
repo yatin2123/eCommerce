@@ -67,10 +67,21 @@ function Header(props) {
                         const subcat = sbucategory.subcategory.filter((c) => c.cart_id === v.id);
                         console.log(subcat);
 
+                        const mencategory = shop.shop.find((category) =>category.cat_name === "Man's");
+                        console.log(mencategory);
+
+                        // if (mencategory && subcat.cart_id === mencategory.id ) {
+                        //   return (
+                        //     <li key={index}>
+                        //       {sbucategoryItem.sub_name}
+                        //     </li> // Ensure unique key prop
+                        //   );
+                        // }
+
                         return (
                           <div key={v.id}>
 
-                            <NavLink key={v.id} className="menu-title category" to={`/mens`}>
+                            <NavLink key={v.id} className="menu-title category" to={`/shop/mens/${v.id}`}>
                               {v.cat_name}
                             </NavLink>
 

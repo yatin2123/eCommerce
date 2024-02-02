@@ -7,21 +7,20 @@ function Shopdata(props) {
     const [finaldata, setFinaldata] = useState([]);
 
     const dispatch = useDispatch();
-    const subcategory = useSelector(state => state.sbucategory)
-    console.log(subcategory);
+    const product = useSelector(state => state.product)
+    console.log(product);
 
     const { id } = useParams()
     console.log(id);
 
     useEffect(() => {
-        if (subcategory.subcategory.length > 0) {
-
-            const subdata = subcategory.subcategory.filter((v) => v.id === id);
-            console.log(subdata);
-
-            setFinaldata(subdata);
+        // Ensure product data is available before filtering
+        if (product.product.length > 0) {
+            const filteredData = product.product.filter((v) => v.sub_id == id);
+            console.log(filteredData);
+            setFinaldata(filteredData);
         }
-    }, [id, subcategory.subcategory]);
+    }, [id, product.product])
     return (
         <div>
             <section className="shop_section layout_padding">
@@ -48,12 +47,12 @@ function Shopdata(props) {
                                                         </div>
                                                         <div className="detail-box">
                                                             <h6>
-                                                                {v.sub_name}
+                                                                {v.pro_name}
                                                             </h6>
                                                             <h6>
                                                                 Price
                                                                 <span>
-                                                                    {v.p}
+                                                                    {v.pro_price}
                                                                 </span>
                                                             </h6>
                                                         </div>
