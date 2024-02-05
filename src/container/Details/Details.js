@@ -16,12 +16,11 @@ function Details(props) {
     console.log(id);
 
     useEffect(() => {
-        // Ensure product data is available before filtering
-        if (product.product.length > 0) {
-            const filteredData = product.product.filter((v) => v.sub_id == id);
-            console.log(filteredData);
-            setProdata(filteredData);
-        }
+        
+        const filteredData = product.product.filter((v) => v.id == id);
+        console.log(filteredData);
+        setProdata(filteredData);
+
     }, [id, product.product])
 
 
@@ -37,7 +36,7 @@ function Details(props) {
                                     <div className="product-imgs">
                                         <div className="img-display">
                                             <div className="img-showcase">
-                                            {/* <ImageField source={v.file_name} title="image" /> */}
+                                                {/* <ImageField source={v.file_name} title="image" /> */}
                                                 <img src={v.file} alt="product image" />
                                                 {/* {v.additional_images.map((img, index) => (
                                                     <img key={index} src={img} alt={`additional product image ${index + 1}`} />
@@ -79,7 +78,7 @@ function Details(props) {
                                         <div className="purchase-info">
                                             <input type="number" min={0} defaultValue={1} />
                                             <button type="button" className="btn">
-                                                Add to Cart <i className="fas fa-shopping-cart" />
+                                                Add to Cart
                                             </button>
                                             <button type="button" className="btn">Compare</button>
                                         </div>

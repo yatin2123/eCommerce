@@ -36,14 +36,14 @@ function Shopdata(props) {
 
                                 return (
                                     <>
-                                        <NavLink className="nav-link scrollto"  to={`/details/${v.id}`}>
+                                        <NavLink className="nav-link scrollto"  to={`/${v.id}`}>
 
 
                                             <div className="col-sm-6 col-md-4 col-lg-3">
                                                 <div className="box">
                                                     <a href>
                                                         <div className="img-box">
-                                                            <img src="images/p1.png" alt />
+                                                            <img src={v.file} alt />
                                                         </div>
                                                         <div className="detail-box">
                                                             <h6>

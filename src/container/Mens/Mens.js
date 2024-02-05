@@ -43,7 +43,7 @@ function Mens(props) {
                                             <div className="box">
                                                 <a href>
                                                     <div className="img-box">
-                                                        <img src="images/p1.png" alt />
+                                                        <img src={v.file} alt />
                                                     </div>
                                                     <div className="detail-box">
                                                         <h6>

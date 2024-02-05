@@ -50,7 +50,7 @@ function Header(props) {
               <li className="nav-item dropdown">
                 <NavLink
                   className="nav-link scrollto dropdown-toggle"
-                  to={"/shopdata"}
+                  // to={"/shopdata"}
                   id="dropdown01"
                   data-toggle="dropdown"
                   aria-haspopup="true"
@@ -60,15 +60,14 @@ function Header(props) {
                 </NavLink>
                 <div className="dropdown-menu megamenu" aria-labelledby="dropdown01">
                   <div className="row">
-
                     <ul>
                       {shop.shop.map((v) => {
                         console.log(v);
                         const subcat = sbucategory.subcategory.filter((c) => c.cart_id === v.id);
                         console.log(subcat);
 
-                        const mencategory = shop.shop.find((category) =>category.cat_name === "Man's");
-                        console.log(mencategory);
+                        // const mencategory = shop.shop.find((category) =>category.cat_name === "Man's");
+                        // console.log(mencategory);
 
                         // if (mencategory && subcat.cart_id === mencategory.id ) {
                         //   return (
@@ -80,13 +79,16 @@ function Header(props) {
 
                         return (
                           <div key={v.id}>
+                            <div className="box">
 
-                            <NavLink key={v.id} className="menu-title category" to={`/shop/mens/${v.id}`}>
-                              {v.cat_name}
-                            </NavLink>
+                              <NavLink key={v.id} className="menu-title category" to={`/shop/${v.id}`}>
+                                {v.cat_name}
+                              </NavLink>
+
+                            </div>
 
                             {subcat.map((sub) => (
-                              <NavLink key={sub.id} to={`/shopdata/${sub.id}`} className="menu-title">
+                              <NavLink key={sub.id} to={`/shop/${v.cat_name}/${sub.id}`} className="menu-title">
                                 {sub.sub_name}
                               </NavLink>
                             ))}
