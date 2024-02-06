@@ -6,8 +6,8 @@ function ProductList(props) {
     // console.log("asdasdasd");
 
     const [finalcategory, setFinalcategory] = useState([]);
-    const { catName,id } = useParams();
-    console.log( catName,id );
+    const { catName, id } = useParams();
+    console.log(catName, id);
     const product = useSelector(state => state.product);
 
     useEffect(() => {

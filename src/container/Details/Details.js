@@ -1,9 +1,9 @@
 import { logDOM } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-function Details(props) {
+function Details({cart, setCart}) {
 
     const [prodata, setProdata] = useState([])
     const product = useSelector(state => state.product)
@@ -11,6 +11,8 @@ function Details(props) {
 
     // const subcategory = useSelector(state => state.sbucategory)
     // console.log(subcategory);
+
+    const dispatch = useDispatch()
 
     const { id } = useParams()
     console.log(id);
@@ -23,6 +25,12 @@ function Details(props) {
 
     }, [id, product.product])
 
+
+    const handleaddtocart = (id) => {
+        console.log(id);
+        
+        // dispatch(({id: id, qty: 1}))
+    }
 
     return (
         <div>
@@ -38,12 +46,7 @@ function Details(props) {
                                             <div className="img-showcase">
                                                 {/* <ImageField source={v.file_name} title="image" /> */}
                                                 <img src={v.file} alt="product image" />
-                                                {/* {v.additional_images.map((img, index) => (
-                                                    <img key={index} src={img} alt={`additional product image ${index + 1}`} />
-                                                ))} */}
-                                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_2.jpg" alt="shoe image" />
-                                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_3.jpg" alt="shoe image" />
-                                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg" alt="shoe image" />
+                                                
                                             </div>
                                         </div>
 
@@ -77,7 +80,7 @@ function Details(props) {
                                         </div>
                                         <div className="purchase-info">
                                             <input type="number" min={0} defaultValue={1} />
-                                            <button type="button" className="btn">
+                                            <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
                                                 Add to Cart
                                             </button>
                                             <button type="button" className="btn">Compare</button>

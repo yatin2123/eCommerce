@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { getShopdata } from "../../container/slice/shop.slice";
 import { getsubcategory } from "../../container/slice/subcategory.slice";
 
-function Header(props) {
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+
+function Header({ cart }) {
   const auth = useSelector((state) => state.auth);
   const shop = useSelector((state) => state.shop);
   console.log(shop);
@@ -20,6 +25,15 @@ function Header(props) {
   const handleLogout = () => {
     console.log("Logging out...");
   };
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
 
   return (
     <div>
@@ -39,6 +53,8 @@ function Header(props) {
           >
             <span className=""></span>
           </button>
+
+
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav">
@@ -65,17 +81,6 @@ function Header(props) {
                         console.log(v);
                         const subcat = sbucategory.subcategory.filter((c) => c.cart_id === v.id);
                         console.log(subcat);
-
-                        // const mencategory = shop.shop.find((category) =>category.cat_name === "Man's");
-                        // console.log(mencategory);
-
-                        // if (mencategory && subcat.cart_id === mencategory.id ) {
-                        //   return (
-                        //     <li key={index}>
-                        //       {sbucategoryItem.sub_name}
-                        //     </li> // Ensure unique key prop
-                        //   );
-                        // }
 
                         return (
                           <div key={v.id}>
@@ -112,10 +117,23 @@ function Header(props) {
               </li>
 
               <li>
+                <NavLink className="nav-link scrollto" to="/cart">
+                  Cart
+                </NavLink>
+              </li>
+
+              <li>
                 <NavLink className="nav-link scrollto" to="/contact">
                   Contact
                 </NavLink>
               </li>
+              <Link to={"/cart"}>
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={0} color="secondary">
+                  <AddShoppingCartIcon />
+                </StyledBadge>
+              </IconButton>
+              </Link>
             </ul>
 
             <div className="user_option">
