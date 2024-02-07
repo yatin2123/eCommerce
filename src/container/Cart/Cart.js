@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementqty, incrementqty } from '../slice/cart.slice';
 
@@ -14,8 +14,17 @@ function Cart(props) {
     const dispatch = useDispatch();
 
     const cartdata = cart.cart.map((v) => {
-        console.log(v);
+        let med = product.product.find((m) => v.id == m.id)
+        console.log(med);
+
+
+        return { ...med, qty: v.qty }
     })
+
+
+
+    const totalPrice = cartdata.reduce((acc, item) => acc + item.pro_price * item.qty, 0);
+    console.log(totalPrice);
 
 
     const handleincrementQty = (id) => {
@@ -32,18 +41,18 @@ function Cart(props) {
         <div>
             <div className="card">
                 <div className="row">
+                    {
+                        cartdata.map((v) => {
+                            return (
+                                <>
+                                    <div className="col-md-8 cart">
+                                        <div className="title">
+                                            <div className="row">
+                                                <div className="col"><h4><b>Shopping Cart</b></h4></div>
+                                                <div className="col align-self-center text-right text-muted">3 items</div>
+                                            </div>
+                                        </div>
 
-                    <div className="col-md-8 cart">
-                        <div className="title">
-                            <div className="row">
-                                <div className="col"><h4><b>Shopping Cart</b></h4></div>
-                                <div className="col align-self-center text-right text-muted">3 items</div>
-                            </div>
-                        </div>
-                        {
-                            product.product.map((v) => {
-                                return (
-                                    <>
                                         <div className="row border-top border-bottom">
                                             <div className="row main align-items-center">
                                                 <div className="col-2"><img className="img-fluid" src={v.file} /></div>
@@ -55,41 +64,42 @@ function Cart(props) {
                                                     <button className="plus-btn" type="button" name="button" onClick={() => handleincrementQty(v.id)}>
                                                         +
                                                     </button>
-                                                    <span></span>
+                                                    <span>{v.qty}</span>
                                                     <button className="minus-btn" type="button" name="button" onClick={() => handledecrementQty(v.id)}>
                                                         -
                                                     </button>
                                                 </div>
-                                                <div className="col">€ {v.pro_price} <span className="close">✕</span></div>
+                                                <div className="col">€ {v.qty * v.pro_price} <span className="close">✕</span></div>
                                             </div>
                                         </div>
-                                    </>
-                                )
-                            })
-                        }
 
 
+                                    </div >
+                                    <div className="col-md-4 summary">
+                                        <div><h5><b>Summary</b></h5></div>
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col" style={{ paddingLeft: 0 }}>ITEMS {v.qty}</div>
+                                            <div className="col text-right">{ }</div>
+                                        </div>
+                                        <form>
+                                            <p>SHIPPING</p>
+                                            <select><option className="text-muted">Standard-Delivery- €5.00</option></select>
+                                            <p>GIVE CODE</p>
+                                            <input id="code" placeholder="Enter your code" />
+                                            
 
-                    </div>
-                    <div className="col-md-4 summary">
-                        <div><h5><b>Summary</b></h5></div>
-                        <hr />
-                        <div className="row">
-                            <div className="col" style={{ paddingLeft: 0 }}>ITEMS 3</div>
-                            <div className="col text-right">€ 132.00</div>
-                        </div>
-                        <form>
-                            <p>SHIPPING</p>
-                            <select><option className="text-muted">Standard-Delivery- €5.00</option></select>
-                            <p>GIVE CODE</p>
-                            <input id="code" placeholder="Enter your code" />
-                        </form>
-                        <div className="row" style={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '2vh 0' }}>
-                            <div className="col">TOTAL PRICE</div>
-                            <div className="col text-right">€ 137.00</div>
-                        </div>
-                        <button className="btn">CHECKOUT</button>
-                    </div>
+                                        </form>
+                                        <div className="row" style={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '2vh 0' }}>
+                                            <div className="col">TOTAL PRICE</div>
+                                            <div className="col text-right">€ {totalPrice}</div>
+                                        </div>
+                                        <button className="btn">CHECKOUT</button>
+                                    </div>
+                                </>
+                            )
+                        })
+                    }
                 </div>
             </div>
 

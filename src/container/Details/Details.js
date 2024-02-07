@@ -2,6 +2,7 @@ import { logDOM } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { addtocart } from '../slice/cart.slice';
 
 function Details({cart, setCart}) {
 
@@ -28,6 +29,7 @@ function Details({cart, setCart}) {
 
     const handleaddtocart = (id) => {
         console.log(id);
+        dispatch(addtocart(id))
         
         // dispatch(({id: id, qty: 1}))
     }
