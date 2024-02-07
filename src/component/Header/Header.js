@@ -4,23 +4,23 @@ import { Link, NavLink } from "react-router-dom";
 import { getShopdata } from "../../container/slice/shop.slice";
 import { getsubcategory } from "../../container/slice/subcategory.slice";
 
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import './Header.css'
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import "./Header.css";
 
 function Header({ cart }) {
   const auth = useSelector((state) => state.auth);
   const shop = useSelector((state) => state.shop);
   console.log(shop);
-  const sbucategory = useSelector(state => state.sbucategory);
+  const sbucategory = useSelector((state) => state.sbucategory);
   console.log(sbucategory);
 
-  const cartdata = useSelector(state => state.cart)
+  const cartdata = useSelector((state) => state.cart);
   console.log(cartdata);
 
-  const cartCount = cartdata.cart.reduce((acc, v) => acc + v.qty, 0)
+  const cartCount = cartdata.cart.reduce((acc, v) => acc + v.qty, 0);
   console.log(cartCount);
 
   const dispatch = useDispatch();
@@ -35,11 +35,11 @@ function Header({ cart }) {
   };
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
+    "& .MuiBadge-badge": {
       right: -3,
       top: 13,
       border: `2px solid ${theme.palette.background.paper}`,
-      padding: '0 4px',
+      padding: "0 4px",
     },
   }));
 
@@ -62,8 +62,6 @@ function Header({ cart }) {
             <span className=""></span>
           </button>
 
-
-
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li>
@@ -73,10 +71,10 @@ function Header({ cart }) {
               </li>
               <li className="nav-item dropdown">
                 <NavLink>
+                  shop
                   <header className="header">
                     <div className="container">
                       <div className="row v-center">
-
                         <div className="header-item item-center">
                           <div className="menu-overlay" />
                           <nav className="menu">
@@ -89,24 +87,32 @@ function Header({ cart }) {
                                     <ul>
                                       {shop.shop.map((v) => {
                                         console.log(v);
-                                        const subcat = sbucategory.subcategory.filter((c) => c.cart_id === v.id);
+                                        const subcat =
+                                          sbucategory.subcategory.filter(
+                                            (c) => c.cart_id === v.id
+                                          );
                                         console.log(subcat);
 
                                         return (
                                           <div key={v.id}>
                                             <li className="menu-item-has-children">
-
-
-                                              <NavLink key={v.id} className="menu-title category" to={`/shop/${v.id}`}>
+                                              <NavLink
+                                                key={v.id}
+                                                className="menu-title category"
+                                                to={`/shop/${v.id}`}
+                                              >
                                                 {v.cat_name}
                                               </NavLink>
-
                                             </li>
 
                                             <ul className="menu-main">
                                               <li className="menu-item-has-children">
                                                 {subcat.map((sub) => (
-                                                  <NavLink key={sub.id} to={`/shop/${v.cat_name}/${sub.id}`} className="menu-title">
+                                                  <NavLink
+                                                    key={sub.id}
+                                                    to={`/shop/${v.cat_name}/${sub.id}`}
+                                                    className="menu-title"
+                                                  >
                                                     {sub.sub_name}
                                                   </NavLink>
                                                 ))}
@@ -118,58 +124,26 @@ function Header({ cart }) {
                                     </ul>
                                     <h4 className="title">Beauty</h4>
                                     <ul>
-                                      <li><a href="#">Moisturizer</a></li>
-                                      <li><a href="#">Face powder</a></li>
-                                      <li><a href="#">Lipstick</a></li>
+                                      <li>
+                                        <a href="#">Moisturizer</a>
+                                      </li>
+                                      <li>
+                                        <a href="#">Face powder</a>
+                                      </li>
+                                      <li>
+                                        <a href="#">Lipstick</a>
+                                      </li>
                                     </ul>
                                   </div>
-                                  
-                                  
                                 </div>
                               </li>
                             </ul>
                           </nav>
                         </div>
-
                       </div>
                     </div>
                   </header>
                 </NavLink>
-
-
-
-                <div className="dropdown-menu megamenu" aria-labelledby="dropdown01">
-                  <div className="row">
-                    <ul>
-                      {shop.shop.map((v) => {
-                        console.log(v);
-                        const subcat = sbucategory.subcategory.filter((c) => c.cart_id === v.id);
-                        console.log(subcat);
-
-                        return (
-                          <div key={v.id}>
-                            <li>
-
-
-                              <NavLink key={v.id} className="menu-title category" to={`/shop/${v.id}`}>
-                                {v.cat_name}
-                              </NavLink>
-
-                            </li>
-
-                            <li>
-                              {subcat.map((sub) => (
-                                <NavLink key={sub.id} to={`/shop/${v.cat_name}/${sub.id}`} className="menu-title">
-                                  {sub.sub_name}
-                                </NavLink>
-                              ))}
-                            </li>
-                          </div>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                </div>
               </li>
 
               <li>
