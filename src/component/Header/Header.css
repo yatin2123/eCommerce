@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 400;
+	overflow-x: hidden;
+} */
 *{
 	margin:0;
 	box-sizing: border-box;
@@ -27,15 +35,10 @@ a{
 /* header */
 .header{
 	display: block;
-    width: 100%;
-    /* position: relative; */
-    z-index: 99;
-    /* padding: 15px; */
-    margin-left: -57px;
-    position: absolute;
-    /* margin-right: -22px; */
-    /* margin-bottom: -7px; */
-    margin-top: -10px;
+	width: 100%;
+	position: relative;
+	z-index: 99;
+	padding:15px;
 }
 .header .item-left{
 	flex:0 0 17%;
@@ -63,16 +66,17 @@ a{
      transition: color 0.3s ease;
 }
 .header .menu > ul > li{
-	    /* display: inline-block; */
-    /* line-height: 50px; */
-    margin-left: 25px;
+	display: inline-block;
+	line-height: 50px;
+	margin-left: 25px;
 }
 .header .menu > ul > li > a{
-	padding: 5px 25px;
-    color: #514f4f;
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: 5px;
+	font-size: 15px;
+	font-weight: 500;
+	color:#000000;
+	position: relative;
+	text-transform: capitalize;
+	transition: color 0.3s ease;
 }
 .header .menu > ul > li .sub-menu{
 	position: absolute;
@@ -126,8 +130,7 @@ a{
 
 .header .menu > ul > li .sub-menu.mega-menu-column-4{
   max-width: 1100px;
-  width: 400px; 
-  margin-left: 30px;	
+  width: 100%; 	
   display: flex;
   flex-wrap: wrap;
   padding:20px 15px;
@@ -160,7 +163,19 @@ a{
 .header .menu > ul > li:hover > a{
 	color:#ea4636;
 }
-
+/* banner section */
+.banner-section{
+  /* background-image: url('../img/banner.jpg'); */
+  background-size: cover;
+  background-position: center;
+  height: 700px;
+  width: 100%;
+  display: block;
+}
+.mobile-menu-head,
+.mobile-menu-trigger{
+	display: none;
+}
 
 /*responsive*/
 @media(max-width: 991px){

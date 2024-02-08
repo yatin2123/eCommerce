@@ -43,7 +43,7 @@ function Cart(props) {
             return (
               <>
                 <div className="col-md-8 cart">
-                  <div className="title">
+                  <div className="title11">
                     <div className="row">
                       <div className="col">
                         <h4>

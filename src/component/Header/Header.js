@@ -45,7 +45,7 @@ function Header({ cart }) {
 
   return (
     <div>
-      <header className="header_section">
+      {/* <header className="header_section">
         <nav className="navbar navbar-expand-lg custom_nav-container">
           <a className="navbar-brand" href="index.html">
             <span>Giftos</span>
@@ -72,77 +72,44 @@ function Header({ cart }) {
               <li className="nav-item dropdown">
                 <NavLink>
                   shop
-                  <header className="header">
-                    <div className="container">
-                      <div className="row v-center">
-                        <div className="header-item item-center">
-                          <div className="menu-overlay" />
-                          <nav className="menu">
-                            <ul className="menu-main">
-                              <li className="menu-item-has-children">
-                                <a href="#">Shop </a>
-                                <div className="sub-menu mega-menu mega-menu-column-4">
-                                  <div className="list-item">
-                                    {/* <h4 className="title">Men's</h4> */}
-                                    <ul>
-                                      {shop.shop.map((v) => {
-                                        console.log(v);
-                                        const subcat =
-                                          sbucategory.subcategory.filter(
-                                            (c) => c.cart_id === v.id
-                                          );
-                                        console.log(subcat);
+                  <div className="list-item">
+                      {shop.shop.map((v) => {
+                        console.log(v);
+                        const subcat =
+                          sbucategory.subcategory.filter(
+                            (c) => c.cart_id === v.id
+                          );
+                        console.log(subcat);
 
-                                        return (
-                                          <div key={v.id}>
-                                            <li className="menu-item-has-children">
-                                              <NavLink
-                                                key={v.id}
-                                                className="menu-title category"
-                                                to={`/shop/${v.id}`}
-                                              >
-                                                {v.cat_name}
-                                              </NavLink>
-                                            </li>
+                        return (
+                          <div key={v.id}>
+                            
+                              <NavLink
+                                key={v.id}
+                                className="menu-title category"
+                                to={`/shop/${v.id}`}
+                              >
+                                {v.cat_name}
+                              </NavLink>
+                           
 
-                                            <ul className="menu-main">
-                                              <li className="menu-item-has-children">
-                                                {subcat.map((sub) => (
-                                                  <NavLink
-                                                    key={sub.id}
-                                                    to={`/shop/${v.cat_name}/${sub.id}`}
-                                                    className="menu-title"
-                                                  >
-                                                    {sub.sub_name}
-                                                  </NavLink>
-                                                ))}
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        );
-                                      })}
-                                    </ul>
-                                    <h4 className="title">Beauty</h4>
-                                    <ul>
-                                      <li>
-                                        <a href="#">Moisturizer</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">Face powder</a>
-                                      </li>
-                                      <li>
-                                        <a href="#">Lipstick</a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </nav>
-                        </div>
-                      </div>
-                    </div>
-                  </header>
+                            
+                                {subcat.map((sub) => (
+                                  <NavLink
+                                    key={sub.id}
+                                    to={`/shop/${v.cat_name}/${sub.id}`}
+                                    className="menu-title"
+                                  >
+                                    {sub.sub_name}
+                                  </NavLink>
+                                ))}
+                             
+                          </div>
+                        );
+                      })}
+                    
+                  </div>
+
                 </NavLink>
               </li>
 
@@ -198,8 +165,144 @@ function Header({ cart }) {
             </div>
           </div>
         </nav>
-      </header>
-    </div>
+      </header> */}
+
+      <header class="header">
+        <div class="container">
+          <div class="row v-center">
+            <div class="header-item item-left">
+              <div class="logo">
+                <a href="#">logo</a>
+              </div>
+            </div>
+
+            <div class="header-item item-center">
+              <div class="menu-overlay"></div>
+              <nav class="menu">
+                <div class="mobile-menu-head">
+                  <div class="go-back"><i class="fa fa-angle-left"></i></div>
+                  <div class="current-menu-title"></div>
+                  <div class="mobile-menu-close">&times;</div>
+                </div>
+                <ul class="menu-main">
+                  <li>
+                    <a href="#">Home</a>
+                  </li>
+
+                  <li class="menu-item-has-children">
+                    <NavLink to={'/shop'}>Shop <i class="fa fa-angle-down"></i></NavLink>
+                    <div class="sub-menu mega-menu mega-menu-column-4">
+
+
+                      {/* {shop.shop.map((v) => {
+                        console.log(v);
+                        const subcat = sbucategory.subcategory.filter((c) => { c.cart_id === v.id });
+
+                        return (
+
+                          <div class="list-item">
+
+                            <NavLink
+                              key={v.id}
+                              className="menu-title category"
+                              to={`/shop/${v.id}`}
+                              
+                            >
+                              <h4 className="title">{v.cat_name}</h4>
+                            </NavLink>
+
+                            {subcat.map((sub) => (
+                              <NavLink
+                                key={sub.id}
+                                to={`/shop/${v.cat_name}/${sub.id}`}
+                                className="menu-title"
+                              >
+                                {sub.sub_name}
+                              </NavLink>
+                            ))}
+
+
+                          </div>
+                        )
+                      })
+                      } */}
+
+                      {
+                        shop.shop.map((v) => {
+                          console.log(v);
+                          return (
+                            <div class="list-item">
+                              <NavLink to={`/shop/${v.id}`}><h4 className="title">{v.cat_name}</h4></NavLink>
+                              <ul>
+                                {
+                                  sbucategory.subcategory.map((m) => {
+                                    console.log(m);
+                                    if (m.cart_id === v.id) {
+                                      return (
+                                        <li>
+                                          <NavLink
+                                            key={m.id}
+                                            to={`/shop/${v.cat_name}/${m.id}`}
+                                            className="menu-title"
+                                          >
+                                            {m.sub_name}
+                                          </NavLink>
+                                        </li>
+                                      )
+                                    } else {
+                                      return null
+                                    }
+                                  })
+                                }
+                              </ul>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">Blog <i class="fas fa-angle-down"></i></a>
+                    <div class="sub-menu single-column-menu">
+                      <ul>
+                        <li><a href="#">Standard Layout</a></li>
+                        <li><a href="#">Grid Layout</a></li>
+                        <li><a href="#">single Post Layout</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">Pages <i class="fas fa-angle-down"></i></a>
+                    <div class="sub-menu single-column-menu">
+                      <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">404 Page</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <a href="#">Contact</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="header-item item-right">
+              <a href="#"><i class="fas fa-search"></i></a>
+              <a href="#"><i class="far fa-heart"></i></a>
+              <a href="#"><i class="fas fa-shopping-cart"></i></a>
+
+              <div class="mobile-menu-trigger">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header >
+    </div >
   );
 }
 
