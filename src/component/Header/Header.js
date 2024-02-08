@@ -262,42 +262,59 @@ function Header({ cart }) {
                     </div>
 
                   </li>
-                  <li class="menu-item-has-children">
-                    <a href="#">Blog <i class="fas fa-angle-down"></i></a>
-                    <div class="sub-menu single-column-menu">
-                      <ul>
-                        <li><a href="#">Standard Layout</a></li>
-                        <li><a href="#">Grid Layout</a></li>
-                        <li><a href="#">single Post Layout</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li class="menu-item-has-children">
-                    <a href="#">Pages <i class="fas fa-angle-down"></i></a>
-                    <div class="sub-menu single-column-menu">
-                      <ul>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">404 Page</a></li>
-                      </ul>
-                    </div>
+                  <li>
+                    <NavLink className="nav-link scrollto" to="/why">
+                      Why Us
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="#">Contact</a>
+                    <NavLink className="nav-link scrollto" to="/testimonial">
+                      Testimonial
+                    </NavLink>
                   </li>
+                  <li>
+                    <NavLink className="nav-link scrollto" to="/cart">
+                      Cart
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink className="nav-link scrollto" to="/contact">
+                      Contact
+                    </NavLink>
+                  </li>
+
+                  <Link to={"/cart"}>
+                    <IconButton aria-label="cart">
+                      <StyledBadge badgeContent={cartCount} color="secondary">
+                        <AddShoppingCartIcon />
+                      </StyledBadge>
+                    </IconButton>
+                  </Link>
+
                 </ul>
+
               </nav>
             </div>
 
-            <div class="header-item item-right">
-              <a href="#"><i class="fas fa-search"></i></a>
-              <a href="#"><i class="far fa-heart"></i></a>
-              <a href="#"><i class="fas fa-shopping-cart"></i></a>
 
-              <div class="mobile-menu-trigger">
-                <span></span>
-              </div>
+
+            <div class="header-item item-right">
+            <form className="form-inline">
+                <input type="text" placeholder="Search"></input>
+              </form>
+
+              {auth.user ? (
+                <NavLink to={"/"}>
+                  <span onClick={handleLogout}>Logout</span>
+                </NavLink>
+              ) : (
+                <NavLink to={"/auth"}>
+                  <span>Login/ Signup</span>
+                </NavLink>
+              )}
+             
+              
             </div>
           </div>
         </div>

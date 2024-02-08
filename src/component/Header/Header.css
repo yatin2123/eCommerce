@@ -14,7 +14,7 @@
 	box-sizing: border-box;
 }
 .container{
-	max-width: 1200px;
+	max-width: 1600px;
 	margin:auto;
 }
 .row{
@@ -59,15 +59,16 @@ a{
 }
 .header .item-right a{ 
      text-decoration: none;
-     font-size: 16px;
+     font-size: 14px;
      color:#555555;
      display: inline-block;
      margin-left: 10px;
      transition: color 0.3s ease;
+	 margin-top: 20px;
 }
 .header .menu > ul > li{
 	display: inline-block;
-	line-height: 50px;
+	/* line-height: 50px; */
 	margin-left: 25px;
 }
 .header .menu > ul > li > a{

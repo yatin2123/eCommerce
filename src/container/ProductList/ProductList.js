@@ -9,11 +9,13 @@ function ProductList(props) {
     const { catName, id } = useParams();
     console.log(catName, id);
     const product = useSelector(state => state.product);
+    console.log(product);
 
     useEffect(() => {
         const data = product.product.filter((v) => v.cart_id == id || v.sub_id == id);
         setFinalcategory(data);
     }, [id, product.product]);
+    
 
     return (
         <div>
@@ -31,15 +33,16 @@ function ProductList(props) {
                                             <div className="img-box">
                                                 <img src={v.file} alt={v.pro_name} />
                                             </div>
-                                            <div className="detail-box">
+                                            
+                                           
+                                        </a>
+
+                                    </div>
+                                    <div className="detail-box">
                                                 <h6>{v.pro_name}</h6>
+                                                <p>{v.pro_des}</p>
                                                 <h6>Price <span>{v.pro_price}</span></h6>
                                             </div>
-                                            <div className="new">
-                                                <span>New</span>
-                                            </div>
-                                        </a>
-                                    </div>
                                 </NavLink>
                             </div>
                         ))}
