@@ -190,7 +190,7 @@ function Header({ cart }) {
                   </li>
 
                   <li class="menu-item-has-children">
-                    <NavLink to={'/shop'}>Shop <i class="fa fa-angle-down"></i></NavLink>
+                    <NavLink >Shop <i class="fa fa-angle-down"></i></NavLink>
                     <div class="sub-menu mega-menu mega-menu-column-4">
 
 
