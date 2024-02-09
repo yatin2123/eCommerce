@@ -6,26 +6,31 @@ import "./Cart.css";
 // import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
-
-
+import { addOrder } from "../slice/cartform.slice";
+import Button from "../../component/Button/Button";
 
 
 function Cart(props) {
   const product = useSelector((state) => state.product);
   console.log(product);
+  const order = useSelector(state => state.order)
+  console.log(order);
+
+  const auth = useSelector(state => state.auth);
+  console.log(auth.user);
 
   const categoryOptions = [];
   categoryOptions.push(product.product)
 
-  const validationSchema = Yup.object().shape({
-    pro_name: Yup.string().required('Product Name is required'),
-    category: Yup.string().required('Category is required'),
-    price: Yup.number()
-      .required('Price is required')
-      .positive('Price must be positive'),
-    discount: Yup.number().positive('Discount must be positive'),
-    productImage: Yup.mixed().required('Product Image is required'),
-  });
+  // const validationSchema = Yup.object().shape({
+  //   pro_name: Yup.string().required('Product Name is required'),
+  //   category: Yup.string().required('Category is required'),
+  //   price: Yup.number()
+  //     .required('Price is required')
+  //     .positive('Price must be positive'),
+  //   discount: Yup.number().positive('Discount must be positive'),
+  //   productImage: Yup.mixed().required('Product Image is required'),
+  // });
 
   const cart = useSelector((state) => state.cart);
   console.log(cart);
@@ -88,7 +93,7 @@ function Cart(props) {
 
     onSubmit: (data, action) => {
       console.log(data);
-
+      dispatch(addOrder(data))
     },
   });
 
@@ -110,6 +115,7 @@ function Cart(props) {
       >
         {({ isSubmitting, }) => (
           console.log(values),
+          
           <Form>
             <div>
               {step === 1 && (
@@ -209,7 +215,7 @@ function Cart(props) {
               )}
 
               {step === 2 && (
-                <div>
+                <div className="inputbox">
                   <input
                     type="text"
                     id="name"
@@ -403,13 +409,14 @@ function Cart(props) {
 
               <div>
                 {step > 1 && (
-                  <button type="button" onClick={handlePreviousStep}>
+                  <Button type="button" btntype='primary' onClick={handlePreviousStep}>
                     Previous
-                  </button>
+                  </Button>
                 )}
                 {step < 3 && (
-                  <button
+                  <Button
                     type="button"
+                    btntype='secondry'
                     onClick={handleNextStep}
                     disabled={
                       (step === 1 &&
@@ -418,12 +425,12 @@ function Cart(props) {
                     }
                   >
                     Next
-                  </button>
+                  </Button>
                 )}
                 {step === 3 && (
-                  <button type="submit" disabled={isSubmitting} onSubmit={handleSubmit}>
+                  <Button type="submit"  btntype='secondry' disabled={isSubmitting} onSubmit={handleSubmit}>
                     Submit
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>

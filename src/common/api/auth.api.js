@@ -47,7 +47,7 @@ export const loginAPI = (data) => {
     console.log(data);
     try {
         return new Promise((resolve, reject) => {
-            signInWithEmailAndPassword(auth, data.email, data.con_phone)
+            signInWithEmailAndPassword(auth, data.email, data.phone)
 
                 .then((userCredential) => {
                     // Signed in 

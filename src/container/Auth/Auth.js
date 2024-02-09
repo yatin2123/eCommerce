@@ -14,11 +14,11 @@ function Auth(props) {
     if (type === 'login') {
         authobj = {
             email: yup.string().email("please enter valid email").required("please enter email"),
-            phone: yup.string().required("please enter password")
+          
         }
         inival = {
             email: '',
-            phone: ''
+           
         }
     } else if (type === 'signup') {
         authobj = {
