@@ -2,7 +2,7 @@ import { all, call, put, takeEvery, } from 'redux-saga/effects'
 
 // import { FORGET_REQUWEST, LOGIN_REQUWEST, SIGNUP_REQWEST } from '../ActionType'
 import { forgetAPI, loginAPI, signupAPI } from '../common/api/auth.api';
-import { authError, loginResponse } from './action/auth.action';
+import { authError, loginResponse, signupResponse } from './action/auth.action';
 import { setAlert } from '../container/slice/alert.slice';
 import { FORGET_REQUWEST, LOGIN_REQUWEST, SIGNUP_REQWEST } from './ActionType';
 // import { forgetAPI, loginAPI, signupAPI } from '../../common/api/auth.api'
@@ -11,18 +11,17 @@ import { FORGET_REQUWEST, LOGIN_REQUWEST, SIGNUP_REQWEST } from './ActionType';
 
 
 function* signupUser(action) {
-    console.log('aaaaaa');
+    console.log(action);
     try {
-        const user = yield call(signupAPI, action.payload)
-
-        console.log(user);
-        // yield put({ signupResponse, user: user })
-        yield put(setAlert({ text: user.massege, color: 'success' }))
+        const user = yield call(signupAPI, action.payload);
+        console.log(user.user);
+        yield put(signupResponse(user.user))
+        // yield put(setAlert({ text: user.massege, color: 'success' }))
     } catch (e) {
         console.log(e);
 
         yield put(authError(e.message))
-        yield put(setAlert({ text: e.message, color: 'error' }))
+        // yield put(setAlert({ text: e.message, color: 'error' }))
 
     }
 }
@@ -35,12 +34,12 @@ function* loginUser(action) {
 
         console.log(user);
         yield put(loginResponse(user.user))
-        yield put(setAlert({ text: user.massege, color: 'success' }))
+        // yield put(setAlert({ text: user.massege, color: 'success' }))
     } catch (e) {
         console.log(e);
 
         yield put(authError(e.message))
-        yield put(setAlert({ text: e.message, color: 'error' }))
+        // yield put(setAlert({ text: e.message, color: 'error' }))
     }
 }
 

@@ -20,6 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 import CategoryIcon from '@mui/icons-material/Category';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -106,9 +107,8 @@ export default function Doctor({ children }) {
 
     const Iconlist = [
         {lable:"Category ", icon:<CategoryIcon/>, to: "/admin/shop"},
-
-        {lable:"Subcategory    ",  to: "/admin/subcategory"},
-        {lable:"Product",  to: "/admin/product"},
+        {lable:"Subcategory",  to: "/admin/subcategory"},
+        {lable:"Product", icon:<ProductionQuantityLimitsIcon/>,  to: "/admin/product"},
        
     ]
 
@@ -165,7 +165,7 @@ export default function Doctor({ children }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {index % 2 === 0 ? <CategoryIcon /> : <ProductionQuantityLimitsIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={value.lable} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>

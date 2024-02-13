@@ -16,11 +16,11 @@ function Cart(props) {
   const order = useSelector(state => state.order)
   console.log(order);
 
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.auth)
   console.log(auth.user);
 
   const categoryOptions = [];
-  categoryOptions.push(product.product)
+  categoryOptions.push(product.product);
 
   // const validationSchema = Yup.object().shape({
   //   pro_name: Yup.string().required('Product Name is required'),
@@ -62,10 +62,7 @@ function Cart(props) {
 
   const [step, setStep] = useState(1);
 
-
-
   const handleNextStep = () => {
-    console.log('fffff');
     if (step < 3) {
       setStep(step + 1);
     }
@@ -77,6 +74,12 @@ function Cart(props) {
 
   let cartSchema = Yup.object().shape({
     name: Yup.string().required("please enter your name."),
+    email: Yup.string().required("please enter your email."),
+    pincode: Yup.number().required("please enter your pincode."),
+    city: Yup.string().required("please enter your city."),
+    state: Yup.string().required("please enter your state."),
+    flat_no: Yup.number().required("please enter your flat_no."),
+    landmark: Yup.string().required("please enter your landmark."),
   });
 
   const formik = useFormik({
@@ -88,6 +91,8 @@ function Cart(props) {
       state: '',
       flat_no: '',
       landmark: '',
+      total_amount: totalPrice,
+      uid: auth.user.uid
     },
     validationSchema: cartSchema,
 
@@ -115,8 +120,8 @@ function Cart(props) {
       >
         {({ isSubmitting, }) => (
           console.log(values),
-          
-          <Form>
+
+          <Form  onSubmit={handleSubmit}>
             <div>
               {step === 1 && (
                 <div className="card">
@@ -239,7 +244,7 @@ function Cart(props) {
                   {errors.email && touched.email ? <span>{errors.email}</span> : null}
 
                   <input
-                    type="text"
+                    type="number"
                     id="pincode"
                     name="pincode"
                     placeholder="pincode"
@@ -283,7 +288,7 @@ function Cart(props) {
                   {errors.area && touched.area ? <span>{errors.area}</span> : null}
 
                   <input
-                    type="text"
+                    type="number"
                     id="flat_no"
                     name="flat_no"
                     placeholder="flat_no"
@@ -428,8 +433,8 @@ function Cart(props) {
                   </Button>
                 )}
                 {step === 3 && (
-                  <Button type="submit"  btntype='secondry' disabled={isSubmitting} onSubmit={handleSubmit}>
-                    Submit
+                  <Button type="submit" btntype='secondry' disabled={isSubmitting}>
+                    Payment
                   </Button>
                 )}
               </div>

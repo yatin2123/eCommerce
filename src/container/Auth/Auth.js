@@ -3,12 +3,14 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { toBeEnabled } from '@testing-library/jest-dom/matchers';
 // import { forgetReqwest, loginReqwest, signupReqwest, signupreqwest } from '../../reducx/action/auth.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { forgetReqwest, loginReqwest, signupReqwest } from '../../redux/action/auth.action';
 
 function Auth(props) {
 
     const [type, setType] = useState('login')
+    const auth = useSelector(state => state.auth)
+    console.log(auth);
   
     let authobj, inival;
     if (type === 'login') {
@@ -50,7 +52,7 @@ function Auth(props) {
 
     let authSchema = yup.object().shape(authobj);
 
-    const dispatch = useDispatch('')
+    const dispatch = useDispatch()
 
     const handlesignup = (data) => {
         console.log(data);

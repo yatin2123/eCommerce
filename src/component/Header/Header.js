@@ -11,9 +11,9 @@ import IconButton from "@mui/material/IconButton";
 import "./Header.css";
 
 function Header({ cart }) {
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector(state => state.auth);
   const shop = useSelector((state) => state.shop);
-  console.log(shop);
+  console.log(auth);
   const sbucategory = useSelector((state) => state.sbucategory);
   console.log(sbucategory);
 
@@ -186,7 +186,9 @@ function Header({ cart }) {
                 </div>
                 <ul class="menu-main">
                   <li>
-                    <a href="#">Home</a>
+                    <NavLink className="nav-link scrollto" to="/">
+                      Home
+                    </NavLink>
                   </li>
 
                   <li class="menu-item-has-children">
@@ -300,7 +302,7 @@ function Header({ cart }) {
 
 
             <div class="header-item item-right">
-            <form className="form-inline">
+              <form className="form-inline">
                 <input type="text" placeholder="Search"></input>
               </form>
 
@@ -313,8 +315,8 @@ function Header({ cart }) {
                   <span>Login/ Signup</span>
                 </NavLink>
               )}
-             
-              
+
+
             </div>
           </div>
         </div>
