@@ -16,7 +16,7 @@ function Details({cart, setCart}) {
 
     const dispatch = useDispatch()
 
-    const { id } = useParams()
+    const {id} = useParams;
     console.log(id);
 
     useEffect(() => {

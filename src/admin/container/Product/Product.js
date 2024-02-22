@@ -220,7 +220,6 @@ const ProductForm = () => {
                             {shop.shop.map((v) => {
                                 console.log(v);
                                 return <option value={v.id}>{v.cat_name}</option>
-                              
                             })}
                         </select>
 

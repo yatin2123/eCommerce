@@ -315,8 +315,6 @@ function Header({ cart }) {
                   <span>Login/ Signup</span>
                 </NavLink>
               )}
-
-
             </div>
           </div>
         </div>

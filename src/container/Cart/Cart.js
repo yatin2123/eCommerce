@@ -74,8 +74,10 @@ function Cart(props) {
 
   const handledata = (address) => {
       let obj = {
-        address: [address]
+        address: [address],
+       
       }
+   
       dispatch(addOrder(obj))
       console.log(obj);
   }
@@ -101,7 +103,8 @@ function Cart(props) {
       state: '',
       flat_no:'',
       landmark:'',
-      area:''
+      area:'',
+      amount : totalPrice,
     },
 
     validationSchema: cartSchema,
@@ -111,8 +114,6 @@ function Cart(props) {
   });
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } = formik;
-
-
 
   return (
     <div>
