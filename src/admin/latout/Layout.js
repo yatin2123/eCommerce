@@ -24,6 +24,8 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
+
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -106,16 +108,14 @@ export default function Doctor({ children }) {
     };
 
     const Iconlist = [
-        {lable:"Category ", icon:<CategoryIcon/>, to: "/admin/shop"},
-        {lable:"Subcategory",  to: "/admin/subcategory"},
-        {lable:"Product", icon:<ProductionQuantityLimitsIcon/>,  to: "/admin/product"},
-        {lable:"Order",  to: "/admin/order"},
-       
-    ]
-
+        { label: "Category", icons: [<CategoryIcon />], to: "/admin/shop" },
+        { label: "Subcategory", icons: [<CardMembershipIcon />], to: "/admin/subcategory" },
+        { label: "Product", icons: [<ProductionQuantityLimitsIcon />], to: "/admin/product" },
+        { label: "Order", icons: [ <ShoppingCartIcon />], to: "/admin/order" },
+    ];
     return (
-        <Box sx={{ display: 'flex' }}> 
-        
+        <Box sx={{ display: 'flex' }}>
+
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
@@ -146,11 +146,12 @@ export default function Doctor({ children }) {
                 <Divider />
                 <List>
                     {Iconlist.map((value, index) => (
-                        <ListItem 
-                        key={index} 
-                        disablePadding sx={{ display: 'block' }}
-                        component={Link}
-                        to={value.to}
+                        <ListItem
+                            key={index}
+                            disablePadding
+                            sx={{ display: 'block' }}
+                            component={Link}
+                            to={value.to}
                         >
                             <ListItemButton
                                 sx={{
@@ -159,16 +160,19 @@ export default function Doctor({ children }) {
                                     px: 2.5,
                                 }}
                             >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <CategoryIcon /> : <ProductionQuantityLimitsIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={value.lable} sx={{ opacity: open ? 1 : 0 }} />
+                                {value.icons.map((icon, iconIndex) => (
+                                    <ListItemIcon
+                                        key={iconIndex}
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        {icon}
+                                    </ListItemIcon>
+                                ))}
+                                <ListItemText primary={value.label} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
                     ))}

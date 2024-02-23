@@ -193,41 +193,7 @@ function Header({ cart }) {
 
                   <li class="menu-item-has-children">
                     <NavLink >Shop <i class="fa fa-angle-down"></i></NavLink>
-                    <div class="sub-menu mega-menu mega-menu-column-4">
-
-
-                      {/* {shop.shop.map((v) => {
-                        console.log(v);
-                        const subcat = sbucategory.subcategory.filter((c) => { c.cart_id === v.id });
-
-                        return (
-
-                          <div class="list-item">
-
-                            <NavLink
-                              key={v.id}
-                              className="menu-title category"
-                              to={`/shop/${v.id}`}
-                              
-                            >
-                              <h4 className="title">{v.cat_name}</h4>
-                            </NavLink>
-
-                            {subcat.map((sub) => (
-                              <NavLink
-                                key={sub.id}
-                                to={`/shop/${v.cat_name}/${sub.id}`}
-                                className="menu-title"
-                              >
-                                {sub.sub_name}
-                              </NavLink>
-                            ))}
-
-
-                          </div>
-                        )
-                      })
-                      } */}
+                    <div class="sub-menu mega-menu mega-menu-column-5">
 
                       {
                         shop.shop.map((v) => {
