@@ -18,7 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addShopdata,
   deleteShopdata,
+  
   getShopdata,
+  
   updateShopdata,
 } from "../../../container/slice/shop.slice";
 import { IconButton } from "@mui/material";
@@ -29,13 +31,14 @@ const ShopForm = () => {
   const [update, setUpdate] = useState(false)
   // console.log(update);
 
-  const shop = useSelector((state) => state.shop);
-  console.log(shop.shop);
+  const shop = useSelector(state => state.shop);
+  console.log(shop);
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('admin shop');
     dispatch(getShopdata());
-  }, [dispatch]);
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);

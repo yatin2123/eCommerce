@@ -15,6 +15,7 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   updateDoc,
 } from "firebase/firestore";
 import { db, storage } from "../../firebase";
@@ -56,10 +57,16 @@ export const deleteShopdata = createAsyncThunk(
 export const getShopdata = createAsyncThunk("category/get", async () => {
   let data = [];
 
-  const querySnapshot = await getDoc(collection(db, "category"));
+  const querySnapshot = await getDocs(collection(db, "category"));
   querySnapshot.forEach((doc) => {
+    console.log('444444444444', { ...doc.data(), id: doc.id });
     data.push({ ...doc.data(), id: doc.id });
   });
+
+  // const querySnapshot = await getDocs(collection(db, "category"));
+  // querySnapshot.forEach((doc) => {
+  //   console.log(`${doc.id} => ${doc.data()}`);
+  // });
 
   return data;
 });
@@ -82,9 +89,9 @@ export const shopSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addShopdata.fulfilled, (state, action) => {
       console.log(action.payload);
-    
-      state.shop = state.shop.concat(action.payload);
-     
+
+      // state.shop = state.shop.concat(action.payload);
+
     });
 
     builder.addCase(deleteShopdata.fulfilled, (state, action) => {
@@ -92,6 +99,7 @@ export const shopSlice = createSlice({
     });
 
     builder.addCase(getShopdata.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.shop = action.payload;
     });
 

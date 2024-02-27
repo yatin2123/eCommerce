@@ -38,7 +38,7 @@ function Details({cart, setCart}) {
     return (
         <div>
             <div className="card-wrapper">
-                <div className="card">
+                <div className="card1">
                     {
                         prodata.map((v) => {
                             console.log(v.file);

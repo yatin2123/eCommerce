@@ -40,7 +40,7 @@ const ProductForm = () => {
 
     useEffect(() => {
         dispatch(getproduct())
-    }, [dispatch])
+    }, [])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -67,7 +67,7 @@ const ProductForm = () => {
         },
         validationSchema: productschema,
         onSubmit: (data, action) => {
-           
+
             console.log(data);
 
             // if (update) {
@@ -143,7 +143,7 @@ const ProductForm = () => {
             editable: true,
             renderCell: (params) => {
                 return (
-                   <img height={"100px"} src={(params.row.file)}/>
+                    <img height={"100px"} src={(params.row.file)} />
                 )
 
             },
@@ -186,8 +186,15 @@ const ProductForm = () => {
 
         setSubdata(fdata)
     }
-    
+
+   
+
     const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, setValues } = formik;
+
+    const rows = product.product.map((product, index) => ({
+        ...product,
+        id: index + 1, // Assuming index starts from 0, you can adjust this as needed
+    }));
 
     return (
         <form onSubmit={handleSubmit}>
@@ -207,8 +214,8 @@ const ProductForm = () => {
 
                             id="cart_id"
                             onChange={(event) => {
-                               
-                                handleChange(event); 
+
+                                handleChange(event);
                                 subcat(event.target.value);
                                 // handlesubcat(event.target.value);
                             }}
@@ -224,7 +231,6 @@ const ProductForm = () => {
                         </select>
 
                         <select
-
                             id="sub_id"
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -235,7 +241,7 @@ const ProductForm = () => {
                             {subdata.map((v) => {
                                 console.log(v);
                                 return <option value={v.id}>{v.sub_name}</option>
-                               
+
                             })}
                         </select>
 
@@ -290,8 +296,6 @@ const ProductForm = () => {
                             value={values.pro_price}
                         />
 
-
-
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
@@ -302,7 +306,7 @@ const ProductForm = () => {
 
             <Box sx={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={product.product}
+                    rows={rows}
                     columns={columns}
                     initialState={{
                         pagination: {

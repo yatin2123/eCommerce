@@ -1,8 +1,17 @@
 import React from 'react';
+import Slider from '../../component/Ui/Slider/Slider';
+
+import { useSelector } from "react-redux";
+import { CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
+import Slider1 from '../../component/Ui/Slider/Slider1';
 
 function Index(props) {
+
+    const product = useSelector((state => state.product));
+    console.log(product);
     return (
         <>
+        
             <section className="slider_section">
                 <div className="slider_container">
                     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
@@ -26,7 +35,7 @@ function Index(props) {
                                         </div>
                                         <div className="col-md-5 ">
                                             <div className="img-box">
-                                                <img src="" alt />
+                                                <img src="%PUBLIC_URL%/agency-img.jpg" alt />
                                             </div>
                                         </div>
                                     </div>
@@ -37,8 +46,14 @@ function Index(props) {
                 </div>
             </section>
 
+            <Slider>
 
 
+            </Slider>
+
+           <Slider1>
+
+           </Slider1>
         </>
     );
 }

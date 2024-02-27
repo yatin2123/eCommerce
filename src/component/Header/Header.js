@@ -172,7 +172,8 @@ function Header({ cart }) {
           <div class="row v-center">
             <div class="header-item item-left">
               <div class="logo">
-                <a href="#">logo</a>
+                {/* <a href="#">logo</a> */}
+                <img src="https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg"></img>
               </div>
             </div>
 
@@ -278,7 +279,7 @@ function Header({ cart }) {
                 </NavLink>
               ) : (
                 <NavLink to={"/auth"}>
-                  <span>Login/ Signup</span>
+                  <span> Signup</span>
                 </NavLink>
               )}
             </div>

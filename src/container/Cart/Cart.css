@@ -14,7 +14,7 @@ body{
 .title11{
     margin-bottom: 5vh;
   }
-  .card{
+  .card2{
     margin: auto;
     max-width: 950px;
     width: 90%;
@@ -23,7 +23,7 @@ body{
     border: transparent;
   }
   @media(max-width:767px){
-    .card{
+    .card2{
         margin: 3vh auto;
     }
   }
@@ -106,7 +106,7 @@ body{
   input{
     border: 1px solid rgba(0, 0, 0, 0.137);
     padding: 1vh;
-    margin-bottom: 4vh;
+    /* margin-bottom: 4vh; */
     outline: none;
     width: 100%;
     background-color: rgb(247, 247, 247);
@@ -125,7 +125,7 @@ body{
     margin-right: 10px;
    
   }
-  .btn{
+  .btn1{
     background-color: #000;
     border-color: #000;
     color: white;
@@ -135,7 +135,7 @@ body{
     padding: 1vh;
     border-radius: 0;
   }
-  .btn:focus{
+  .btn1:focus{
     box-shadow: none;
     outline: none;
     box-shadow: none;
@@ -144,7 +144,7 @@ body{
     -webkit-user-select: none;
     transition: none; 
   }
-  .btn:hover{
+  .btn1:hover{
     color: white;
   }
   a{

@@ -127,7 +127,7 @@ function Cart(props) {
           <Form onSubmit={handleSubmit}>
             <div>
               {step === 1 && (
-                <div className="card">
+                <div className="card2">
                   <div className="row">
                     {cartdata.map((v) => {
                       return (
@@ -319,7 +319,7 @@ function Cart(props) {
 
               {step === 3 && (
                 <div>
-                  <div className="card">
+                  <div className="card2">
                     <div className="row">
                       {cartdata.map((v) => {
                         return (
@@ -405,7 +405,7 @@ function Cart(props) {
                                 <div className="col">TOTAL PRICE</div>
                                 <div className="col text-right">€ {totalPrice}</div>
                               </div>
-                              <button className="btn">CHECKOUT</button>
+                              <button className="btn1">CHECKOUT</button>
                             </div>
                           </>
                         );

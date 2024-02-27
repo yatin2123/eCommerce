@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -29,20 +29,21 @@ export const addproduct = createAsyncThunk(
 
         // 'file' comes from the Blob or File API
         console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
-        await uploadBytes(storageRef, data.file).then(async (snapshot) => {
+        try {
+            const snapshot = await uploadBytes(storageRef, data.file);
             console.log('Uploaded a blob or file!', snapshot);
 
-            await getDownloadURL(snapshot.ref)
-                .then(async (url) => {
-                    console.log(url);
+            const url = await getDownloadURL(snapshot.ref);
+            console.log(url);
 
-                    let aptdoc = await addDoc(collection(db, "product"), { ...data, file: url, file_name: rno + '_' + data.file.name });
-                    console.log('aaaaaaaaaaaaaaaaa', aptdoc.id);
+            const aptdoc = await addDoc(collection(db, "product"), { ...data, file: url, file_name: rno + '_' + data.file.name });
+            console.log('aaaaaaaaaaaaaaaaa', aptdoc.id);
 
-                    prodata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name }
-                })
-            console.log(prodata);
-        }).catch((e) => console.log(e))
+            prodata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name };
+        } catch (error) {
+            console.log('Error uploading file:', error);
+            // Handle the error here
+        }
 
         return prodata
 
@@ -54,7 +55,7 @@ export const getproduct = createAsyncThunk(
     async () => {
         let data = [];
 
-        const querySnapshot = await getDoc(collection(db, "product"));
+        const querySnapshot = await getDocs(collection(db, "product"));
         querySnapshot.forEach((doc) => {
             data.push({ ...doc.data(), id: doc.id });
         });
@@ -106,25 +107,25 @@ export const updateproduct = createAsyncThunk(
             await deleteObject(desertRef).then(async (data) => {
                 const rno = Math.floor(Math.random() * 100000);
                 console.log(rno);
-        
+
                 const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
                 console.log("Storage Reference:", storageRef);
-        
-        
+
+
                 // 'file' comes from the Blob or File API
                 console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
                 await uploadBytes(storageRef, data.file).then(async (snapshot) => {
                     console.log('Uploaded a blob or file!', snapshot);
-        
+
                     await getDownloadURL(snapshot.ref)
                         .then(async (url) => {
                             console.log(url);
-        
+
                             const washingtonRef = doc(db, "product", data.id);
                             let prodata = { ...data };
                             delete prodata.id;
                             console.log("Prodata:", prodata);
-                
+
                             await updateDoc(washingtonRef, { ...data, id: data.id });
                             prodata.id = data.id
                         })
@@ -213,6 +214,7 @@ export const productSlice = createSlice({
         });
 
         builder.addCase(getproduct.fulfilled, (state, action) => {
+            console.log(action.payload);
             state.product = action.payload;
         })
 
