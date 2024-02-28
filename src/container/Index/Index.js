@@ -35,7 +35,7 @@ function Index(props) {
                                         </div>
                                         <div className="col-md-5 ">
                                             <div className="img-box">
-                                                <img src="%PUBLIC_URL%/agency-img.jpg" alt />
+                                                <img src="" alt />
                                             </div>
                                         </div>
                                     </div>

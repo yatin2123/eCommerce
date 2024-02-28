@@ -223,7 +223,7 @@ function Cart(props) {
               )}
 
               {step === 2 && (
-                <div className="inputbox">
+                <div className="inputbox1">
                   <input
                     type="text"
                     id="name"

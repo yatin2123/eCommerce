@@ -16,7 +16,7 @@ body{
 .img-showcase img{
     width: 100%;
     display: block;
-    height: 900px;
+    /* height: 900px; */
 }
 .img-display{
     overflow: hidden;
@@ -181,8 +181,8 @@ body{
 }
 
 @media screen and (min-width: 992px){
-    .card1{
-        /* display: grid; */
+    .card-one{
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1.5rem;
     }

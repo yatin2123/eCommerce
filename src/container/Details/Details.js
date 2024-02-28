@@ -16,7 +16,7 @@ function Details({cart, setCart}) {
 
     const dispatch = useDispatch()
 
-    const {id} = useParams;
+    const {id} = useParams();
     console.log(id);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ function Details({cart, setCart}) {
     return (
         <div>
             <div className="card-wrapper">
-                <div className="card1">
+                <div className="card-one">
                     {
                         prodata.map((v) => {
                             console.log(v.file);

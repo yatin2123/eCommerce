@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addDoc, collection, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 
 
@@ -34,7 +34,7 @@ export const getOrder = createAsyncThunk(
   async () => {
     let data = [];
   
-    const querySnapshot = await getDoc(collection(db, "order"));
+    const querySnapshot = await getDocs(collection(db, "order"));
     querySnapshot.forEach((doc) => {
       data.push({ ...doc.data(), id: doc.id });
     });

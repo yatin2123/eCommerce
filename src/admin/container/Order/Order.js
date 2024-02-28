@@ -21,6 +21,9 @@ function Order(props) {
     const order = useSelector(state => state.order);
     console.log(order);
 
+    const auth = useSelector(state => state.auth);
+    console.log(auth);
+
     useEffect(() => {
         dispatch(getOrder())
     }, [])
@@ -45,7 +48,7 @@ function Order(props) {
 
     const columns = [
         {
-            field: 'id', headerName: 'ID', width: 90,
+            field: 'uid', headerName: 'ID', width: 90,
             // renderCell: (params) =>
             //     // console.log(params.row.name);
             //     `${params.row.id || ''} `,
