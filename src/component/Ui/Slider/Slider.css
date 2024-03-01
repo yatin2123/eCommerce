@@ -14,6 +14,7 @@
     /* padding: 10px 22px; */
     border-radius: 10px;
     /* margin-bottom: 35px; */
+    
 }
 .container{
     position: relative;
@@ -49,9 +50,7 @@
     padding-top: 5px;
     color: gray;
 }
-.box {
-    position: relative;
-}
+
 
 .swiper-button-next:after,
 .swiper-rtl .swiper-button-prev:after {
@@ -60,6 +59,10 @@
     background-color: white;
     padding: 4px 6px;
     
+}
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+    content: 'next';
+    font-size: 20px;
 }
 
 .swiper-button-prev:after{
@@ -70,4 +73,8 @@
 .swiper-button-next::after, .swiper-rtl .swiper-button-prev::after {
     content: 'next';
     font-size: 15px;
+}
+
+.slider_section .slider_container {
+    position: relative;
 }

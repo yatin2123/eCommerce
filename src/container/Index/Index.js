@@ -36,11 +36,6 @@ function Index(props) {
                                                     <Link to={"/Contact"}>
                                                         Contact Us
                                                     </Link>
-
-                                                    <h4>shop details</h4>
-                                                    <p>Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. <br></br>Nostrum fugit doloribus
-                                                        consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
-                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

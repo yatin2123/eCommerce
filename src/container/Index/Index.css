@@ -7,3 +7,7 @@
     margin-right: 120px;
 }
 
+.ovaery{
+    position: relative;
+    z-index: 999;   
+}
