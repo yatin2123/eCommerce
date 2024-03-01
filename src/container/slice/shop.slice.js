@@ -32,25 +32,56 @@ export const addShopdata = createAsyncThunk(
   async (data) => {
     console.log(data);
 
-    try {
-      const docRef = await addDoc(collection(db, "category"), data);
-      console.log("Document written with ID: ", docRef.id);
+    let catdata = { ...data };
 
-      return { ...data, id: docRef.id };
-    } catch (e) {
-      console.error("Error adding document: ", e);
+    console.log(catdata);
+
+    const rno = Math.floor(Math.random() * 1000);
+    console.log(rno);
+
+
+
+    const storageRef = ref(storage, 'category/' + rno + "_" + data.file.name);
+    console.log("Storage Reference:", storageRef);
+
+
+    // 'file' comes from the Blob or File API
+    console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+    try {
+      const snapshot = await uploadBytes(storageRef, data.file);
+      console.log('Uploaded a blob or file!', snapshot);
+
+      const url = await getDownloadURL(snapshot.ref);
+      console.log(url);
+
+      const aptdoc = await addDoc(collection(db, "category"), { ...data, file: url, file_name: rno + '_' + data.file.name });
+      console.log('aaaaaaaaaaaaaaaaa', aptdoc.id);
+
+      catdata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name };
+    } catch (error) {
+      console.log('Error uploading file:', error);
+      // Handle the error here
     }
+
+    return catdata
   }
 );
 
 export const deleteShopdata = createAsyncThunk(
   "category/delete",
-  async (id) => {
-    console.log(id);
+  async (data) => {
+    const desertRef = ref(storage, 'category/' + data.file_name);
+        console.log(desertRef);
 
-    await deleteDoc(doc(db, "category", id));
+        await deleteObject(desertRef).then(async (data) => {
+            await deleteDoc(doc(db, "category", data.id));
+            console.log(data.id);
 
-    return id;
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return data.id;
   }
 );
 
@@ -90,7 +121,7 @@ export const shopSlice = createSlice({
     builder.addCase(addShopdata.fulfilled, (state, action) => {
       console.log(action.payload);
 
-      // state.shop = state.shop.concat(action.payload);
+      state.shop = state.shop.concat(action.payload);
 
     });
 

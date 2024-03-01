@@ -18,9 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addShopdata,
   deleteShopdata,
-  
+
   getShopdata,
-  
+
   updateShopdata,
 } from "../../../container/slice/shop.slice";
 import { IconButton } from "@mui/material";
@@ -54,11 +54,12 @@ const ShopForm = () => {
   const formik = useFormik({
     initialValues: {
       cat_name: "",
+      file: "",
     },
     validationSchema: shopSchema,
 
     onSubmit: (data, action) => {
-      console.log(data);      
+      console.log(data);
       if (update) {
         console.log(update);
         dispatch(updateShopdata(data))
@@ -90,6 +91,18 @@ const ShopForm = () => {
       headerName: "First name",
       width: 150,
       editable: true,
+    },
+
+    {
+      field: "file",
+      headerName: "image",
+      width: 150,
+      editable: true,
+      renderCell: (params) => {
+        return (
+          <img height={"100px"}  width={"100px"} src={(params.row.file)} />
+        )
+      }
     },
 
     {
@@ -126,7 +139,7 @@ const ShopForm = () => {
     },
   ];
 
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched , setValues} =
+  const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched, setValues } =
     formik;
 
   console.log(shop.shop);
@@ -155,6 +168,21 @@ const ShopForm = () => {
               value={values.cat_name}
             />
             {errors.cat_name && touched.cat_name ? <span>{errors.cat_name}</span> : null}
+
+            <input
+              accept="image/*"
+              id="file"
+              type="file"
+              onChange={(event) => setFieldValue("file", event.target.files[0])}
+            />
+            {values.file && (
+              <img
+                src={typeof values.file === "string" ? values.file : URL.createObjectURL(values.file)}
+                width={"50px"}
+                height={"50px"}
+                alt="Selected File"
+              />
+            )}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

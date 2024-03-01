@@ -237,7 +237,10 @@ a:focus {
 /*end header section*/
 .slider_section .slider_container {
   color: #fefefe;
-  background-image: url('http://127.0.0.1:5500/img/hero/hero-1.jpg');
+  background-image: url('https://t4.ftcdn.net/jpg/05/53/40/37/360_F_553403777_lHnxCQB2VbjZTbwuOBwsTW8stkgEPmIJ.jpg');
+  background-position: center;
+  background-size: cover;
+  /* background-color: #ffacbe; */
   padding: 25px;
   border-radius: 0 0 15px 15px;
   height: 800px;
@@ -252,7 +255,7 @@ a:focus {
 
 .slider_section .img-box {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: -ms-flexbox; 
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;

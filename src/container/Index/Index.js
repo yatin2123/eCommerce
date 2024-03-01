@@ -4,6 +4,9 @@ import Slider from '../../component/Ui/Slider/Slider';
 import { useSelector } from "react-redux";
 import { CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
 import Slider1 from '../../component/Ui/Slider/Slider1';
+import { Link } from 'react-router-dom';
+
+import './Index.css'
 
 function Index(props) {
 
@@ -22,15 +25,21 @@ function Index(props) {
                                         <div className="col-md-7">
                                             <div className="detail-box">
                                                 <h1>
-                                                    Welcome To Our <br /><br />
+                                                    Welcome To Our 
                                                     Gift Shop
                                                 </h1>
                                                 <p>
-                                                    Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim, accusantium perferendis.
+                                                    Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus 
+                                                    consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
                                                 </p>
-                                                <a href>
+                                                <Link to={"/Contact"}>
                                                     Contact Us
-                                                </a>
+                                                </Link>
+
+                                                <h4>shop details</h4>
+                                                <p>Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus 
+                                                  consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
+                                                </p>
                                             </div>
                                         </div>
                                         <div className="col-md-5 ">
