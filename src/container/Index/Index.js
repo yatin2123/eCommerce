@@ -14,7 +14,7 @@ function Index(props) {
     console.log(product);
     return (
         <>
-        
+
             <section className="slider_section">
                 <div className="slider_container">
                     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
@@ -24,22 +24,24 @@ function Index(props) {
                                     <div className="row">
                                         <div className="col-md-7">
                                             <div className="detail-box">
-                                                <h1>
-                                                    Welcome To Our 
-                                                    Gift Shop
-                                                </h1>
-                                                <p>
-                                                    Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus 
-                                                    consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
-                                                </p>
-                                                <Link to={"/Contact"}>
-                                                    Contact Us
-                                                </Link>
+                                                <div className='ovaery'>
+                                                    <h1>
+                                                        Welcome To Our
+                                                        Gift Shop
+                                                    </h1>
+                                                    <p>
+                                                        Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit.<br></br> Nostrum fugit doloribus
+                                                        consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
+                                                    </p>
+                                                    <Link to={"/Contact"}>
+                                                        Contact Us
+                                                    </Link>
 
-                                                <h4>shop details</h4>
-                                                <p>Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus 
-                                                  consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
-                                                </p>
+                                                    <h4>shop details</h4>
+                                                    <p>Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. <br></br>Nostrum fugit doloribus
+                                                        consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-md-5 ">
@@ -60,9 +62,9 @@ function Index(props) {
 
             </Slider>
 
-           <Slider1>
+            <Slider1>
 
-           </Slider1>
+            </Slider1>
         </>
     );
 }

@@ -15,6 +15,9 @@
     border-radius: 10px;
     /* margin-bottom: 35px; */
 }
+.container{
+    position: relative;
+}
 
 .imge-overly {
     position: absolute;
@@ -25,6 +28,7 @@
     background-color: #0d0c0c;
     opacity: 0.7;
 }
+
 .contact {
     position: absolute;
     top: 35%;
@@ -32,14 +36,35 @@
     text-align: center;
     color: white;
 }
+
 .contact h5 {
     font-size: 30px;
     font-weight: 600;
     color: white;
 }
-.one p{
-    margin-bottom: 35px;
+
+.one p {
+    /* margin-bottom: 35px; */
     font-size: 10px;
     padding-top: 5px;
     color: gray;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+    content: 'next';
+    margin-right: 130px;
+    background-color: white;
+    padding: 4px 6px;
+    
+}
+
+.swiper-button-prev:after{
+    background-color: white;
+    padding: 4px 6px;
+}
+
+.swiper-button-next::after, .swiper-rtl .swiper-button-prev::after {
+    content: 'next';
+    font-size: 15px;
 }
