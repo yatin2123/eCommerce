@@ -16,19 +16,22 @@ body{
 .img-showcase img{
     width: 100%;
     display: block;
-    /* height: 900px; */
+    height: 662px;
+   
 }
 .img-display{
     overflow: hidden;
+    transition: all 0.5s;
 }
 .img-showcase{
     display: flex;
     width: 100%;
     transition: all 0.5s ease;
 }
-.img-showcase img{
+/* .img-showcase:hover img{
     min-width: 100%;
-}
+    transform: scale(1.2,1.2);
+} */
 .img-select{
     display: flex;
 }
@@ -179,6 +182,11 @@ body{
     border-color: transparent;
     color: #fff;
 }
+/* .card-one{
+    border: 2px solid;
+    padding: 20px;
+    border-radius: 10px;
+} */
 
 @media screen and (min-width: 992px){
     .card-one{

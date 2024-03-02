@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { hover } from '@testing-library/user-event/dist/hover';
 // import 'swiper/css/scrollbar';
 
 
@@ -131,21 +132,24 @@ function Slider(props) {
                                             width: '18rem'
                                         }}
                                     >
+                                        <div className='box-trans box-one'>
+                                            <img
+                                                alt="Sample"
+                                                src={v.file}
+                                                height={"300px"}
+                                                width={"285px"}
 
-                                        <img
-                                            alt="Sample"
-                                            src={v.file}
-                                            height={"300px"}
-                                            width={"285px"}
-                                        />
-                                        <div className='box'>
-                                            <div className='imge-overly'>
-                                                <div className='contact'>
-                                                    <CardBody>
-                                                        <CardTitle tag="h5">
-                                                            {v.cat_name}
-                                                        </CardTitle>
-                                                    </CardBody>
+                                            />
+
+                                            <div className='box'>
+                                                <div className='imge-overly'>
+                                                    <div className='contact'>
+                                                        <CardBody>
+                                                            <CardTitle tag="h5">
+                                                                {v.cat_name}
+                                                            </CardTitle>
+                                                        </CardBody>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

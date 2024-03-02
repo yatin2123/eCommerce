@@ -2,25 +2,73 @@ import { logDOM } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addtocart } from '../slice/cart.slice';
+import { addtocart, decrementqty, incrementqty } from '../slice/cart.slice';
 import './Details.css'
 
-function Details({cart, setCart}) {
+// import mg from '../../../public/assetes/images/shoping.jpg'
+
+import ReactImageMagnify from 'react-image-magnify';
+
+function Details() {
 
     const [prodata, setProdata] = useState([])
     const product = useSelector(state => state.product)
     console.log(product);
 
+    const shop = useSelector(state => state.shop);
+    console.log(shop);
+
+
+    // let discount = {};
+    // shop.shop.map((v) => {
+    //     console.log(v);
+    //     prodata.product.map((p) => {
+    //         if (v === 'mens') {
+    //             discount = p.pro_price - 200;
+    //         } else if (v === 'women') {
+    //             discount = p.pro_price - 300;
+    //         }
+    //     })
+    // })
+    // console.log(discount);
+
+    // let discount;
+
+    // product.product.map((v) => {
+    //     console.log(v);
+    //     if(v.pro_name === "lee cooper"){
+    //         discount = v.pro_price - 200
+    //     } else if(v.pro_name === "Trond") {
+    //         discount = v.pro_price -100
+    //     }
+    // })
+    // console.log(discount);
+
+
+    const cart = useSelector(state => state.cart);
+    console.log(cart);
     // const subcategory = useSelector(state => state.sbucategory)
     // console.log(subcategory);
 
+    // const prodauctData = cart.cart.map((v) => {
+    //     let pro = product.product.find((p) => v.id == p.id);
+    //     console.log(pro);
+
+    //     return {...pro, qty: v.qty};
+    // });
+
+
+    // console.log(prodauctData);
+
+
+
     const dispatch = useDispatch()
 
-    const {id} = useParams();
+    const { id } = useParams();
     console.log(id);
 
     useEffect(() => {
-        
+
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
         setProdata(filteredData);
@@ -31,10 +79,19 @@ function Details({cart, setCart}) {
     const handleaddtocart = (id) => {
         console.log(id);
         dispatch(addtocart(id))
-        
+
         // dispatch(({id: id, qty: 1}))
     }
 
+    const handleincrement = (id) => {
+        console.log(id);
+        dispatch(incrementqty(id))
+    }
+
+    const handledecrement = (id) => {
+        console.log(id);
+        dispatch(decrementqty(id))
+    }
     return (
         <div>
             <div className="card-wrapper">
@@ -48,8 +105,21 @@ function Details({cart, setCart}) {
                                         <div className="img-display">
                                             <div className="img-showcase">
                                                 {/* <ImageField source={v.file_name} title="image" /> */}
-                                                <img src={v.file} alt="product image" />
-                                                
+                                                {/* <img src={v.file} alt="product image" /> */}
+                                                <ReactImageMagnify
+                                                    {...{
+                                                        smallImage: {
+                                                            alt: 'Wristwatch by Ted Baker London',
+                                                            isFluidWidth: true,
+                                                            src: v.file
+                                                        },
+                                                        largeImage: {
+                                                            src: v.file,
+                                                            width: 1200,
+                                                            height: 650
+                                                        }
+                                                    }}
+                                                />
                                             </div>
                                         </div>
 
@@ -66,8 +136,8 @@ function Details({cart, setCart}) {
                                             <span>4.7(21)</span>
                                         </div>
                                         <div className="product-price">
-                                            <p className="last-price">Old Price: <span>$857.00</span></p>
-                                            <p className="new-price">New Price: <span>${v.pro_price}</span></p>
+                                            <p className="last-price">Old Price: <span>{v.pro_price}</span></p>
+                                            <p className="new-price">New Price: <span>{v.pro_price - 300}</span></p>
                                         </div>
                                         <div className="product-detail">
                                             <h2>about this item: </h2>
@@ -82,11 +152,13 @@ function Details({cart, setCart}) {
                                             </ul>
                                         </div>
                                         <div className="purchase-info">
-                                            <input type="number" min={0} defaultValue={1} />
+                                            <button onClick={() => handleincrement(v.id)}>+</button>
+                                            <span>{cart.cart.find(item => item.id === v.id)?.qty || 0}</span>
+                                            <button onClick={() => handledecrement(v.id)}>-</button>
                                             <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
                                                 Add to Cart
                                             </button>
-                                            <button type="button" className="btn">Compare</button>
+
                                         </div>
                                         <div className="social-links">
                                             <p>Share At: </p>

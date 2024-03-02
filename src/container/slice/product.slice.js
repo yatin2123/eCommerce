@@ -208,19 +208,52 @@ export const productSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
+
+        builder.addCase(addproduct.pending, (state) => {
+            state.isLoding = true;
+        });
+
         builder.addCase(addproduct.fulfilled, (state, action) => {
             console.log(action);
             state.product = state.product.concat(action.payload);
+            state.isLoding = false
+        });
+
+        builder.addCase(addproduct.rejected, (state, action) => {
+            state.isLoding = false;
+            state.error = action.error.message;
+        });
+
+
+        builder.addCase(getproduct.pending, (state) => {
+            state.isLoding = true;
         });
 
         builder.addCase(getproduct.fulfilled, (state, action) => {
             console.log(action.payload);
             state.product = action.payload;
+            state.isLoding = false;
         })
+
+        builder.addCase(getproduct.rejected, (state) => {
+            state.isLoding = false;
+        });
+
+
+        builder.addCase(deleteproduct.pending, (state) => {
+            state.isLoding = true;
+        });
 
         builder.addCase(deleteproduct.fulfilled, (state, action) => {
             state.product = state.product.filter((v) => v.id !== action.payload)
+            state.isLoding = false;
         })
+
+        builder.addCase(deleteproduct.rejected, (state) => {
+            state.isLoding = false;
+        })
+
+        
 
         builder.addCase(updateproduct.fulfilled, (state, action) => {
             state.product = state.product.map((v) => {

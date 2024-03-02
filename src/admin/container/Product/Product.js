@@ -13,11 +13,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import { addproduct, deleteproduct, getproduct, updateproduct } from '../../../container/slice/product.slice';
+import { addproduct, deleteproduct, endLoading, getproduct, startLoading, updateproduct } from '../../../container/slice/product.slice';
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
+import { getShopdata } from '../../../container/slice/shop.slice';
+import { getsubcategory } from '../../../container/slice/subcategory.slice';
+import "./Product.css"
+
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 
 
@@ -40,7 +47,9 @@ const ProductForm = () => {
 
     useEffect(() => {
         dispatch(getproduct())
-    }, [])
+        dispatch(getShopdata())
+        dispatch(getsubcategory())
+    }, [dispatch])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -63,7 +72,8 @@ const ProductForm = () => {
             pro_name: '',
             pro_des: '',
             pro_price: '',
-            file: ''
+            file: '',
+            pro_stock: ''
         },
         validationSchema: productschema,
         onSubmit: (data, action) => {
@@ -129,6 +139,18 @@ const ProductForm = () => {
             },
         },
         {
+            field: 'stock',
+            headerName: 'Stock',
+            type: 'number',
+            width: 110,
+            editable: true,
+            renderCell: (params) => {
+                console.log(params);
+
+            },
+        },
+
+        {
             field: 'pro_price',
             headerName: 'price',
             type: 'number',
@@ -187,7 +209,7 @@ const ProductForm = () => {
         setSubdata(fdata)
     }
 
-   
+
 
     const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, setValues } = formik;
 
@@ -197,130 +219,158 @@ const ProductForm = () => {
     }));
 
     return (
-        <form onSubmit={handleSubmit}>
-            <React.Fragment>
-                <Button variant="outlined" onClick={handleClickOpen}>
-                    Product
-                </Button>
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Product</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            To subscribe to this website, please enter your email address
-                            here. We will send updates occasionally.
-                        </DialogContentText>
+        <>
+            {
+                product.isLoding ? (
+                    <Box sx={{ display: 'flex' }}>
+                    <CircularProgress />
+                </Box> 
+                ) :
+                    (
+                        <form onSubmit={handleSubmit}>
 
-                        <select
+                            <React.Fragment>
 
-                            id="cart_id"
-                            onChange={(event) => {
+                                <div className='btn-box'>
+                                    <Button variant="outlined" onClick={handleClickOpen}>
+                                        <p>Product</p>
+                                    </Button>
+                                </div>
+                                <Dialog open={open} onClose={handleClose}>
+                                    <DialogTitle>Product</DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            To subscribe to this website, please enter your email address
+                                            here. We will send updates occasionally.
+                                        </DialogContentText>
 
-                                handleChange(event);
-                                subcat(event.target.value);
-                                // handlesubcat(event.target.value);
-                            }}
-                            onBlur={handleBlur}
-                            value={values.cart_id}
-                        >
-                            <option value="0">select</option>
+                                        <select
 
-                            {shop.shop.map((v) => {
-                                console.log(v);
-                                return <option value={v.id}>{v.cat_name}</option>
-                            })}
-                        </select>
+                                            id="cart_id"
+                                            onChange={(event) => {
 
-                        <select
-                            id="sub_id"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.sub_id}
-                        >
-                            <option value="0">select</option>
+                                                handleChange(event);
+                                                subcat(event.target.value);
+                                                // handlesubcat(event.target.value);
+                                            }}
+                                            onBlur={handleBlur}
+                                            value={values.cart_id}
+                                        >
+                                            <option value="0">select</option>
 
-                            {subdata.map((v) => {
-                                console.log(v);
-                                return <option value={v.id}>{v.sub_name}</option>
+                                            {shop.shop.map((v) => {
+                                                console.log(v);
+                                                return <option value={v.id}>{v.cat_name}</option>
+                                            })}
+                                        </select>
 
-                            })}
-                        </select>
+                                        <select
+                                            id="sub_id"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.sub_id}
+                                        >
+                                            <option value="0">select</option>
 
-                        <TextField
-                            margin="dense"
-                            id="pro_name"
-                            label="Product Name"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.pro_name}
-                        />
+                                            {subdata.map((v) => {
+                                                console.log(v);
+                                                return <option value={v.id}>{v.sub_name}</option>
 
-                        <TextField
-                            name='file'
-                            type='file'
-                            fullWidth
-                            variant="standard"
-                            onChange={(event) => setFieldValue("file", event.target.files[0])}
-                        />
+                                            })}
+                                        </select>
 
-                        {values.file && (
-                            <img
-                                src={typeof values.file === 'string' ? values.file : URL.createObjectURL(values.file)}
-                                width={"50px"}
-                                height={"50px"}
-                            />
-                        )}
-                        <TextField
-                            margin="dense"
-                            id="pro_des"
-                            label="Product des"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.pro_des}
-                        />
+                                        <TextField
+                                            margin="dense"
+                                            id="pro_name"
+                                            label="Product Name"
+                                            type="text"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.pro_name}
+                                        />
 
-                        <TextField
-                            margin="dense"
-                            id="pro_price"
-                            label="Product Price"
-                            type="number"
-                            fullWidth
-                            variant="standard"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.pro_price}
-                        />
+                                        <TextField
+                                            name='file'
+                                            type='file'
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={(event) => setFieldValue("file", event.target.files[0])}
+                                        />
 
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={handleSubmit}>ADD</Button>
-                    </DialogActions>
-                </Dialog>
-            </React.Fragment>
+                                        {values.file && (
+                                            <img
+                                                src={typeof values.file === 'string' ? values.file : URL.createObjectURL(values.file)}
+                                                width={"50px"}
+                                                height={"50px"}
+                                            />
+                                        )}
+                                        <TextField
+                                            margin="dense"
+                                            id="pro_des"
+                                            label="Product des"
+                                            type="text"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.pro_des}
+                                        />
 
-            <Box sx={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
-                            },
-                        },
-                    }}
-                    pageSizeOptions={[5]}
-                    checkboxSelection
-                    disableRowSelectionOnClick
-                />
-            </Box>
-        </form>
+                                        <TextField
+                                            margin="dense"
+                                            id="pro_price"
+                                            label="Product Price"
+                                            type="number"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.pro_price}
+                                        />
+
+                                        <TextField
+                                            margin="stock"
+                                            id="pro_stock"
+                                            label="Product Stock"
+                                            type="number"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.pro_stock}
+                                        />
+
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose}>Cancel</Button>
+                                        <Button onClick={handleSubmit}>ADD</Button>
+                                    </DialogActions>
+                                </Dialog>
+                            </React.Fragment>
+
+                            <Box sx={{ height: 400, width: '100%' }}>
+                                <DataGrid
+                                    rows={rows}
+                                    columns={columns}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: {
+                                                pageSize: 5,
+                                            },
+                                        },
+                                    }}
+                                    pageSizeOptions={[5]}
+                                    checkboxSelection
+                                    disableRowSelectionOnClick
+                                />
+                            </Box>
+                        </form>
+                    )
+            }
+
+        </>
     );
 };
 

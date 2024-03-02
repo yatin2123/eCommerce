@@ -54,27 +54,31 @@
 
 .swiper-button-next:after,
 .swiper-rtl .swiper-button-prev:after {
-    content: 'next';
+    
     margin-right: 130px;
     background-color: white;
     padding: 4px 6px;
-    
-}
-.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
-    content: 'next';
     font-size: 20px;
 }
 
-.swiper-button-prev:after{
+
+.swiper-button-prev::after{
     background-color: white;
     padding: 4px 6px;
+    font-size: 20px;
 }
 
-.swiper-button-next::after, .swiper-rtl .swiper-button-prev::after {
-    content: 'next';
-    font-size: 15px;
-}
+
 
 .slider_section .slider_container {
     position: relative;
+}
+
+
+
+.box-trans {
+    transition: all 0.5s; 
+}
+:hover .box-one{
+    transform: scale(1.1,1.2);
 }
