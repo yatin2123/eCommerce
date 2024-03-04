@@ -82,37 +82,36 @@ function Details() {
                                             />
                                         </div>
                                         <div className="copy">
-                                        <div className="product-content">
-                                        <h2 className="product-title">{v.pro_name}</h2>
-                                        {/* <a href="#" className="product-link">visit nike store</a> */}
-                                        <div className="product-rating">
-                                            <i className="fas fa-star" />
-                                            <i className="fas fa-star" />
-                                            <i className="fas fa-star" />
-                                            <i className="fas fa-star" />
-                                            <i className="fas fa-star-half-alt" />
-                                            <span>4.7(21)</span>
-                                        </div>
-                                        <div className="product-price">
-                                            <p className="last-price">Old Price: <span>{v.pro_price}</span></p>
-                                            <p className="new-price">New Price: <span>{v.pro_price - (v.pro_price * v.discount / 100)}</span></p>
-                                        </div>
-                                        <div className="product-detail">
-                                            <h2>about this item: </h2>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
-                                            
-                                        </div>
-                                        <div className="purchase-info">
-                                            <button onClick={() => handleincrement(v.id)}>+</button>
-                                            <span>{cart.cart.find(item => item.id === v.id)?.qty || 0}</span>
-                                            <button onClick={() => handledecrement(v.id)}>-</button>
-                                            {/* <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
-                                                Add to Cart
-                                            </button> */}
-                                            <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>Add to Cart</button>
-                                        </div>
-                                    </div>
+                                            <div className="product-content">
+                                                <h2 className="product-title">{v.pro_name}</h2>
+                                                {/* <a href="#" className="product-link">visit nike store</a> */}
+                                                <div className="product-rating">
+                                                    <i className="fas fa-star" />
+                                                    <i className="fas fa-star" />
+                                                    <i className="fas fa-star" />
+                                                    <i className="fas fa-star" />
+                                                    <i className="fas fa-star-half-alt" />
+                                                    <span>4.7(21)</span>
+                                                </div>
+                                                <div className="product-price">
+                                                    <p className="last-price">Old Price: <span>{v.pro_price}</span></p>
+                                                    <p className="new-price">New Price: <span>{v.pro_price - (v.pro_price * v.discount / 100)}</span></p>
+                                                </div>
+                                                <div className="product-detail">
+                                                    <h2>about this item: </h2>
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+
+                                                </div>
+                                                <div className="purchase-info">
+                                                    <button onClick={() => handleincrement(v.id)}>+</button>
+                                                    <span>{cart.cart.find(item => item.id === v.id)?.qty || 0}</span>
+                                                    <button onClick={() => handledecrement(v.id)}>-</button>
+                                                    <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
+                                                        Add to Cart
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </>

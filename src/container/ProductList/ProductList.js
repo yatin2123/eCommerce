@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import './ProductList.css'
 function ProductList(props) {
-    // console.log("asdasdasd");
 
     const [finalcategory, setFinalcategory] = useState([]);
     const { catName, id } = useParams();
-    console.log(catName, id);
+    // console.log(catName, id);
     const product = useSelector(state => state.product);
     console.log(product);
 
@@ -15,7 +14,6 @@ function ProductList(props) {
         const data = product.product.filter((v) => v.cart_id == id || v.sub_id == id);
         setFinalcategory(data);
     }, [id, product.product]);
-
 
     return (
         <div>
@@ -33,14 +31,12 @@ function ProductList(props) {
                                             <div className="img-box">
                                                 <img src={v.file} alt={v.pro_name} />
                                             </div>
-
-
                                         </a>
 
                                     </div>
                                     <div className="detail-box">
                                         <h6>{v.pro_name}</h6>
-                                        <p>{v.pro_des}</p>
+                                       
                                         <h6>Price <span>{v.pro_price}</span></h6>
                                         <h6>Stock: <span>{v.pro_stock}</span></h6> 
                                     </div>
