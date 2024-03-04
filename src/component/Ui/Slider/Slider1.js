@@ -34,7 +34,7 @@ function Slider1(props) {
     return (
         <section id="product_section" className="product_section">
             <div className="container">
-                <div className='cat_box'>Trendin Product</div>
+                <div className='cat_box'>Trending Product</div>
                 <div className="slider-container">
 
                     <Slider {...settings}>

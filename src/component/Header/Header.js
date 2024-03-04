@@ -205,7 +205,7 @@ function Header({ cart }) {
                               <ul>
                                 {
                                   sbucategory.subcategory.map((m) => {
-                                    console.log(m);
+                                    // console.log(m);
                                     if (m.cart_id === v.id) {
                                       return (
                                         <li>

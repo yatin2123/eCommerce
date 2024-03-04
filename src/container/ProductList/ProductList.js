@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import './ProductList.css'
 function ProductList(props) {
     // console.log("asdasdasd");
@@ -42,13 +42,16 @@ function ProductList(props) {
                                         <h6>{v.pro_name}</h6>
                                         <p>{v.pro_des}</p>
                                         <h6>Price <span>{v.pro_price}</span></h6>
+                                        <h6>Stock: <span>{v.pro_stock}</span></h6> 
                                     </div>
                                 </NavLink>
                             </div>
                         ))}
                     </div>
                     <div className="btn-box">
-                        <a href="#">View All Products</a>
+                        <Link to={`/shop/${id}`}>
+                            View All
+                        </Link>
                     </div>
                 </div>
             </section>

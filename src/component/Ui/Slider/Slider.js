@@ -127,18 +127,18 @@ function Slider(props) {
                             console.log(v),
                             <SwiperSlide key={index}>
                                 <Link to={`/shop/${v.id}`}>
-                                    <Card
-                                        style={{
-                                            width: '18rem'
-                                        }}
-                                    >
-                                        <div className='box-trans box-one'>
-                                            <img
+                                    
+                                    <div className={`box-one one ${v.id}`} > 
+                                        <Card
+                                            style={{
+                                                width: '18rem'
+                                            }}
+                                        >
+                                            <img 
                                                 alt="Sample"
                                                 src={v.file}
                                                 height={"300px"}
                                                 width={"285px"}
-
                                             />
 
                                             <div className='box'>
@@ -152,8 +152,9 @@ function Slider(props) {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Card>
+
+                                        </Card>
+                                    </div>
                                 </Link>
                             </SwiperSlide>
                         ))}

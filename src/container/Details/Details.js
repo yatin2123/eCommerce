@@ -4,63 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addtocart, decrementqty, incrementqty } from '../slice/cart.slice';
 import './Details.css'
-
 // import mg from '../../../public/assetes/images/shoping.jpg'
 
 import ReactImageMagnify from 'react-image-magnify';
+import { getproduct } from '../slice/product.slice';
 
 function Details() {
 
-    const [prodata, setProdata] = useState([])
+    const [prodata, setProdata] = useState([]);
     const product = useSelector(state => state.product)
     console.log(product);
-
     const shop = useSelector(state => state.shop);
     console.log(shop);
 
-
-    // let discount = {};
-    // shop.shop.map((v) => {
-    //     console.log(v);
-    //     prodata.product.map((p) => {
-    //         if (v === 'mens') {
-    //             discount = p.pro_price - 200;
-    //         } else if (v === 'women') {
-    //             discount = p.pro_price - 300;
-    //         }
-    //     })
-    // })
-    // console.log(discount);
-
-    // let discount;
-
-    // product.product.map((v) => {
-    //     console.log(v);
-    //     if(v.pro_name === "lee cooper"){
-    //         discount = v.pro_price - 200
-    //     } else if(v.pro_name === "Trond") {
-    //         discount = v.pro_price -100
-    //     }
-    // })
-    // console.log(discount);
-
-
     const cart = useSelector(state => state.cart);
     console.log(cart);
-    // const subcategory = useSelector(state => state.sbucategory)
-    // console.log(subcategory);
-
-    // const prodauctData = cart.cart.map((v) => {
-    //     let pro = product.product.find((p) => v.id == p.id);
-    //     console.log(pro);
-
-    //     return {...pro, qty: v.qty};
-    // });
-
-
-    // console.log(prodauctData);
-
-
 
     const dispatch = useDispatch()
 
@@ -98,35 +56,35 @@ function Details() {
                 <div className="card-one">
                     {
                         prodata.map((v) => {
-                            console.log(v.file);
+                            console.log(v);
                             return (
                                 <>
-                                    <div className="product-imgs">
-                                        <div className="img-display">
-                                            <div className="img-showcase">
-                                                {/* <ImageField source={v.file_name} title="image" /> */}
-                                                {/* <img src={v.file} alt="product image" /> */}
-                                                <ReactImageMagnify
-                                                    {...{
-                                                        smallImage: {
-                                                            alt: 'Wristwatch by Ted Baker London',
-                                                            isFluidWidth: true,
-                                                            src: v.file
-                                                        },
-                                                        largeImage: {
-                                                            src: v.file,
-                                                            width: 1200,
-                                                            height: 650
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
+                                    <div className="perimeter">
+                                        <div className="image">
+                                            <ReactImageMagnify
+                                                {...{
+                                                    smallImage: {
+                                                        alt: "Wristwatch by Ted Baker London",
+                                                        isFluidWidth: true,
+                                                        src: v.file,
+                                                        srcSet: v.srcSet,
+                                                        sizes:
+                                                            "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw"
+                                                    },
+                                                    largeImage: {
+                                                        alt: "",
+                                                        src: v.file,
+                                                        width: 1200,
+                                                        height: 1800
+                                                    },
+                                                    isHintEnabled: true
+                                                }}
+                                            />
                                         </div>
-
-                                    </div>
-                                    <div className="product-content">
+                                        <div className="copy">
+                                        <div className="product-content">
                                         <h2 className="product-title">{v.pro_name}</h2>
-                                        <a href="#" className="product-link">visit nike store</a>
+                                        {/* <a href="#" className="product-link">visit nike store</a> */}
                                         <div className="product-rating">
                                             <i className="fas fa-star" />
                                             <i className="fas fa-star" />
@@ -137,46 +95,24 @@ function Details() {
                                         </div>
                                         <div className="product-price">
                                             <p className="last-price">Old Price: <span>{v.pro_price}</span></p>
-                                            <p className="new-price">New Price: <span>{v.pro_price - 300}</span></p>
+                                            <p className="new-price">New Price: <span>{v.pro_price - (v.pro_price * v.discount / 100)}</span></p>
                                         </div>
                                         <div className="product-detail">
                                             <h2>about this item: </h2>
                                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
                                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
-                                            <ul>
-                                                <li>Color: <span>Black</span></li>
-                                                <li>Available: <span>in stock</span></li>
-                                                <li>Category: <span>Shoes</span></li>
-                                                <li>Shipping Area: <span>All over the world</span></li>
-                                                <li>Shipping Fee: <span>Free</span></li>
-                                            </ul>
+                                            
                                         </div>
                                         <div className="purchase-info">
                                             <button onClick={() => handleincrement(v.id)}>+</button>
                                             <span>{cart.cart.find(item => item.id === v.id)?.qty || 0}</span>
                                             <button onClick={() => handledecrement(v.id)}>-</button>
-                                            <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
+                                            {/* <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
                                                 Add to Cart
-                                            </button>
-
+                                            </button> */}
+                                            <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>Add to Cart</button>
                                         </div>
-                                        <div className="social-links">
-                                            <p>Share At: </p>
-                                            <a href="#">
-                                                <i className="fab fa-facebook-f" />
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-twitter" />
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-instagram" />
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-whatsapp" />
-                                            </a>
-                                            <a href="#">
-                                                <i className="fab fa-pinterest" />
-                                            </a>
+                                    </div>
                                         </div>
                                     </div>
                                 </>

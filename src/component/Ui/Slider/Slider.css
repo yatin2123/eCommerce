@@ -14,9 +14,10 @@
     /* padding: 10px 22px; */
     border-radius: 10px;
     /* margin-bottom: 35px; */
-    
+
 }
-.container{
+
+.container {
     position: relative;
 }
 
@@ -54,18 +55,18 @@
 
 .swiper-button-next:after,
 .swiper-rtl .swiper-button-prev:after {
-    
+
     margin-right: 130px;
     background-color: white;
-    padding: 4px 6px;
-    font-size: 20px;
+    padding: 10px 10px;
+    border-radius: 5px;
 }
 
 
-.swiper-button-prev::after{
+.swiper-button-prev::after {
     background-color: white;
-    padding: 4px 6px;
-    font-size: 20px;
+    padding: 10px 10px;
+    border-radius: 5px;
 }
 
 
@@ -76,9 +77,36 @@
 
 
 
-.box-trans {
+/* .index{
     transition: all 0.5s; 
 }
 :hover .box-one{
     transform: scale(1.1,1.2);
+} */
+.box-one{
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.one:hover .card{
+    transform: scale(1, 1.2);
+    overflow: hidden;
+}
+
+/* .swiper-slide {
+    overflow: hidden;
+} */
+
+/* .swiper-backface-hidden .swiper-slide {
+    overflow: hidden !important;
+} */
+.swiper-slide-next{
+    overflow: hidden !important;
+}
+
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 20px !important;
+    color: gray;
 }

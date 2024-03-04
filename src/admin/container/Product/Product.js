@@ -21,12 +21,7 @@ import { IconButton } from '@mui/material';
 import { getShopdata } from '../../../container/slice/shop.slice';
 import { getsubcategory } from '../../../container/slice/subcategory.slice';
 import "./Product.css"
-
 import CircularProgress from '@mui/material/CircularProgress';
-
-
-
-
 
 const ProductForm = () => {
 
@@ -59,7 +54,6 @@ const ProductForm = () => {
         setOpen(false);
     };
 
-
     let productschema = yup.object().shape({
         pro_name: yup.string().required("please enter name"),
         pro_des: yup.string().required("please enter des"),
@@ -73,7 +67,8 @@ const ProductForm = () => {
             pro_des: '',
             pro_price: '',
             file: '',
-            pro_stock: ''
+            pro_stock: '',
+            discount: ''
         },
         validationSchema: productschema,
         onSubmit: (data, action) => {
@@ -106,7 +101,7 @@ const ProductForm = () => {
     const columns = [
         {
             field: 'car_id',
-            headerName: 'product name',
+            headerName: 'category name',
             width: 150,
             editable: true,
             renderCell: (params) => {
@@ -139,15 +134,19 @@ const ProductForm = () => {
             },
         },
         {
-            field: 'stock',
+
+            field: 'pro_stock',
             headerName: 'Stock',
             type: 'number',
             width: 110,
             editable: true,
             renderCell: (params) => {
-                console.log(params);
-
+                console.log(params.row);
+                return (
+                    <>{params.row.pro_stock}</>
+                );
             },
+
         },
 
         {
@@ -222,9 +221,18 @@ const ProductForm = () => {
         <>
             {
                 product.isLoding ? (
-                    <Box sx={{ display: 'flex' }}>
-                    <CircularProgress />
-                </Box> 
+                    <Box sx={{ display: 'flex' }}
+                        top={0}
+                        left={0}
+                        bottom={0}
+                        right={0}
+                        position="absolute"  
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <CircularProgress />
+                    </Box>
                 ) :
                     (
                         <form onSubmit={handleSubmit}>
@@ -340,6 +348,18 @@ const ProductForm = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.pro_stock}
+                                        />
+
+                                        <TextField
+                                            margin="discount"
+                                            id="discount"
+                                            label="Product discount"
+                                            type="number"
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.discount}
                                         />
 
                                     </DialogContent>
