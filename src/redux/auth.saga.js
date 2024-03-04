@@ -19,7 +19,6 @@ function* signupUser(action) {
         // yield put(setAlert({ text: user.massege, color: 'success' }))
     } catch (e) {
         console.log(e);
-
         yield put(authError(e.message))
         // yield put(setAlert({ text: e.message, color: 'error' }))
 

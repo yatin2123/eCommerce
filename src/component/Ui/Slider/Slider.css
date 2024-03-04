@@ -7,20 +7,16 @@
     margin-top: 30px;
     background-color: #d5b6b626;
 }
-#category_section .cat_box {
-    /* background-color: #f2dbde; */
+/* #category_section .cat_box {
     display: inline-block;
-    /* padding: 10px 22px; */
     border-radius: 10px;
-    /* margin-bottom: 35px; */
-
 }
 #category_section .card{
     border-radius: 20px;
 }
 #category_section .card img{
     border-radius: 20px;
-}
+} */
 .container {
     position: relative;
 }
@@ -32,7 +28,7 @@
     bottom: 0;
     background-color: #0d0c0c;
     opacity: 0.7;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 .contact {
     position: absolute;
@@ -48,14 +44,14 @@
 }
 .one p {
     /* margin-bottom: 35px; */
-    font-size: 10px;
+    font-size: 14px;
     padding-top: 5px;
     color: gray;
 }
 .swiper-button-next:after,
 .swiper-rtl .swiper-button-prev:after {
 
-    margin-right: 130px;
+    margin-right: 131px;
     background-color: white;
     padding: 7px 10px;
     border-radius: 50%;

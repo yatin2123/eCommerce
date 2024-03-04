@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
-
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-
 
 const initialState = {
     isLoding: false,
@@ -13,20 +11,15 @@ const initialState = {
 
 export const addproduct = createAsyncThunk(
     "product/add",
-
     async (data) => {
         console.log("Data:", data);
 
         let prodata = { ...data };
         console.log("Prodata:", prodata);
-
         const rno = Math.floor(Math.random() * 100000);
         console.log(rno);
-
         const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
         console.log("Storage Reference:", storageRef);
-
-
         // 'file' comes from the Blob or File API
         console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
         try {
@@ -42,9 +35,7 @@ export const addproduct = createAsyncThunk(
             prodata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name };
         } catch (error) {
             console.log('Error uploading file:', error);
-            // Handle the error here
         }
-
         return prodata
 
     }
@@ -54,19 +45,16 @@ export const getproduct = createAsyncThunk(
     "product/get",
     async () => {
         let data = [];
-
         const querySnapshot = await getDocs(collection(db, "product"));
         querySnapshot.forEach((doc) => {
             data.push({ ...doc.data(), id: doc.id });
         });
-
         return data;
     }
 )
 
 export const deleteproduct = createAsyncThunk(
     "product/delete",
-
     async (data) => {
         const desertRef = ref(storage, 'product/' + data.file_name);
         console.log(desertRef);
@@ -74,11 +62,9 @@ export const deleteproduct = createAsyncThunk(
         await deleteObject(desertRef).then(async (data) => {
             await deleteDoc(doc(db, "product", data.id));
             console.log(data.id);
-
         }).catch((error) => {
             console.log(error);
         });
-
         return data.id;
     }
 )
@@ -88,9 +74,7 @@ export const updateproduct = createAsyncThunk(
 
     async (data) => {
         console.log(data);
-
         let prodata = []
-
         if (typeof data.file === 'string') {
             console.log('rrrrrrrrrrrrrrrrrrrrrrr');
             const washingtonRef = doc(db, "product", data.id);
@@ -110,8 +94,6 @@ export const updateproduct = createAsyncThunk(
 
                 const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
                 console.log("Storage Reference:", storageRef);
-
-
                 // 'file' comes from the Blob or File API
                 console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
                 await uploadBytes(storageRef, data.file).then(async (snapshot) => {
@@ -135,71 +117,8 @@ export const updateproduct = createAsyncThunk(
             }).catch((error) => {
                 console.log(error);
             });
-
-            // const desertRef = ref(storage, 'product/' + data.file_name);
-            // console.log(desertRef);
-
-            // await deleteObject(desertRef).then(async (data) => {
-            //     const rno = Math.floor(Math.random() * 100000);
-            //     console.log(rno);
-
-            //     const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
-            //     console.log("Storage Reference:", storageRef);
-
-
-            //     // 'file' comes from the Blob or File API
-            //     console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
-            //     await uploadBytes(storageRef, data.file).then(async (snapshot) => {
-            //         console.log('Uploaded a blob or file!', snapshot);
-
-            //         await getDownloadURL(snapshot.ref)
-            //             .then(async (url) => {
-            //                 console.log(url);
-            //                 const washingtonRef = doc(db, "product", data.id);
-            //                 prodata = { ...data };
-            //                 delete prodata.id;
-
-            //                 await updateDoc(washingtonRef, { ...data, id: data.id });
-            //                 prodata.id = data.id
-            //             })
-            //         console.log(prodata);
-            //     })
-
-
-            // })
-
-            // const rno = Math.floor(Math.random() * 100000);
-            // console.log(rno);
-
-            // const storageRef = ref(storage, 'product/' + rno + "_" + data.file.name);
-            // console.log("Storage Reference:", storageRef);
-
-
-
-            // console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
-            // await uploadBytes(storageRef, data.file).then(async (snapshot) => {
-            //     console.log('Uploaded a blob or file!', snapshot);
-
-            //     await getDownloadURL(snapshot.ref)
-            //         .then(async (url) => {
-            //             console.log(url);
-
-            //             let aptdoc = await addDoc(collection(db, "product"), { ...data, file: url, file_name: rno + '_' + data.file.name });
-            //             console.log('aaaaaaaaaaaaaaaaa', aptdoc.id);
-
-            //             prodata = { id: aptdoc.id, ...data, file: url, file_name: rno + '_' + data.file.name }
-            //         })
-            //     console.log(prodata);
-            // })
-
         }
-
         return prodata
-        // let productData =;
-        // delete productData.id;
-
-
-        // return data;
     }
 )
 

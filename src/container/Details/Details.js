@@ -16,7 +16,6 @@ function Details() {
     console.log(product);
     const shop = useSelector(state => state.shop);
     console.log(shop);
-
     const cart = useSelector(state => state.cart);
     console.log(cart);
 
@@ -33,11 +32,9 @@ function Details() {
 
     }, [id, product.product])
 
-
     const handleaddtocart = (id) => {
         console.log(id);
         dispatch(addtocart(id))
-
         // dispatch(({id: id, qty: 1}))
     }
 
@@ -118,7 +115,6 @@ function Details() {
                             )
                         })
                     }
-
                 </div>
             </div>
         </div>

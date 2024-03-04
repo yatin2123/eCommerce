@@ -232,7 +232,7 @@ body{
     padding: 20px;
     font-family: sans-serif;
     position: relative;
-    z-index: -1;
+    /* z-index: -1; */
   }
   
   @media (min-width: 415px) {
