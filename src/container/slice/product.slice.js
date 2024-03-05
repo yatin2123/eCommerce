@@ -56,15 +56,14 @@ export const getproduct = createAsyncThunk(
 export const deleteproduct = createAsyncThunk(
     "product/delete",
     async (data) => {
+        console.log(data);
         const desertRef = ref(storage, 'product/' + data.file_name);
         console.log(desertRef);
 
-        await deleteObject(desertRef).then(async (data) => {
-            await deleteDoc(doc(db, "product", data.id));
-            console.log(data.id);
-        }).catch((error) => {
-            console.log(error);
-        });
+        await deleteObject(desertRef)
+
+        await deleteDoc(doc(db, "product", data.id));
+        console.log(data.id);
         return data.id;
     }
 )
@@ -164,6 +163,7 @@ export const productSlice = createSlice({
         });
 
         builder.addCase(deleteproduct.fulfilled, (state, action) => {
+            console.log(action);
             state.product = state.product.filter((v) => v.id !== action.payload)
             state.isLoding = false;
         })
@@ -172,7 +172,7 @@ export const productSlice = createSlice({
             state.isLoding = false;
         })
 
-        
+
 
         builder.addCase(updateproduct.fulfilled, (state, action) => {
             state.product = state.product.map((v) => {

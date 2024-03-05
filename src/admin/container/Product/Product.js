@@ -27,12 +27,12 @@ const ProductForm = () => {
 
     const [open, setOpen] = React.useState(false);
 
-    const [update, setUpdate] = useState([]);
+    const [update, setUpdate] = useState();
     const [subdata, setSubdata] = useState([])
 
     const dispatch = useDispatch([])
     const product = useSelector((state => state.product));
-    console.log(product);
+    console.log(product);    
 
     const shop = useSelector((state => state.shop));
     console.log(shop);
@@ -41,7 +41,7 @@ const ProductForm = () => {
     console.log(subcategory);
 
     useEffect(() => {
-        dispatch(getproduct())
+       dispatch(getproduct())
         dispatch(getShopdata())
         dispatch(getsubcategory())
     }, [dispatch])
@@ -75,15 +75,16 @@ const ProductForm = () => {
 
             console.log(data);
 
-            // if (update) {
-            //     dispatch(updateproduct(data))
-            // } else {
-            //     dispatch(addproduct(data))
-            // }
+            if (update) {
+                console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+                dispatch(updateproduct(data))
+            } else {
+                console.log('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
+                dispatch(addproduct(data))
+            }
+            // dispatch(addproduct(data))
 
-            dispatch(addproduct(data))
-
-            setValues(update)
+            setValues(update)            
             handleClose()
             action.resetForm()
         },
@@ -212,10 +213,10 @@ const ProductForm = () => {
 
     const { handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, setValues } = formik;
 
-    const rows = product.product.map((product, index) => ({
-        ...product,
-        id: index + 1, // Assuming index starts from 0, you can adjust this as needed
-    }));
+    // const rows = product.product.map((product, index) => ({
+    //     ...product,
+    //     id: index + 1,
+    // }));
 
     return (
         <>
@@ -372,7 +373,7 @@ const ProductForm = () => {
 
                             <Box sx={{ height: 400, width: '100%' }}>
                                 <DataGrid
-                                    rows={rows}
+                                    rows={product.product}
                                     columns={columns}
                                     initialState={{
                                         pagination: {

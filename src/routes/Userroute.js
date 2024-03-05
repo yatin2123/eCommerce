@@ -14,6 +14,7 @@ import Details from "../container/Details/Details";
 // import Mens from "../container/Mens/Mens";
 import ProductList from "../container/ProductList/ProductList";
 import Cart from "../container/Cart/Cart";
+import View from "../container/View/View";
 
 function Userroute(props) {
 
@@ -27,6 +28,7 @@ function Userroute(props) {
         <Route exact path="/shop" element={<Shop />} />
         <Route exact path="/shop/:id" element={<ProductList />} />
         <Route exact path="/shop/:catName/:id" element={<ProductList />} />
+        <Route exact path="/view/shop/:id" element={<View />} />
         <Route exact path="/shopdata/:id" element={<Shopdata />} />
         <Route exact path="/:id" element={<Details cart={cart} setCart={setCart}/>} />
         <Route exact path="/why" element={<Why />} />

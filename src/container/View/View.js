@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, NavLink, useParams } from 'react-router-dom';
-import './ProductList.css'
-function ProductList(props) {
+import { useDispatch, useSelector } from 'react-redux';
+import { getproduct } from '../slice/product.slice';
+import { NavLink, useParams } from 'react-router-dom';
 
-    const [finalcategory, setFinalcategory] = useState([]);
-    const { catName, id } = useParams();
-    console.log(catName, id);
+function View(props) {
     const product = useSelector(state => state.product);
     console.log(product);
+    const [productdata, setProductData] = useState([]);
+
+    const dispatch = useDispatch();
+    const { catName, id } = useParams();
+    console.log(catName, id);
 
     useEffect(() => {
-        const data = product.product.filter((v) => v.cart_id == id || v.sub_id == id);
+        // dispatch(getproduct());
+
+        const data = product.product.filter((v) => v.cart_id === id || v.sub_id === id);
         console.log(data);
-        setFinalcategory(data);
-    }, [id, product.product]);
+        setProductData(data);
+    
+    }, [dispatch, id, product.product]);
 
     return (
         <div>
@@ -24,7 +29,7 @@ function ProductList(props) {
                         <h2>Latest Products</h2>
                     </div>
                     <div className="row">
-                        {finalcategory.map((v) => (
+                        {productdata.map((v) => (
                             <div key={v.id} className="col-sm-6 col-md-4 col-lg-3">
                                 <NavLink className="nav-link scrollto" to={`/${v.id}`}>
                                     <div className="box">
@@ -36,7 +41,6 @@ function ProductList(props) {
                                     </div>
                                     <div className="detail-box">
                                         <h6>{v.pro_name}</h6>
-
                                         <h6>Price <span>{v.pro_price}</span></h6>
                                         <h6>Stock: <span>{v.pro_stock}</span></h6>
                                     </div>
@@ -44,16 +48,10 @@ function ProductList(props) {
                             </div>
                         ))}
                     </div>
-                    <div className="btn-box">
-                        <NavLink to={`/view/shop/${id}`}>
-                            View All
-                        </NavLink>
-                    </div>
-
                 </div>
             </section>
         </div>
     );
 }
 
-export default ProductList;
+export default View;

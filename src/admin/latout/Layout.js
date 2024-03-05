@@ -112,6 +112,7 @@ export default function Doctor({ children }) {
         { label: "Subcategory", icons: [<CardMembershipIcon />], to: "/admin/subcategory" },
         { label: "Product", icons: [<ProductionQuantityLimitsIcon />], to: "/admin/product" },
         { label: "Order", icons: [ <ShoppingCartIcon />], to: "/admin/order" },
+        { label: "address", icons: [ <ShoppingCartIcon />], to: "/admin/address" },
     ];
     return (
         <Box sx={{ display: 'flex' }}>

@@ -183,6 +183,18 @@ body{
     border-color: transparent;
     color: #fff;
 }
+.purchase-info button{
+    padding: 0px 7px;
+    text-decoration: none;
+    border: 1px solid;
+    font-size: 20px;
+    color: white;
+    background-color: #f64749;
+}
+.purchase-info span{
+    margin: 5px;
+    font-size: 15px;
+}
 /* .card-one{
     border: 2px solid;
     padding: 20px;

@@ -12,6 +12,9 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrder } from '../../../container/slice/cartform.slice';
+import PreviewIcon from '@mui/icons-material/Preview';
+import { IconButton } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function Order(props) {
 
@@ -46,12 +49,16 @@ function Order(props) {
         },
     });
 
+    const handlealldata = (data) => {
+        console.log(data);
+    }
+
     const columns = [
         {
             field: 'uid', headerName: 'ID', width: 90,
-            // renderCell: (params) =>
-            //     // console.log(params.row.name);
-            //     `${params.row.id || ''} `,
+            renderCell: (params) =>
+                // console.log(params.row.name);
+                `${params.row.id || ''} `,
 
         },
         {
@@ -66,12 +73,12 @@ function Order(props) {
                     ))}
                 </>
             ),
-                // console.log(params.row.name);
-                // `${params.row.address.map((v) => {
-                //     return(
-                //         <p>{v.name}</p>
-                //     )
-                // })} `,
+            // console.log(params.row.name);
+            // `${params.row.address.map((v) => {
+            //     return(
+            //         <p>{v.name}</p>
+            //     )
+            // })} `,
         },
         {
             field: 'City',
@@ -114,7 +121,29 @@ function Order(props) {
                 </>
             ),
         },
-       
+
+        {
+            field: 'view',
+            headerName: 'View',
+            type: 'number',
+            width: 110,
+            editable: true,
+            renderCell: (params) => {
+                return (
+                    <>
+                        <Link to={'/admin/address'}>
+                            <IconButton
+                                aria-label="delete"
+                                onClick={() => handlealldata(params.row)}
+                            >
+                                <PreviewIcon />
+                            </IconButton>
+                        </Link>
+                    </>
+                )
+            }
+        },
+
     ];
 
     const rows = [
