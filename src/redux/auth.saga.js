@@ -14,7 +14,7 @@ function* signupUser(action) {
     console.log(action);
     try {
         const user = yield call(signupAPI, action.payload);
-        console.log(user.user);
+        console.log(user);
         yield put(signupResponse(user.user))
         // yield put(setAlert({ text: user.massege, color: 'success' }))
     } catch (e) {

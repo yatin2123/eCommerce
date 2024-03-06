@@ -7,7 +7,7 @@ export const initialValues = {
 }
 
 export const signupReducer = (state = initialValues, action) => {
-    // console.log(action);
+    console.log(action);
 
     switch (action.type) {
         case SIGNUP_REQWEST:

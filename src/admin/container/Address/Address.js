@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrder } from '../../../container/slice/cartform.slice';
+import { getOrder, updateorder } from '../../../container/slice/cartform.slice';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -13,93 +13,134 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { getproduct } from '../../../container/slice/product.slice';
+import { CardText, CardTitle } from 'reactstrap';
+import './Address.css';
 
 function Address(props) {
+    const [selectedStatus, setSelectedStatus] = useState('');
     const orderdata = useSelector(state => state.order);
     console.log(orderdata);
     const cart = useSelector(state => state.cart);
-    console.log(cart);
+    // console.log(cart);
+    // console.log(selectedStatus);
 
     // const Data = orderdata.push(cart);
-
     const product = useSelector(state => state.product);
-    console.log(product);
+    // console.log(product);
+    // const [data, setData] = useState([]);
+    // console.log(data);
 
-    const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getOrder());
-
+        dispatch(getproduct())
     }, [dispatch]);
 
+    const cartdata = product.product.map((v) => {
+        // console.log(v);
+        let med = orderdata.order.find((m) => m.cart.some((c) => c.id === v.id));
+        // console.log(med);
+        return { ...med, data: v };
+    });
+    console.log(cartdata);
+
+    const handleSelectChange = (event) => {
+        const value = event.target.value;
+        console.log('Selected Status:', value);
+        setSelectedStatus(value);
+    }
+
+    const handleSubmit = (id) => {
+        console.log('Selected Status:', selectedStatus);
+
+        if (!selectedStatus) {
+            console.log('Please select a status');
+            return;
+        }
+
+        dispatch(updateorder({ id: id, status: selectedStatus }));
+    }
     return (
         <>
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <InputLabel id="demo-select-small-label">select</InputLabel>
-                <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                    value={age}
-                    label="select"
-                    onChange={handleChange}
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-            </FormControl>
-            {
-                orderdata.order.map((v) => {
-                    return (
-                        <>
-                        <h3>Order list</h3>
-                            {v.address.map((n) => (
-                                <Card key={n.id} sx={{ maxWidth: 345 }}>
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h6" component="div">
-                                            Name: {n.name}
-                                        </Typography>
+            <form>
+                {
+                    cartdata.map((v) => {
+                        if (v.uid) {
+                            return (
+                                <>
+                                    <div className="cart">
 
-                                        <Typography gutterBottom variant="h6" component="div">
-                                            Email: {n.email}
-                                        </Typography>
-                                        <Typography gutterBottom variant="h6" component="div">
-                                           City: {n.city}
-                                        </Typography>
-                                        <Typography gutterBottom variant="h6" component="div">
-                                           Area: {n.area}
-                                        </Typography>
-                                        <Typography gutterBottom variant="h6" component="div">
-                                           State: {n.state}
-                                        </Typography>
+                                        <div className="row border-top border-bottom">
+                                            <div className="row main align-items-center">
+                                                <div className="col-2 img-box">
+                                                    <img className="img-fluid" src={v.data.file} />
+                                                </div>
+                                                <div className="col">
+                                                    <div className="row text-muted">{ }</div>
+                                                    <div className="row">{v.pro_name}</div>
 
-                                        <Typography gutterBottom variant="h6" component="div">
-                                        Pincode: {n.pincode}
-                                        </Typography>
+                                                </div>
 
-                                        <Typography gutterBottom variant="h6" component="div">
-                                           Amount: {n.amount}
-                                        </Typography>
+                                                <div className="col">
+                                                    € {v.data.pro_price} <span className="close">✕</span>
+                                                </div>
+                                                <div className="col">
+                                                    € {v.cart.map((v) => v.qty)} <span className="close"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        <Typography gutterBottom variant="h6" component="div">
-                                        Landmark: {n.landmark}
-                                        </Typography>
-                                        {/* You can add more details about the address here */}
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </>
-                    );
-                })
-            }
+                                    <div className='card-one'>
+                                        <h5>Address</h5>
+                                        <p>{v.address.map((p) => {
+                                            return (
+                                                <>
+                                                    <p>{p.name}</p>
+                                                    <p>{p.email}</p>
+                                                    <p>{p.area}</p>
+                                                    <p>{p.city}</p>
+                                                    <p>{p.state}</p>
+                                                    <p>{p.pincode}</p>
+                                                    <p>{p.landmark}</p>
+                                                </>
+                                            )
+                                        })}</p>
+                                    </div>
+
+                                    <div className='card-one'>
+                                        <h5>User Details</h5>
+                                        <p>{v.address.map((p) => {
+                                            return (
+                                                <>
+                                                    <p>{p.name}</p>
+                                                    <p>{p.email}</p>
+                                                </>
+                                            )
+                                        })}</p>
+                                    </div>
+
+                                    <div className='select-box'>
+                                        <select value={selectedStatus} onChange={handleSelectChange}>
+                                            <option value="">--select--</option>
+                                            <option value="process">Process</option>
+                                            <option value="complete">Complete</option>
+                                            <option value="pending">Pending</option>
+                                        </select>
+                                    </div>
+
+                                    <button onClick={handleSubmit(v.id)}>submit</button>
+                                </>
+                            )
+                            
+                        }
+                        
+                    })
+                }
+                
+            </form>
         </>
     )
 }

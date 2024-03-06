@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 
@@ -55,6 +55,24 @@ export const deleteorder = createAsyncThunk(
   }
 )
 
+export const updateorder = createAsyncThunk(
+  "order/update",
+
+  async (data) => {
+    console.log(data);
+          
+    const washingtonRef = doc(db, "order", data.id);
+
+    let orderData = { ...data, id: data.id };
+    delete orderData.id;
+    console.log(orderData);
+
+    await updateDoc(washingtonRef, orderData);
+    return data;
+  }
+)
+
+
 
 export const cartformSlice = createSlice({
   name: "order",
@@ -73,6 +91,18 @@ export const cartformSlice = createSlice({
 
     builder.addCase(deleteorder.fulfilled, (state, action) => {
       state.order = state.order.filter((v) => v.id !== action.payload)
+    })
+
+    builder.addCase(updateorder.fulfilled, (state, action) => {
+      console.log(action);
+      state.order = state.order.map((v) => {
+        if(v.id === action.payload){
+            return action.payload
+        } else {
+          return v
+        }
+      })
+      
     })
   }
 })

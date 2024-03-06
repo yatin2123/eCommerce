@@ -17,7 +17,7 @@ function Cart(props) {
   console.log(order);
 
   const auth = useSelector(state => state.auth)
-  console.log(auth.user);
+  console.log(auth);
 
   const categoryOptions = [];
   categoryOptions.push(product.product);
@@ -37,18 +37,18 @@ function Cart(props) {
 
   const dispatch = useDispatch();
 
+
   const cartdata = cart.cart.map((v) => {
+    console.log(v);
     let med = product.product.find((m) => v.id == m.id);
     console.log(med);
 
     return { ...med, qty: v.qty };
   });
+  console.log(cartdata);
 
-  const totalPrice = cartdata.reduce(
-    (acc, item) => acc + item.pro_price * item.qty,
-    0
-  );
-  console.log(totalPrice);
+  const totalPrice = cartdata.reduce((acc, item) => acc + item.pro_price * item.qty, 0);
+  // console.log(totalPrice);
 
   const handleincrementQty = (id) => {
     console.log(id);
@@ -71,15 +71,18 @@ function Cart(props) {
   const handlePreviousStep = () => {
     setStep(step - 1);
   };
-
+  const process = 'process';
   const handledata = (address) => {
-      let obj = {
-        address: [address],
-       
-      }
-   
-      dispatch(addOrder(obj))
-      console.log(obj);
+    console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+    let obj = {
+      address: [address],
+      cart: cart.cart,
+      uid: auth.user.uid,
+      status: process
+    }
+
+    dispatch(addOrder(obj))
+    console.log(obj);
   }
 
   let cartSchema = Yup.object().shape({
@@ -92,19 +95,17 @@ function Cart(props) {
     landmark: Yup.string().required("please enter your landmark."),
   });
 
-
-
   const formik = useFormik({
     initialValues: {
-      name:'',
+      name: '',
       email: '',
       pincode: '',
-      city:'',
+      city: '',
       state: '',
-      flat_no:'',
-      landmark:'',
-      area:'',
-      amount : totalPrice,
+      flat_no: '',
+      landmark: '',
+      area: '',
+      amount: totalPrice,
     },
 
     validationSchema: cartSchema,
@@ -122,7 +123,7 @@ function Cart(props) {
 
       >
         {({ isSubmitting, }) => (
-          console.log(values),
+          // console.log(values),
           // dispatch(addOrder(values)),
           <Form onSubmit={handleSubmit}>
             <div>
@@ -141,7 +142,7 @@ function Cart(props) {
                                   </h4>
                                 </div>
                                 <div className="col align-self-center text-right text-muted">
-                                  3 items
+                                  {v.qty}
                                 </div>
                               </div>
                             </div>
@@ -180,44 +181,37 @@ function Cart(props) {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4 summary">
-                            <div>
-                              <h5>
-                                <b>Summary</b>
-                              </h5>
-                            </div>
-                            <hr />
-                            <div className="row">
-                              <div className="col" style={{ paddingLeft: 0 }}>
-                                ITEMS {v.qty}
-                              </div>
-                              <div className="col text-right">{ }</div>
-                            </div>
-                            <form>
-                              <p>SHIPPING</p>
-                              <select>
-                                <option className="text-muted">
-                                  Standard-Delivery- €5.00
-                                </option>
-                              </select>
-                              <p>GIVE CODE</p>
-                              <input id="code" placeholder="Enter your code" />
-                            </form>
-                            <div
-                              className="row"
-                              style={{
-                                borderTop: "1px solid rgba(0,0,0,.1)",
-                                padding: "2vh 0",
-                              }}
-                            >
-                              <div className="col">TOTAL PRICE</div>
-                              <div className="col text-right">€ {totalPrice}</div>
-                            </div>
-                            <button className="btn">CHECKOUT</button>
-                          </div>
+
                         </>
                       );
                     })}
+
+                    <div className="col-md-4 summary">
+                      <div>
+                        <h5>
+                          <b>Summary</b>
+                        </h5>
+                      </div>
+                      <hr />
+                      <div className="row">
+                        <div className="col" style={{ paddingLeft: 0 }}>
+                          {/* ITEMS {v.qty} */}
+                        </div>
+                        <div className="col text-right">{ }</div>
+                      </div>
+
+                      <div
+                        className="row"
+                        style={{
+                          borderTop: "1px solid rgba(0,0,0,.1)",
+                          padding: "2vh 0",
+                        }}
+                      >
+                        <div className="col">TOTAL PRICE</div>
+                        <div className="col text-right">€ {totalPrice}</div>
+                      </div>
+                      <button className="btn">CHECKOUT</button>
+                    </div>
                   </div>
                 </div>
               )}
