@@ -1,10 +1,10 @@
 import { all, call, put, takeEvery, } from 'redux-saga/effects'
 
 // import { FORGET_REQUWEST, LOGIN_REQUWEST, SIGNUP_REQWEST } from '../ActionType'
-import { forgetAPI, loginAPI, signupAPI } from '../common/api/auth.api';
-import { authError, loginResponse, signupResponse } from './action/auth.action';
+import { forgetAPI, loginAPI, logoutAPI, signupAPI } from '../common/api/auth.api';
+import { authError, loggeduserReqwest, loginResponse, logoutReqwest, signupResponse } from './action/auth.action';
 import { setAlert } from '../container/slice/alert.slice';
-import { FORGET_REQUWEST, LOGIN_REQUWEST, SIGNUP_REQWEST } from './ActionType';
+import { FORGET_REQUWEST, LOGIN_REQUWEST, LOGOUT_USER, SIGNUP_REQWEST } from './ActionType';
 // import { forgetAPI, loginAPI, signupAPI } from '../../common/api/auth.api'
 // import { authError, loginResponse, signupResponse } from '../action/auth.action';
 // import { setAlert } from '../../slice/alert.slice';
@@ -55,6 +55,17 @@ function* forgetUser (action) {
     }
 }
 
+function* logout(action) {
+    try {
+      const user = yield call(logoutAPI)
+      yield put(loggeduserReqwest())
+      yield put(setAlert({text: user.message, color: 'success'}))
+    } catch (e) {
+    
+      yield put(setAlert({text: e.message, color: 'error'}))
+    }
+  }
+
 
 function* watchSignup() {
     yield takeEvery(SIGNUP_REQWEST, signupUser)
@@ -68,10 +79,15 @@ function* watchForget() {
     yield takeEvery(FORGET_REQUWEST, forgetUser)
 }
 
+function* watchLogout (){
+    yield takeEvery(LOGOUT_USER, logout)
+  }
+
 export default function* authSaga() {
     yield all([
         watchSignup(),
         watchLogin(),
-        watchForget()
+        watchForget(),
+        watchLogout()
     ])
 }

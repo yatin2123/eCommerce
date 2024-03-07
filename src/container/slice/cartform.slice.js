@@ -2,9 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
-
-
-
 const initialState = {
   isLoding: false,
   order: [],
@@ -13,7 +10,6 @@ const initialState = {
 
 export const addOrder = createAsyncThunk(
   "order/add",
-
   async (data) => {
     console.log(data);
 
@@ -30,7 +26,6 @@ export const addOrder = createAsyncThunk(
 
 export const getOrder = createAsyncThunk(
   "order/get",
-
   async () => {
     let data = [];
   
@@ -38,7 +33,6 @@ export const getOrder = createAsyncThunk(
     querySnapshot.forEach((doc) => {
       data.push({ ...doc.data(), id: doc.id });
     });
-  
     return data;
   }
 )

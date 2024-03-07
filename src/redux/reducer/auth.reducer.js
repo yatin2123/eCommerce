@@ -1,4 +1,4 @@
-import { AUTH_ERROR, LOGIN_RESPONSE, SIGNUP_REQWEST, SIGNUP_RESPONSE } from "../ActionType";
+import { AUTH_ERROR, LOGIN_RESPONSE, LOGOUT_USER, SIGNUP_REQWEST, SIGNUP_RESPONSE } from "../ActionType";
 
 export const initialValues = {
     isLoding: false,
@@ -34,6 +34,13 @@ export const signupReducer = (state = initialValues, action) => {
                 user: null,
                 error: action.paylod,
             };
+
+        case LOGOUT_USER:
+            return {
+                isLoding: false,
+                user: null,
+                erroe: null
+            }
         default:
             return state
     }

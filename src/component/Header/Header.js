@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { getShopdata } from "../../container/slice/shop.slice";
@@ -9,29 +9,37 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import "./Header.css";
+import { getproduct } from "../../container/slice/product.slice";
+import { logoutReqwest } from "../../redux/action/auth.action";
 
 function Header({ cart }) {
+  const [search, setSearch] = useState('')
   const auth = useSelector(state => state.auth);
   const shop = useSelector((state) => state.shop);
-  console.log(auth);
+  // console.log(auth);
   const sbucategory = useSelector((state) => state.sbucategory);
-  console.log(sbucategory);
+  // console.log(sbucategory);
 
   const cartdata = useSelector((state) => state.cart);
-  console.log(cartdata);
+  // console.log(cartdata);
 
   const cartCount = cartdata.cart.reduce((acc, v) => acc + v.qty, 0);
-  console.log(cartCount);
+  // console.log(cartCount);
+
+  const product = useSelector(state => state.product);
+  console.log(product);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getsubcategory());
     dispatch(getShopdata());
+    dispatch(getproduct())
   }, []);
 
   const handleLogout = () => {
     console.log("Logging out...");
+    dispatch(logoutReqwest())
   };
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -42,6 +50,24 @@ function Header({ cart }) {
       padding: "0 4px",
     },
   }));
+
+  const handleSearch = () => {
+
+    console.log('kkkkkkkkkkkkkkkk');
+    let data = product.product.filter((v) => {
+      console.log(v);
+      v.pro_name.toLowerCase().includes(search.toLowerCase()) ||
+        v.pro_price.toString().includes(search.toString())
+    })
+
+
+    data = data.filter((v) => {
+      console.log(v);
+    })
+
+  }
+
+  const final = handleSearch()
 
   return (
     <div>
@@ -76,7 +102,7 @@ function Header({ cart }) {
 
                       {
                         shop.shop.map((v) => {
-                          console.log(v);
+                          // console.log(v);
                           return (
                             <div class="list-item">
                               <NavLink to={`/shop/${v.id}`}><h4 className="title">{v.cat_name}</h4></NavLink>
@@ -145,7 +171,7 @@ function Header({ cart }) {
             </div>
             <div class="header-item item-right">
               <form className="form-inline">
-                <input type="text" placeholder="Search"></input>
+                <input type="text" placeholder="Search" onChange={(e) => setSearch(e.target.value)}></input>
               </form>
 
               {auth.user ? (

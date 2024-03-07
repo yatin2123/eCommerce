@@ -1,4 +1,4 @@
-import { AUTH_ERROR, FORGET_REQUWEST, LOGIN_REQUWEST, LOGIN_RESPONSE, SIGNUP_REQWEST, SIGNUP_RESPONSE } from "../ActionType"
+import { AUTH_ERROR, FORGET_REQUWEST, LOGGEDREQWEST_USER, LOGIN_REQUWEST, LOGIN_RESPONSE, LOGOUT_USER, SIGNUP_REQWEST, SIGNUP_RESPONSE } from "../ActionType"
 
 export const signupReqwest = (data) => (dispatch) => {
     console.log(data);
@@ -28,4 +28,12 @@ export const loginResponse = (data) => (dispatch) => {
 export const forgetReqwest = (data) => (dispatch) => {
     console.log(data);
     dispatch({ type: FORGET_REQUWEST, payload: data })
+}
+
+export const logoutReqwest = () => (dispatch) => {
+    dispatch({type: LOGOUT_USER})
+}
+
+export const loggeduserReqwest = () => (dispatch) => {
+    dispatch({type: LOGGEDREQWEST_USER})
 }

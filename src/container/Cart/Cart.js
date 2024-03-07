@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { decrementqty, incrementqty } from "../slice/cart.slice";
+import { decrementqty, deleteCart, incrementqty } from "../slice/cart.slice";
 import "./Cart.css";
 
 // import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
-import { addOrder } from "../slice/cartform.slice";
+import { addOrder, deleteorder } from "../slice/cartform.slice";
 import Button from "../../component/Button/Button";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Cart(props) {
   const product = useSelector((state) => state.product);
@@ -116,6 +116,11 @@ function Cart(props) {
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched, setValues } = formik;
 
+  const handleDelete = (id) => {
+    console.log(id);
+    dispatch(deleteCart(id))
+  }
+
   return (
     <div>
 
@@ -176,7 +181,11 @@ function Cart(props) {
                                   </button>
                                 </div>
                                 <div className="col">
-                                  € {v.qty * v.pro_price} <span className="close">✕</span>
+                                  <span>€ {v.qty * v.pro_price} </span>
+                                </div>
+
+                                <div className="col">
+                                  <span onClick={() => handleDelete(v.id)}><DeleteIcon/></span>
                                 </div>
                               </div>
                             </div>
