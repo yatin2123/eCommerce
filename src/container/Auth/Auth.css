@@ -1,0 +1,63 @@
+.login-design{
+    width: 41%;
+    margin-left: 36%;
+    padding: 45px 10px;
+    /* height: 62%; */
+    box-shadow: 6px 9px 11px #b1b1b1;
+    background-color: white;
+    border-radius: 10px;
+}
+.sign-design input{
+    margin-left: 10px;
+    width: 142%;
+    font-size: 15px;
+}
+.sign-design h4{
+    margin-left: 62%;
+    margin-bottom: 32px;
+    font-weight: 600;
+}
+.text-center{
+    margin-top: 40px;
+}
+.text-center button {
+    padding: 7px 92px;
+    font-size: 19px;
+    border: none;
+    background-color: #f16179;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    border-radius: 10px;
+}
+
+.account{
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 600;
+    margin-bottom: 20px 
+}
+.iconbtn a{
+    border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
+}
+.iconbtn{
+    margin-left: 34%;
+}
+
+.iconbtn:hover .one{
+    color: #f16179;
+}
+
+.account:hover a{
+    color: red;
+}
+
+.account .forgrtbtn:hover a{
+    color: blue;
+}

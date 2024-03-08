@@ -15,6 +15,7 @@ import Details from "../container/Details/Details";
 import ProductList from "../container/ProductList/ProductList";
 import Cart from "../container/Cart/Cart";
 import View from "../container/View/View";
+import Quiz from "../component/Quiz/Quiz";
 
 function Userroute(props) {
 
@@ -35,6 +36,7 @@ function Userroute(props) {
         <Route exact path="/testimonial" element={<Testimonial />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/quiz" element={<Quiz />} />
         <Route exact path="/auth" element={<Auth />} />
       </Routes>
 

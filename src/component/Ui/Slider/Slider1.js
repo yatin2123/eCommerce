@@ -9,6 +9,8 @@ import { getproduct } from '../../../container/slice/product.slice';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 function Slider1(props) {
     console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
     const dispatch = useDispatch()
@@ -19,64 +21,84 @@ function Slider1(props) {
         dispatch(getproduct());
     }, [dispatch]);
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 2000,
-        autoplaySpeed: 2000,
-        cssEase: "linear"
-    };
+
     return (
         <section id="product_section" className="product_section">
             <div className="container">
                 <div className='cat_box'>Trending Product</div>
+                <div className='one'><p>hgeruigyhegihegiegoeghgheogjheogjoghekvfbveibrigbryugbrgyurbgu</p></div>
                 <div className="slider-container">
 
-                    <Slider {...settings}>
+                    <Swiper
+                        modules={[Navigation, Pagination, Scrollbar, A11y]}
+                        spaceBetween={10}
+                        slidesPerView={1}
+                        navigation
+                        pagination={{ clickable: true }}
+                        //    scrollbar={{ draggable: true }}
+                        breakpoints={{
+                            '@0.00': {
+                                slidesPerView: 1,
+                                spaceBetween: 10,
+                            },
+                            '@0.75': {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                            },
+                            '@1.00': {
+                                slidesPerView: 3,
+                                spaceBetween: 40,
+                            },
+                            '@1.50': {
+                                slidesPerView: 4,
+                                spaceBetween: 50,
+                            },
+                        }}
+                    >
                         {
+
                             product.product.map((v) => {
                                 console.log(v);
-                                return (  // <- Add this return statement
-                                    <Link to={`/shop/${v.id}`}>
-                                        <div key={v.id}> {/* Add a key prop for each mapped item */}
-                                            <Card
-                                                style={{
-                                                    width: '18rem'
-                                                }}
-                                            >
-                                                <div className='slider-one'>
-                                                    <img
-                                                        alt="Sample"
-                                                        src={v.file}
-                                                    />
-                                                </div>
-                                                <CardBody>
-                                                    <CardTitle tag="h5">
-                                                        {v.pro_name}
-                                                    </CardTitle>
-                                                    <CardSubtitle
-                                                        className="mb-2 text-muted"
-                                                        tag="h6"
-                                                    >
-                                                        {v.pro_des}
-                                                    </CardSubtitle>
+                                return (
+                                    <SwiperSlide>
+                                        <Link to={`/${v.id}`}>
+                                            <div key={v.id}>
+                                                <Card
+                                                    style={{
+                                                        width: '18rem'
+                                                    }}
+                                                >
+                                                    <div className='slider-one'>
+                                                        <img
+                                                            alt="Sample"
+                                                            src={v.file}
+                                                        />
+                                                    </div>
+                                                    <CardBody>
+                                                        <CardTitle tag="h5">
+                                                            {v.pro_name}
+                                                        </CardTitle>
+                                                        <CardSubtitle
+                                                            className="mb-2 text-muted"
+                                                            tag="h6"
+                                                        >
+                                                            {v.pro_price}
+                                                        </CardSubtitle>
 
-                                                    <Button>
-                                                        <div className='s_btn'>
-                                                            Shop
-                                                        </div>
-                                                    </Button>
-                                                </CardBody>
-                                            </Card>
-                                        </div>
-                                    </Link>
-                                );
+                                                        <Button>
+                                                            <div className='s_btn'>
+                                                                Shop
+                                                            </div>
+                                                        </Button>
+                                                    </CardBody>
+                                                </Card>
+                                            </div>
+                                        </Link>
+                                    </SwiperSlide>
+                                )
                             })
                         }
-                    </Slider>
+                    </Swiper>
                 </div>
             </div>
         </section>
@@ -84,3 +106,5 @@ function Slider1(props) {
 }
 
 export default Slider1;
+
+

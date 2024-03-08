@@ -157,6 +157,12 @@ function Header({ cart }) {
                     </NavLink>
                   </li>
 
+                  <li>
+                    <NavLink className="nav-link scrollto" to="/quiz">
+                      Quiz
+                    </NavLink>
+                  </li>
+
                   <Link to={"/cart"}>
                     <IconButton aria-label="cart">
                       <StyledBadge badgeContent={cartCount} color="secondary">

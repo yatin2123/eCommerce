@@ -9,37 +9,28 @@ import Testimonial from './container/Testimonial/Testimonial';
 import Contact from './container/Contact/Contact';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { persistor, store } from './redux/store';
 import Userroute from './routes/Userroute';
 import Adminroute from './routes/Adminroute'
-
+import { SnackbarProvider } from 'notistack';
+import { PersistGate } from 'redux-persist/integration/react';
+import Alert from './component/Alert/Alert';
 
 function App() {
   return (
-
-
     <>
-      <Provider store={store}>
-        {/* <Header /> */}
-        <Routes>
-          {/* <Route exact path='/' element={<Index />} /e
-          <Route exact path='shop' element={<Shop />} />
-          <Route exact path='testimonial' element={<Testimonial />} />
-          <Route exact path='why' element={<Why />} />
-          <Route exact path='contact' element={<Contact />} /> */}
-          <Route exact path="/*" element={<Userroute />} />
-          <Route exact path="/admin/*" element={<Adminroute />} />
-        </Routes>
-        {/* <Index />
-        <Shop></Shop>
-        <Why />
-        <Testimonial />
-        <Contact />
-        <Footer /> */}
-      </Provider>
+      <SnackbarProvider>
+        <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Alert/>
+          <Routes>
+            <Route exact path="/*" element={<Userroute />} />
+            <Route exact path="/admin/*" element={<Adminroute />} />
+          </Routes>
+          </PersistGate>
+        </Provider>
+      </SnackbarProvider>
     </>
-
-
   );
 }
 

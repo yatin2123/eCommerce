@@ -20,7 +20,6 @@ export const alertSlice = createSlice({
             state.text = '';
             state.color = ''
         }
-
     }
 })
 

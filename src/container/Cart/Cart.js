@@ -314,9 +314,6 @@ function Cart(props) {
                     value={values.landmark}
                   />
                   {errors.landmark && touched.landmark ? <span>{errors.landmark}</span> : null}
-
-
-
                 </div>
               )}
 
