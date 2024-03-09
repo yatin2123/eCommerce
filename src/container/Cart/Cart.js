@@ -219,7 +219,7 @@ function Cart(props) {
                         <div className="col">TOTAL PRICE</div>
                         <div className="col text-right">€ {totalPrice}</div>
                       </div>
-                      <button className="btn">CHECKOUT</button>
+                      {/* <button className="btn">CHECKOUT</button> */}
                     </div>
                   </div>
                 </div>
@@ -405,7 +405,7 @@ function Cart(props) {
                                 <div className="col">TOTAL PRICE</div>
                                 <div className="col text-right">€ {totalPrice}</div>
                               </div>
-                              <button className="btn1">CHECKOUT</button>
+                              {/* <button className="btn1">CHECKOUT</button> */}
                             </div>
                           </>
                         );

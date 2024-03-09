@@ -1,6 +1,5 @@
 .detail-box h4 {
     font-weight: 600;
-    
     margin-top: 40px;
 }
 .detail-box .p-one{
@@ -11,3 +10,15 @@
     position: relative;
     z-index: 999;   
 }
+@media screen and (max-width:480px) {
+    /* .detail-box{
+        position: fixed;
+        top: 165px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+        margin-left: 39px;
+    } */
+}
+

@@ -29,7 +29,7 @@
     }
 
     .slider_section .detail-box h1 {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .slider_section .img-box {
@@ -107,6 +107,14 @@
     .contact_section {
         padding-left: 25px;
         padding-right: 25px;
+    }
+    .slider_section .detail-box h1 {
+        font-size: 1rem;    
+        font-weight: normal;
+    }
+    p {
+        font-weight: normal;
+        font-size: 10px;
     }
 }
 

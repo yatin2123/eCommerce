@@ -85,7 +85,7 @@ function Address(props) {
                                         <div className="row">
                                             <div className="col-lg-8">
                                                 {/* Details */}
-                                                <div className="card mb-4">
+                                                <div className="card-ad mb-4">
                                                     <div className="card-body">
                                                         <div className="mb-3 d-flex justify-content-between">
 
@@ -132,7 +132,7 @@ function Address(props) {
                                                     </div>
                                                 </div>
                                                 {/* Payment */}
-                                                <div className="card mb-4">
+                                                <div className="card-ad mb-4">
                                                     <div className="card-body">
                                                         <div className="row">
                                                             <div className="col-lg-6">
@@ -155,7 +155,7 @@ function Address(props) {
                                             </div>
                                             <div className="col-lg-4">
                                                 {/* Customer Notes */}
-                                                <div className="card mb-4">
+                                                <div className="card-ad mb-4">
                                                     <div className="card-body">
                                                         <h3 className="h6">User Details</h3>
                                                         <p>{v.address.map((p) => {
@@ -168,7 +168,7 @@ function Address(props) {
                                                         })}</p>
                                                     </div>
                                                 </div>
-                                                <div className="card mb-4">
+                                                <div className="card-ad mb-4">
                                                     {/* Shipping information */}
                                                     <div className="card-body">
                                                         <h3 className="h6">Shipping Information</h3>

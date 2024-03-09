@@ -22,7 +22,7 @@ function Index(props) {
                             <div className="carousel-item active">
                                 <div className="container-fluid">
                                     <div className="row">
-                                        <div className="col-md-7">
+                                        <div className="colum-box col-md-7">
                                             <div className="detail-box">
                                                 <div className='ovaery'>
                                                     <h1>
@@ -30,8 +30,7 @@ function Index(props) {
                                                         Gift Shop
                                                     </h1>
                                                     <p>
-                                                        Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit.<br></br> Nostrum fugit doloribus
-                                                        consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim.
+                                                        Sequi perspiciatis nulla reiciendis, rem, tenetur impedit,<br></br> eveniet non necessitatibus error distinctio mollitia suscipit.
                                                     </p>
                                                     <Link to={"/Contact"}>
                                                         Contact Us

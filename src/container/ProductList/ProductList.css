@@ -1,3 +1,22 @@
 .detail-box{
     margin-right: 90px;
 }
+
+
+@media screen and (max-width:768px) {
+    .detail-box {
+        margin-right: 0px;
+        margin-left: 50px;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .detail-box {
+        margin-left: 20px;
+    }
+}
+@media screen and (max-width:480px) {
+    .detail-box {
+        margin-left: -21px;
+    }
+}

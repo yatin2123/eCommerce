@@ -73,124 +73,142 @@ function Header({ cart }) {
     <div>
       <header class="header">
         <div class="container">
-          <div class="row v-center">
-            <div class="header-item item-left">
-              <div class="logo">
-                {/* <a href="#">logo</a> */}
-                <img src="https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg"></img>
-              </div>
-            </div>
 
-            <div class="header-item item-center">
-              <div class="menu-overlay"></div>
-              <nav class="menu">
-                <div class="mobile-menu-head">
-                  <div class="go-back"><i class="fa fa-angle-left"></i></div>
-                  <div class="current-menu-title"></div>
-                  <div class="mobile-menu-close">&times;</div>
-                </div>
-                <ul class="menu-main">
-                  <li>
-                    <NavLink className="nav-link scrollto" to="/">
-                      Home
-                    </NavLink>
-                  </li>
 
-                  <li class="menu-item-has-children">
-                    <NavLink >Shop <i class="fa fa-angle-down"></i></NavLink>
-                    <div class="sub-menu mega-menu mega-menu-column-5">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            {/* <a class="navbar-brand" href="#">Navbar</a> */}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-                      {
-                        shop.shop.map((v) => {
-                          // console.log(v);
-                          return (
-                            <div class="list-item">
-                              <NavLink to={`/shop/${v.id}`}><h4 className="title">{v.cat_name}</h4></NavLink>
-                              <ul>
-                                {
-                                  sbucategory.subcategory.map((m) => {
-                                    // console.log(m);
-                                    if (m.cart_id === v.id) {
-                                      return (
-                                        <li>
-                                          <NavLink
-                                            key={m.id}
-                                            to={`/shop/${v.cat_name}/${m.id}`}
-                                            className="menu-title"
-                                          >
-                                            {m.sub_name}
-                                          </NavLink>
-                                        </li>
-                                      )
-                                    } else {
-                                      return null
-                                    }
-                                  })
-                                }
-                              </ul>
-                            </div>
-                          )
-                        })
-                      }
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <div class="row v-center">
+                  <div class="header-item item-left">
+                    <div class="logo nav-item">
+                      {/* <a href="#">logo</a> */}
+                      <img src="https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg"></img>
                     </div>
+                  </div>
 
-                  </li>
-                  <li>
-                    <NavLink className="nav-link scrollto" to="/why">
-                      Why Us
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="nav-link scrollto" to="/testimonial">
-                      Testimonial
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="nav-link scrollto" to="/cart">
-                      Cart
-                    </NavLink>
-                  </li>
+                  <div class="header-item item-center">
+                    <div class="menu-overlay"></div>
+                    <nav class="menu">
+                      <div class="mobile-menu-head">
+                        <div class="go-back"><i class="fa fa-angle-left"></i></div>
+                        <div class="current-menu-title"></div>
+                        <div class="mobile-menu-close">&times;</div>
+                      </div>
+                      <ul class="menu-main navbar-nav mr-auto">
+                        <li className="nav-item">
+                          <NavLink className="nav-link scrollto" to="/">
+                            Home
+                          </NavLink>
+                        </li>
 
-                  <li>
-                    <NavLink className="nav-link scrollto" to="/contact">
-                      Contact
-                    </NavLink>
-                  </li>
+                        <li class="menu-item-has-children nav-item">
+                          <NavLink className="nav-link">Shop <i class="fa fa-angle-down"></i></NavLink>
+                          <div class="sub-menu mega-menu mega-menu-column-5">
 
-                  <li>
+                            {
+                              shop.shop.map((v) => {
+                                // console.log(v);
+                                return (
+                                  <div class="list-item">
+                                    <NavLink to={`/shop/${v.id}`}><h4 className="title">{v.cat_name}</h4></NavLink>
+                                    <ul>
+                                      {
+                                        sbucategory.subcategory.map((m) => {
+                                          // console.log(m);
+                                          if (m.cart_id === v.id) {
+                                            return (
+                                              <li>
+                                                <NavLink
+                                                  key={m.id}
+                                                  to={`/shop/${v.cat_name}/${m.id}`}
+                                                  className="menu-title"
+                                                >
+                                                  {m.sub_name}
+                                                </NavLink>
+                                              </li>
+                                            )
+                                          } else {
+                                            return null
+                                          }
+                                        })
+                                      }
+                                    </ul>
+                                  </div>
+                                )
+                              })
+                            }
+                          </div>
+
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link scrollto" to="/why">
+                            Why Us
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link scrollto" to="/testimonial">
+                            Testimonial
+                          </NavLink>
+                        </li>
+                        <li className="nav-item">
+                          <NavLink className="nav-link scrollto" to="/cart">
+                            Cart
+                          </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                          <NavLink className="nav-link scrollto" to="/contact">
+                            Contact
+                          </NavLink>
+                        </li>
+
+                        {/* <li>
                     <NavLink className="nav-link scrollto" to="/quiz">
                       Quiz
                     </NavLink>
-                  </li>
+                  </li> */}
+                        <li className="nav-item">
+                          <Link to={"/cart"}>
+                            <IconButton aria-label="cart">
+                              <StyledBadge badgeContent={cartCount} color="secondary">
+                                <AddShoppingCartIcon />
+                              </StyledBadge>
+                            </IconButton>
+                          </Link>
+                        </li>
+                      </ul>
 
-                  <Link to={"/cart"}>
-                    <IconButton aria-label="cart">
-                      <StyledBadge badgeContent={cartCount} color="secondary">
-                        <AddShoppingCartIcon />
-                      </StyledBadge>
-                    </IconButton>
-                  </Link>
+                    </nav>
+                  </div>
+                  <div class="header-item item-right">
+                    <form className="form-inline">
+                      <input type="text" placeholder="Search" onChange={(e) => setSearch(e.target.value)}></input>
+                    </form>
 
-                </ul>
+                    {auth.user ? (
+                      <NavLink to={"/"}>
+                        <span onClick={handleLogout}>Logout</span>
+                      </NavLink>
+                    ) : (
+                      <NavLink to={"/auth"}>
+                        <span> Signup</span>
+                      </NavLink>
+                    )}
+                  </div>
+                </div>
+              </ul>
 
-              </nav>
             </div>
-            <div class="header-item item-right">
-              <form className="form-inline">
-                <input type="text" placeholder="Search" onChange={(e) => setSearch(e.target.value)}></input>
-              </form>
+          </nav>
 
-              {auth.user ? (
-                <NavLink to={"/"}>
-                  <span onClick={handleLogout}>Logout</span>
-                </NavLink>
-              ) : (
-                <NavLink to={"/auth"}>
-                  <span> Signup</span>
-                </NavLink>
-              )}
-            </div>
-          </div>
+
+
+
         </div>
       </header >
     </div >

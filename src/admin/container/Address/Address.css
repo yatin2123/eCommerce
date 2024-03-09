@@ -1,10 +1,10 @@
 body{
-    background:#eee;
+    /* background:#eee; */
 }
-.card {
+.card-ad {
     box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
 }
-.card {
+.card-ad {
     position: relative;
     display: flex;
     flex-direction: column;

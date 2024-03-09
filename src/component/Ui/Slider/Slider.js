@@ -6,14 +6,9 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './Slider.css';
 import { CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button, Row, Col, CardImgOverlay } from 'reactstrap';
-import Slider1 from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { hover } from '@testing-library/user-event/dist/hover';
 // import 'swiper/css/scrollbar';
 
 

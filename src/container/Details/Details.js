@@ -96,9 +96,8 @@ function Details() {
                                                 </div>
                                                 <div className="product-detail">
                                                     <h2>about this item: </h2>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
-
+                                                    <p>Lorem ipsum dolor sit amet consederghrthe tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+                                                    
                                                 </div>
                                                 <div className="purchase-info">
                                                     <button onClick={() => handleincrement(v.id)}>+</button>

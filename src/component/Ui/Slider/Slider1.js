@@ -7,8 +7,8 @@ import "./Slider1.css"
 import { CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button, Row, Col } from 'reactstrap';
 import { getproduct } from '../../../container/slice/product.slice';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 function Slider1(props) {
@@ -63,35 +63,36 @@ function Slider1(props) {
                                     <SwiperSlide>
                                         <Link to={`/${v.id}`}>
                                             <div key={v.id}>
-                                                <Card
-                                                    style={{
-                                                        width: '18rem'
-                                                    }}
-                                                >
-                                                    <div className='slider-one'>
-                                                        <img
-                                                            alt="Sample"
-                                                            src={v.file}
-                                                        />
-                                                    </div>
-                                                    <CardBody>
-                                                        <CardTitle tag="h5">
-                                                            {v.pro_name}
-                                                        </CardTitle>
-                                                        <CardSubtitle
-                                                            className="mb-2 text-muted"
-                                                            tag="h6"
-                                                        >
-                                                            {v.pro_price}
-                                                        </CardSubtitle>
-
-                                                        <Button>
-                                                            <div className='s_btn'>
-                                                                Shop
-                                                            </div>
-                                                        </Button>
-                                                    </CardBody>
-                                                </Card>
+                                                <div className='design-cat'>
+                                                    <Card
+                                                        style={{
+                                                            width: '18rem'
+                                                        }}
+                                                    >
+                                                        <div className='slider-one'>
+                                                            <img
+                                                                alt="Sample"
+                                                                src={v.file}
+                                                            />
+                                                        </div>
+                                                        <CardBody>
+                                                            <CardTitle tag="h5">
+                                                                {v.pro_name}
+                                                            </CardTitle>
+                                                            <CardSubtitle
+                                                                className="mb-2 text-muted"
+                                                                tag="h6"
+                                                            >
+                                                                {v.pro_price}
+                                                            </CardSubtitle>
+                                                            <Button>
+                                                                <div className='s_btn'>
+                                                                    Shop
+                                                                </div>
+                                                            </Button>
+                                                        </CardBody>
+                                                    </Card>
+                                                </div>
                                             </div>
                                         </Link>
                                     </SwiperSlide>
