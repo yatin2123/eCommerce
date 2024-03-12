@@ -57,7 +57,7 @@ body {
 }
 
 .product-content {
-    padding: 2rem 1rem;
+    /* padding: 2rem 1rem; */
 }
 
 .product-title {
@@ -66,7 +66,7 @@ body {
     font-weight: 700;
     position: relative;
     color: #12263a;
-    margin: 1rem 0;
+    margin-bottom: 1rem 0;
 }
 
 .product-title::after {
@@ -157,7 +157,7 @@ body {
 }
 
 .purchase-info {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .purchase-info input,
@@ -173,7 +173,7 @@ body {
 }
 
 .purchase-info input {
-    width: 60px;
+    width: 60px !important;
 }
 
 .purchase-info .btn {
@@ -223,7 +223,7 @@ body {
     padding: 0px 7px;
     text-decoration: none;
     border: 1px solid;
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     background-color: #f64749;
 }

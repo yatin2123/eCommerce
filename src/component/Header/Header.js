@@ -62,7 +62,7 @@ function Header({ cart }) {
 
 
     data = data.filter((v) => {
-      console.log(v);
+      // console.log(v);
     })
 
   }
@@ -164,6 +164,12 @@ function Header({ cart }) {
                         <li className="nav-item">
                           <NavLink className="nav-link scrollto" to="/contact">
                             Contact
+                          </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                          <NavLink className="nav-link scrollto" to="/review">
+                            Review
                           </NavLink>
                         </li>
 

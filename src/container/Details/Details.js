@@ -1,13 +1,16 @@
 import { logDOM } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { addtocart, decrementqty, incrementqty } from '../slice/cart.slice';
 import './Details.css'
 // import mg from '../../../public/assetes/images/shoping.jpg'
 
 import ReactImageMagnify from 'react-image-magnify';
 import { getproduct } from '../slice/product.slice';
+import Review from '../Review/Review';
+import { getreview } from '../slice/review.slice';
+
 
 function Details() {
 
@@ -15,9 +18,28 @@ function Details() {
     const product = useSelector(state => state.product)
     console.log(product);
     const shop = useSelector(state => state.shop);
-    console.log(shop);
+    // console.log(shop);
     const cart = useSelector(state => state.cart);
-    console.log(cart);
+    // console.log(cart);
+    const auth = useSelector(state => state.auth);
+    // console.log(auth);
+    const review = useSelector(state => state.review);
+    console.log(review);
+
+    
+
+    const commentdata = review.review.map((v) => {
+        console.log(v);
+        let proid = product.product.filter((p) => v.pid == p.id)
+       console.log(proid);
+       return{...proid, rating: v.rating}
+    })
+    console.log(commentdata);
+
+    const total = commentdata.reduce((acc,v) => (acc+v.rating)/3,0);
+    console.log(total);
+
+   
 
     const dispatch = useDispatch()
 
@@ -25,6 +47,7 @@ function Details() {
     console.log(id);
 
     useEffect(() => {
+        dispatch(getreview())
 
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
@@ -33,18 +56,18 @@ function Details() {
     }, [id, product.product])
 
     const handleaddtocart = (id) => {
-        console.log(id);
+        // console.log(id);
         dispatch(addtocart(id))
         // dispatch(({id: id, qty: 1}))
     }
 
     const handleincrement = (id) => {
-        console.log(id);
+        // console.log(id);
         dispatch(incrementqty(id))
     }
 
     const handledecrement = (id) => {
-        console.log(id);
+        // console.log(id);
         dispatch(decrementqty(id))
     }
     return (
@@ -53,7 +76,7 @@ function Details() {
                 <div className="card-one">
                     {
                         prodata.map((v) => {
-                            console.log(v);
+                            console.log(v.id);
                             return (
                                 <>
                                     <div className="perimeter">
@@ -97,7 +120,7 @@ function Details() {
                                                 <div className="product-detail">
                                                     <h2>about this item: </h2>
                                                     <p>Lorem ipsum dolor sit amet consederghrthe tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-                                                    
+
                                                 </div>
                                                 <div className="purchase-info">
                                                     <button onClick={() => handleincrement(v.id)}>+</button>
@@ -107,6 +130,12 @@ function Details() {
                                                         Add to Cart
                                                     </button>
                                                 </div>
+
+                                                <Review id={v.id}>
+
+                                                </Review>
+
+
                                             </div>
                                         </div>
                                     </div>

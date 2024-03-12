@@ -9,6 +9,7 @@ import productSlice from "../../container/slice/product.slice";
 import cartSlice from "../../container/slice/cart.slice";
 import  cartformSlice  from "../../container/slice/cartform.slice";
 import { signupReducer } from "./auth.reducer";
+import reviewSlice from "../../container/slice/review.slice";
 
 export const rootReduce = combineReducers({
   auth: signupReducer,
@@ -18,4 +19,5 @@ export const rootReduce = combineReducers({
   product: productSlice,
   cart: cartSlice,
   order: cartformSlice,
+  review: reviewSlice,
 });

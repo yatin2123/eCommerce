@@ -1,0 +1,13 @@
+
+
+input{
+    width: 78% !important;
+}
+
+button{
+    background: #f64749;
+    color: white;
+    padding: 5px 17px;
+    border: none;
+    border-radius: 10px
+}
