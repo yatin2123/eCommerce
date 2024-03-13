@@ -9,12 +9,14 @@ import './Details.css'
 import ReactImageMagnify from 'react-image-magnify';
 import { getproduct } from '../slice/product.slice';
 import Review from '../Review/Review';
-import { getreview } from '../slice/review.slice';
+import { deletereview, getreview, updatereview } from '../slice/review.slice';
 
 
 function Details() {
 
     const [prodata, setProdata] = useState([]);
+    const [value, setValue] = useState('')
+    const [update, setUpdate] = useState(false)
     const product = useSelector(state => state.product)
     console.log(product);
     const shop = useSelector(state => state.shop);
@@ -26,25 +28,25 @@ function Details() {
     const review = useSelector(state => state.review);
     console.log(review);
 
-    
-
     const commentdata = review.review.map((v) => {
-        console.log(v);
+        // console.log(v);
         let proid = product.product.filter((p) => v.pid == p.id)
-       console.log(proid);
-       return{...proid, rating: v.rating}
+        console.log(proid);
+        return { ...proid, rating: v.rating }
     })
     console.log(commentdata);
 
-    const total = commentdata.reduce((acc,v) => (acc+v.rating)/3,0);
-    console.log(total);
+    const totalComments = commentdata.length;
+    console.log(totalComments);
 
-   
+    const total = commentdata.reduce((acc, v) => (acc + v.rating) / totalComments, 0);
+    console.log(total);
+    const srt = total.toFixed(2);
+    console.log(srt);
 
     const dispatch = useDispatch()
-
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
     useEffect(() => {
         dispatch(getreview())
@@ -58,7 +60,6 @@ function Details() {
     const handleaddtocart = (id) => {
         // console.log(id);
         dispatch(addtocart(id))
-        // dispatch(({id: id, qty: 1}))
     }
 
     const handleincrement = (id) => {
@@ -70,6 +71,18 @@ function Details() {
         // console.log(id);
         dispatch(decrementqty(id))
     }
+
+    const  handleDelete = (id) => {
+        // console.log('ddddddddddddddddddddddddddd');
+        console.log(id);
+        dispatch(deletereview(id))
+    }
+
+    const handleEdite = (data) => {
+        console.log('eeeeeeee');
+        console.log(data);
+        setUpdate(data)
+    }
     return (
         <div>
             <div className="card-wrapper">
@@ -78,7 +91,9 @@ function Details() {
                         prodata.map((v) => {
                             console.log(v.id);
                             return (
+                                
                                 <>
+                                {/* <Review onupdate={update}></Review> */}
                                     <div className="perimeter">
                                         <div className="image">
                                             <ReactImageMagnify
@@ -111,7 +126,7 @@ function Details() {
                                                     <i className="fas fa-star" />
                                                     <i className="fas fa-star" />
                                                     <i className="fas fa-star-half-alt" />
-                                                    <span>4.7(21)</span>
+                                                    <span>{srt}({totalComments})</span>
                                                 </div>
                                                 <div className="product-price">
                                                     <p className="last-price">Old Price: <span>{v.pro_price}</span></p>
@@ -131,11 +146,25 @@ function Details() {
                                                     </button>
                                                 </div>
 
-                                                <Review id={v.id}>
+                                                <Review id={v.id} onupdate={update} >
 
                                                 </Review>
-
-
+                                                <div>
+                                                    {
+                                                        review.review.map((r) => {
+                                                            console.log(r);
+                                                            return (
+                                                                <>
+                                                                    <p>{r.rating}</p>
+                                                                    <p>{r.comment}</p>
+                                                                    <button onClick={() => handleDelete(r.id)}>X</button>
+                                                                    <button onClick={() => handleEdite(r)}>E</button>
+                                                                    {/* <Review commentd = {r.comment} /> */}
+                                                                </>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

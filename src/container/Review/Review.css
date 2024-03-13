@@ -2,6 +2,8 @@
 
 input{
     width: 78% !important;
+    margin-bottom: 10px;
+    border: none !important;
 }
 
 button{
