@@ -10,7 +10,11 @@ import ReactImageMagnify from 'react-image-magnify';
 import { getproduct } from '../slice/product.slice';
 import Review from '../Review/Review';
 import { deletereview, getreview, updatereview } from '../slice/review.slice';
-
+import { Style } from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import StarIcon from '@mui/icons-material/Star';
+import { getOrder } from '../slice/cartform.slice';
 
 function Details() {
 
@@ -19,8 +23,9 @@ function Details() {
     const [update, setUpdate] = useState(false)
     const product = useSelector(state => state.product)
     console.log(product);
-    const shop = useSelector(state => state.shop);
-    // console.log(shop);
+
+    const order = useSelector(state => state.order);
+    console.log(order);
     const cart = useSelector(state => state.cart);
     // console.log(cart);
     const auth = useSelector(state => state.auth);
@@ -50,12 +55,22 @@ function Details() {
 
     useEffect(() => {
         dispatch(getreview())
-
+        dispatch(getOrder())
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
         setProdata(filteredData);
 
     }, [id, product.product])
+
+
+    const rdata = order.order.map((v) => {
+        console.log(v);
+        let oderdata = review.review.filter((o) => o.uid === v.uid);
+        console.log(oderdata);
+        return { ...v, ...oderdata}
+    })
+    console.log(rdata);
+
 
     const handleaddtocart = (id) => {
         // console.log(id);
@@ -72,7 +87,7 @@ function Details() {
         dispatch(decrementqty(id))
     }
 
-    const  handleDelete = (id) => {
+    const handleDelete = (id) => {
         // console.log('ddddddddddddddddddddddddddd');
         console.log(id);
         dispatch(deletereview(id))
@@ -82,6 +97,7 @@ function Details() {
         console.log('eeeeeeee');
         console.log(data);
         setUpdate(data)
+        // setValue(data)
     }
     return (
         <div>
@@ -91,9 +107,8 @@ function Details() {
                         prodata.map((v) => {
                             console.log(v.id);
                             return (
-                                
                                 <>
-                                {/* <Review onupdate={update}></Review> */}
+                                    {/* <Review onupdate={update}></Review> */}
                                     <div className="perimeter">
                                         <div className="image">
                                             <ReactImageMagnify
@@ -145,20 +160,34 @@ function Details() {
                                                         Add to Cart
                                                     </button>
                                                 </div>
-
                                                 <Review id={v.id} onupdate={update} >
 
                                                 </Review>
                                                 <div>
                                                     {
-                                                        review.review.map((r) => {
+                                                        rdata.map((r) => {
                                                             console.log(r);
+                                                            // const stytle = { display: v.uid === auth.user.uid ? "block" : "none" }
                                                             return (
-                                                                <>
-                                                                    <p>{r.rating}</p>
-                                                                    <p>{r.comment}</p>
-                                                                    <button onClick={() => handleDelete(r.id)}>X</button>
-                                                                    <button onClick={() => handleEdite(r)}>E</button>
+                                                                <>      
+                                                                    <div className='main-box'>
+                                                                        <di className='review-box'>
+                                                                            <di className="data-button">
+                                                                                <p>{r.rating}<StarIcon /></p>
+                                                                                <h6>{r.comment}</h6>
+                                                                                <h4>{r.name}</h4>
+                                                                            </di>
+                                                                            <di className="icon-button">
+                                                                                {
+                                                                                    r.uid === auth.user.uid ||
+                                                                                    <>
+                                                                                        <button onClick={() => handleDelete(r.id)} className='button-one'><DeleteIcon /></button>
+                                                                                        <button onClick={() => handleEdite(r)} disabled={r.uid === auth.user.uid ? true : false} ><EditIcon /></button>
+                                                                                    </>
+                                                                                }
+                                                                            </di>
+                                                                        </di>
+                                                                    </div>
                                                                     {/* <Review commentd = {r.comment} /> */}
                                                                 </>
                                                             )

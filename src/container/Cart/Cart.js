@@ -17,7 +17,7 @@ function Cart(props) {
   console.log(order);
 
   const auth = useSelector(state => state.auth)
-  console.log(auth);
+  console.log(auth.user.uid);
 
   const categoryOptions = [];
   categoryOptions.push(product.product);
@@ -76,12 +76,11 @@ function Cart(props) {
     console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
     let obj = {
       address: [address],
-      cart: cart.cart,
-      uid: auth.user.uid,
-      status: process
+      
+      
     }
-
-    dispatch(addOrder(obj))
+    dispatch(addOrder({ ...obj,cart: cart.cart,uid: auth.user.uid, status: process}))
+    
     console.log(obj);
   }
 
@@ -111,6 +110,7 @@ function Cart(props) {
     validationSchema: cartSchema,
     onSubmit: (data, action) => {
       handledata(data)
+      
     },
   });
 

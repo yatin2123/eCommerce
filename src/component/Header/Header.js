@@ -51,19 +51,20 @@ function Header({ cart }) {
     },
   }));
 
-  const handleSearch = () => {
-
+  const handleSearch = (event) => {
+      // event.preventDefault()
     console.log('kkkkkkkkkkkkkkkk');
-    let data = product.product.filter((v) => {
-      console.log(v);
-      v.pro_name.toLowerCase().includes(search.toLowerCase()) ||
-        v.pro_price.toString().includes(search.toString())
-    })
+    console.log(search);
+    // let data = product.product.filter((v) => {
+    //   console.log(v);
+    //   v.pro_name.toLowerCase().includes(search.toLowerCase()) ||
+    //     v.pro_price.toString().includes(search.toString())
+    // })
 
 
-    data = data.filter((v) => {
-      // console.log(v);
-    })
+    // data = data.filter((v) => {
+    //   // console.log(v);
+    // })
 
   }
 
@@ -193,7 +194,7 @@ function Header({ cart }) {
                   </div>
                   <div class="header-item item-right">
                     <form className="form-inline">
-                      <input type="text" placeholder="Search" onChange={(e) => setSearch(e.target.value)}></input>
+                      <input type="text" placeholder="Search" onChange={(event) => setSearch(event.target.value)}></input>
                     </form>
 
                     {auth.user ? (
@@ -211,10 +212,6 @@ function Header({ cart }) {
 
             </div>
           </nav>
-
-
-
-
         </div>
       </header >
     </div >

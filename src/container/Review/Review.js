@@ -38,7 +38,7 @@ function Review({ id, onupdate }) {
     const formik = useFormik({
         initialValues: {
             comment: '',
-            rating: 0,
+            rating: '',
         },
         validationSchema: reviewschema,
         onSubmit: (data, action) => {
@@ -63,33 +63,38 @@ function Review({ id, onupdate }) {
                     review.review.map((v) => {
                         if (v.uid === auth.user.uid) {
                             return (
-                                <input
-                                    type="comment"
-                                    name="comment"
-                                    placeholder='enter comment'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.comment}
-                                    disabled={onupdate ? false : true}
-                                />
+                                
+                                <>
+                                    <input
+                                        type="comment"
+                                        name="comment"
+                                        placeholder='enter comment'
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.comment}
+                                        disabled={onupdate ? false : true}
+                                    />
+
+                                    <Box
+                                        sx={{
+                                            '& > legend': { mt: 0 },
+                                        }}
+                                    >
+                                        <Rating
+                                            name="simple-controlled"
+                                            value={values.rating}
+                                            onChange={(event, values) => {
+                                                setValue(values);
+                                            }}
+                                        />
+                                    </Box>
+                                </>
                             )
                         }
                     })
                 }
                 {/* {errors.comment && touched.comment && errors.comment} */}
-                <Box
-                    sx={{
-                        '& > legend': { mt: 0 },
-                    }}
-                >
-                    <Rating
-                        name="simple-controlled"
-                        value={value}
-                        onChange={(event, values) => {
-                            setValue(values);
-                        }}
-                    />
-                </Box>
+
                 {
                     auth.user ? (<button type="submit">
                         Submit

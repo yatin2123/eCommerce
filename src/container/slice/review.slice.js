@@ -55,6 +55,7 @@ export const updatereview = createAsyncThunk(
     "review/updatr",
 
     async (data) => {
+        console.log(data);
         const washingtonRef = doc(db, "review", data.id);
 
         let reviewData = { ...data, id: data.id };
