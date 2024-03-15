@@ -9,6 +9,7 @@ import './Auth.css'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import { adduser } from '../slice/auth.slice';
 
 function Auth(props) {
     const [type, setType] = useState('login')
@@ -41,7 +42,9 @@ function Auth(props) {
             name: '',
             email: '',
             phone: '',
-            con_phone: ''
+            con_phone: '',
+            emailverified:false,
+         
         }
     } else {
         authobj = {

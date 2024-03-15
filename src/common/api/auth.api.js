@@ -1,6 +1,9 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import { auth } from "../../firebase";
+
 
 export const signupAPI = (data) => {
     console.log(data);
@@ -13,8 +16,18 @@ export const signupAPI = (data) => {
                 console.log(user);
 
                 sendEmailVerification(auth.currentUser)
-                    .then(() => {
-                        resolve({ massege: "Email verification" })
+                    .then(async () => {
+                        const userdata = { ...data, uid: user.uid}
+
+                       
+                        const docRef = addDoc(collection(db, "user"), userdata);
+                        console.log(docRef);
+
+                        const newDocRef = doc(collection(db, "user"), user.uid);
+
+                        await setDoc(newDocRef, userdata);
+
+                        resolve({ massege: "Email verification", user: user })
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -34,7 +47,6 @@ export const signupAPI = (data) => {
                 }
             });
     })
-
 }
 
 
@@ -89,12 +101,12 @@ export const forgetAPI = (data) => {
 
 export const logoutAPI = (data) => {
     console.log(data);
-  
+
     return new Promise((resolve, reject) => {
-      signOut(auth).then(() => {
-        resolve({ message: 'Logout Successfully.'});
-      }).catch((error) => {
-        reject({ message: "Somthing went wrong." })
-      });
+        signOut(auth).then(() => {
+            resolve({ message: 'Logout Successfully.' });
+        }).catch((error) => {
+            reject({ message: "Somthing went wrong." })
+        });
     })
-  }
+}

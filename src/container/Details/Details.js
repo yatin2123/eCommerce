@@ -15,6 +15,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import StarIcon from '@mui/icons-material/Star';
 import { getOrder } from '../slice/cartform.slice';
+import { getuser } from '../slice/auth.slice';
+
 
 function Details() {
 
@@ -27,11 +29,13 @@ function Details() {
     const order = useSelector(state => state.order);
     console.log(order);
     const cart = useSelector(state => state.cart);
-    // console.log(cart);
+    // console.log(cart);  
     const auth = useSelector(state => state.auth);
     // console.log(auth);
     const review = useSelector(state => state.review);
     console.log(review);
+    const user = useSelector(state => state.auth.user);
+    console.log(user);
 
     const commentdata = review.review.map((v) => {
         // console.log(v);
@@ -56,6 +60,7 @@ function Details() {
     useEffect(() => {
         dispatch(getreview())
         dispatch(getOrder())
+       dispatch(getuser())
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
         setProdata(filteredData);
@@ -63,13 +68,13 @@ function Details() {
     }, [id, product.product])
 
 
-    const rdata = order.order.map((v) => {
-        console.log(v);
-        let oderdata = review.review.filter((o) => o.uid === v.uid);
-        console.log(oderdata);
-        return { ...v, ...oderdata}
-    })
-    console.log(rdata);
+    // const rdata = order.order.map((v) => {
+    //     console.log(v);
+    //     let oderdata = review.review.filter((o) => o.uid === v.uid);
+    //     console.log(oderdata);
+    //     return { ...v, ...oderdata}
+    // })
+    // console.log(rdata);
 
 
     const handleaddtocart = (id) => {
@@ -88,7 +93,7 @@ function Details() {
     }
 
     const handleDelete = (id) => {
-        // console.log('ddddddddddddddddddddddddddd');
+        console.log('ddddddddddddddddddddddddddd');
         console.log(id);
         dispatch(deletereview(id))
     }
@@ -165,7 +170,7 @@ function Details() {
                                                 </Review>
                                                 <div>
                                                     {
-                                                        rdata.map((r) => {
+                                                        review.review.map((r) => {
                                                             console.log(r);
                                                             // const stytle = { display: v.uid === auth.user.uid ? "block" : "none" }
                                                             return (
@@ -179,10 +184,10 @@ function Details() {
                                                                             </di>
                                                                             <di className="icon-button">
                                                                                 {
-                                                                                    r.uid === auth.user.uid ||
+                                                                                    // r.uid === auth.user.uid ||
                                                                                     <>
                                                                                         <button onClick={() => handleDelete(r.id)} className='button-one'><DeleteIcon /></button>
-                                                                                        <button onClick={() => handleEdite(r)} disabled={r.uid === auth.user.uid ? true : false} ><EditIcon /></button>
+                                                                                        <button onClick={() => handleEdite(r)}  ><EditIcon /></button>
                                                                                     </>
                                                                                 }
                                                                             </di>

@@ -7,11 +7,12 @@ import { setAlert } from '../container/slice/alert.slice';
 import { FORGET_REQUWEST, LOGIN_REQUWEST, LOGOUT_USER, SIGNUP_REQWEST } from './ActionType';
 
 function* signupUser(action) {
+    console.log('tttttttttttttttttttttttt');
     console.log(action);
     try {
         const user = yield call(signupAPI, action.payload);
         console.log(user);
-        yield put(signupResponse(user.user))
+        yield put(signupResponse(user))
         yield put(setAlert({ text: user.massege, color: 'success' }))
     } catch (e) {
         console.log(e);

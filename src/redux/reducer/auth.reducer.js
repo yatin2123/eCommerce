@@ -17,7 +17,7 @@ export const signupReducer = (state = initialValues, action) => {
         case SIGNUP_RESPONSE:
             return {
                 isLoding: false,
-                user: null,
+                user: action.payload,
                 error: null,
             };
 
