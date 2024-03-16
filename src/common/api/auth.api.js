@@ -4,7 +4,6 @@ import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import { auth } from "../../firebase";
 
-
 export const signupAPI = (data) => {
     console.log(data);
 
@@ -20,8 +19,8 @@ export const signupAPI = (data) => {
                         const userdata = { ...data, uid: user.uid}
 
                        
-                        const docRef = addDoc(collection(db, "user"), userdata);
-                        console.log(docRef);
+                        // const docRef = addDoc(collection(db, "user"), userdata);
+                        // console.log(docRef);
 
                         const newDocRef = doc(collection(db, "user"), user.uid);
 

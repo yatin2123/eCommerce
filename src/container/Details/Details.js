@@ -17,7 +17,6 @@ import StarIcon from '@mui/icons-material/Star';
 import { getOrder } from '../slice/cartform.slice';
 import { getuser } from '../slice/auth.slice';
 
-
 function Details() {
 
     const [prodata, setProdata] = useState([]);
@@ -31,18 +30,19 @@ function Details() {
     const cart = useSelector(state => state.cart);
     // console.log(cart);  
     const auth = useSelector(state => state.auth);
-    // console.log(auth);
+    console.log(auth);
     const review = useSelector(state => state.review);
     console.log(review);
-    const user = useSelector(state => state.auth.user);
-    console.log(user);
 
+    const user = useSelector(state => state.user);
+    console.log(user);
+    
     const commentdata = review.review.map((v) => {
         // console.log(v);
         let proid = product.product.filter((p) => v.pid == p.id)
         console.log(proid);
         return { ...proid, rating: v.rating }
-    })
+    })  
     console.log(commentdata);
 
     const totalComments = commentdata.length;
@@ -60,12 +60,12 @@ function Details() {
     useEffect(() => {
         dispatch(getreview())
         dispatch(getOrder())
-       dispatch(getuser())
+        dispatch(getuser())
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
         setProdata(filteredData);
 
-    }, [id, product.product])
+    }, [id, product.product, dispatch])
 
 
     // const rdata = order.order.map((v) => {

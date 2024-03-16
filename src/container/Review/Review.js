@@ -17,11 +17,14 @@ function Review({ id, onupdate }) {
     const [value, setValue] = useState(0);
     // console.log(value);
     const auth = useSelector(state => state.auth);
-    console.log(auth.user.uid);
+    console.log(auth);
     const cart = useSelector(state => state.cart);
     // console.log(cart);
     const review = useSelector(state => state.review);
     console.log(review);
+
+    const user = useSelector((state => state.user));
+    console.log(user);
 
     const dispatch = useDispatch();
     useEffect(() => {

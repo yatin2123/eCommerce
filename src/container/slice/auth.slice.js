@@ -5,7 +5,7 @@ import { db } from "../../firebase";
 
 
 const initialState = {
-    user : []
+    user: []
 }
 
 export const getuser = createAsyncThunk(
@@ -13,20 +13,22 @@ export const getuser = createAsyncThunk(
     async () => {
         let data = [];
         console.log('ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
-    
+
         const querySnapshot = await getDocs(collection(db, "user"));
         querySnapshot.forEach((doc) => {
-          data.push({ ...doc.data(), id: doc.id });
+            console.log(doc);
+            data.push({ ...doc.data(), id: doc.id });
         });
-    
+        console.log(data);
+
         return data;
-      }
+    }
 )
 
 export const userSlice = createSlice({
-    name:"user",
+    name: "user",
     initialState: initialState,
-    reducers:{},
+    reducers: {},
     extraReducer: (builder) => {
         builder.addCase(getuser.fulfilled, (state, action) => {
             console.log(action);
@@ -34,5 +36,7 @@ export const userSlice = createSlice({
         })
     }
 })
+
+
 
 export default userSlice.reducer;
