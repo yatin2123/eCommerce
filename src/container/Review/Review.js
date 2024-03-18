@@ -66,7 +66,6 @@ function Review({ id, onupdate }) {
                     review.review.map((v) => {
                         if (v.uid === auth.user.uid) {
                             return (
-                                
                                 <>
                                     <input
                                         type="comment"
@@ -98,13 +97,16 @@ function Review({ id, onupdate }) {
                 }
                 {/* {errors.comment && touched.comment && errors.comment} */}
 
-                {
-                    auth.user ? (<button type="submit">
-                        Submit
-                    </button>) : <NavLink to={'/auth'}><button type="submit">
-                        Submit
-                    </button></NavLink>
-                }
+                <div className='button-class'>
+                    {
+                        auth.user ? (<button type="submit">
+                            Submit
+                        </button>) : <NavLink to={'/auth'}><button type="submit">
+                            Submit
+                        </button></NavLink>
+                    }
+
+                </div>
             </form>
         </div>
     );

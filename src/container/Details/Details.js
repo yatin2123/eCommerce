@@ -15,7 +15,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import StarIcon from '@mui/icons-material/Star';
 import { getOrder } from '../slice/cartform.slice';
-import { getuser } from '../slice/auth.slice';
+import { getuser, getuserdata } from '../slice/auth.slice';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 function Details() {
 
@@ -36,19 +38,19 @@ function Details() {
 
     const user = useSelector(state => state.user);
     console.log(user);
-    
+
     const commentdata = review.review.map((v) => {
         // console.log(v);
-        let proid = product.product.filter((p) => v.pid == p.id)
+        let proid = product.product.filter((p) => v.pid === p.id)
         console.log(proid);
         return { ...proid, rating: v.rating }
-    })  
+    })
     console.log(commentdata);
 
     const totalComments = commentdata.length;
     console.log(totalComments);
 
-    const total = commentdata.reduce((acc, v) => (acc + v.rating) / totalComments, 0);
+    const total = commentdata.reduce((acc, v) => acc + v.rating, 0) / totalComments; 
     console.log(total);
     const srt = total.toFixed(2);
     console.log(srt);
@@ -61,6 +63,7 @@ function Details() {
         dispatch(getreview())
         dispatch(getOrder())
         dispatch(getuser())
+
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
         setProdata(filteredData);
@@ -75,6 +78,13 @@ function Details() {
     //     return { ...v, ...oderdata}
     // })
     // console.log(rdata);
+
+    const rdata = user.user.map((v) => {
+        console.log(v);
+        let reviewData = review.review.find((r) => r.uid === v.uid);
+        return { ...reviewData, name: v.name }
+    })
+    console.log(rdata);
 
 
     const handleaddtocart = (id) => {
@@ -141,11 +151,9 @@ function Details() {
                                                 <h2 className="product-title">{v.pro_name}</h2>
                                                 {/* <a href="#" className="product-link">visit nike store</a> */}
                                                 <div className="product-rating">
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star-half-alt" />
+                                                    <Stack spacing={1}>
+                                                        <Rating name="half-rating-read" defaultValue={srt} precision={0.5} readOnly />
+                                                    </Stack>
                                                     <span>{srt}({totalComments})</span>
                                                 </div>
                                                 <div className="product-price">
@@ -155,7 +163,6 @@ function Details() {
                                                 <div className="product-detail">
                                                     <h2>about this item: </h2>
                                                     <p>Lorem ipsum dolor sit amet consederghrthe tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-
                                                 </div>
                                                 <div className="purchase-info">
                                                     <button onClick={() => handleincrement(v.id)}>+</button>
@@ -170,28 +177,31 @@ function Details() {
                                                 </Review>
                                                 <div>
                                                     {
-                                                        review.review.map((r) => {
+                                                        rdata.map((r) => {
                                                             console.log(r);
                                                             // const stytle = { display: v.uid === auth.user.uid ? "block" : "none" }
                                                             return (
-                                                                <>      
+                                                                <>
                                                                     <div className='main-box'>
                                                                         <di className='review-box'>
                                                                             <di className="data-button">
                                                                                 <p>{r.rating}<StarIcon /></p>
                                                                                 <h6>{r.comment}</h6>
-                                                                                <h4>{r.name}</h4>
                                                                             </di>
                                                                             <di className="icon-button">
                                                                                 {
-                                                                                    // r.uid === auth.user.uid ||
+                                                                                    r.uid !== auth.user.uid ||
                                                                                     <>
                                                                                         <button onClick={() => handleDelete(r.id)} className='button-one'><DeleteIcon /></button>
-                                                                                        <button onClick={() => handleEdite(r)}  ><EditIcon /></button>
+                                                                                        <button onClick={() => handleEdite(r)} disabled={r.uid === auth.user.uid ? false
+                                                                                            : true} ><EditIcon /></button>
                                                                                     </>
                                                                                 }
                                                                             </di>
                                                                         </di>
+                                                                        <div className='data-box'>
+                                                                            <h4>{r.name}</h4>
+                                                                        </div>
                                                                     </div>
                                                                     {/* <Review commentd = {r.comment} /> */}
                                                                 </>

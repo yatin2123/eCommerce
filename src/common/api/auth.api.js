@@ -17,13 +17,11 @@ export const signupAPI = (data) => {
                 sendEmailVerification(auth.currentUser)
                     .then(async () => {
                         const userdata = { ...data, uid: user.uid}
-
                        
                         // const docRef = addDoc(collection(db, "user"), userdata);
                         // console.log(docRef);
 
                         const newDocRef = doc(collection(db, "user"), user.uid);
-
                         await setDoc(newDocRef, userdata);
 
                         resolve({ massege: "Email verification", user: user })
@@ -31,7 +29,6 @@ export const signupAPI = (data) => {
                     .catch((error) => {
                         const errorCode = error.code;
                         const errorMessage = error.massege;
-
                         reject({ massege: errorMessage })
                     })
             })
