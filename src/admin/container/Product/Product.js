@@ -257,7 +257,6 @@ const ProductForm = () => {
 
                                             id="cart_id"
                                             onChange={(event) => {
-
                                                 handleChange(event);
                                                 subcat(event.target.value);
                                                 // handlesubcat(event.target.value);
@@ -266,7 +265,6 @@ const ProductForm = () => {
                                             value={values.cart_id}
                                         >
                                             <option value="0">select</option>
-
                                             {shop.shop.map((v) => {
                                                 console.log(v);
                                                 return <option value={v.id}>{v.cat_name}</option>

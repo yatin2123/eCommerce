@@ -111,6 +111,17 @@ a {
 	opacity: 0;
 	visibility: hidden;
 }
+.select-box-one{
+	margin-right: 55px;
+}
+.select-box-one select{
+	
+		border: 1px solid rgba(0, 0, 0, 0.137);
+		padding: 5px 16px;
+		background-color: rgb(247, 247, 247);
+		border: none;
+		margin-bottom: 0;
+}
 
 @media(min-width: 992px) {
 	.header .menu>ul>li.menu-item-has-children:hover .sub-menu {
@@ -218,6 +229,7 @@ a {
 	padding: 5px 16px;
 	width: 100%;
 	margin-left: 20px;
+	margin-bottom: 0px;
 }
 form{
 	padding: 0 !important;

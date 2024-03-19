@@ -50,7 +50,7 @@ function Details() {
     const totalComments = commentdata.length;
     console.log(totalComments);
 
-    const total = commentdata.reduce((acc, v) => acc + v.rating, 0) / totalComments; 
+    const total = commentdata.reduce((acc, v) => acc + v.rating, 0) / totalComments;
     console.log(total);
     const srt = total.toFixed(2);
     console.log(srt);
@@ -63,7 +63,6 @@ function Details() {
         dispatch(getreview())
         dispatch(getOrder())
         dispatch(getuser())
-
         const filteredData = product.product.filter((v) => v.id == id);
         console.log(filteredData);
         setProdata(filteredData);

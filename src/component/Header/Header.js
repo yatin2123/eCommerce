@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getShopdata } from "../../container/slice/shop.slice";
 import { getsubcategory } from "../../container/slice/subcategory.slice";
 
@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import "./Header.css";
 import { getproduct } from "../../container/slice/product.slice";
 import { logoutReqwest } from "../../redux/action/auth.action";
+import { getOrder } from "../../container/slice/cartform.slice";
 
 function Header({ cart }) {
   const [search, setSearch] = useState('')
@@ -29,12 +30,17 @@ function Header({ cart }) {
   const product = useSelector(state => state.product);
   console.log(product);
 
+  const order = useSelector(state => state.order);
+  console.log(order);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getsubcategory());
     dispatch(getShopdata());
-    dispatch(getproduct())
+    dispatch(getproduct());
+    dispatch(getOrder())
   }, []);
 
   const handleLogout = () => {
@@ -52,7 +58,7 @@ function Header({ cart }) {
   }));
 
   const handleSearch = (event) => {
-      // event.preventDefault()
+    // event.preventDefault()
     console.log('kkkkkkkkkkkkkkkk');
     console.log(search);
     // let data = product.product.filter((v) => {
@@ -144,7 +150,6 @@ function Header({ cart }) {
                               })
                             }
                           </div>
-
                         </li>
                         <li className="nav-item">
                           <NavLink className="nav-link scrollto" to="/why">
@@ -169,8 +174,8 @@ function Header({ cart }) {
                         </li>
 
                         <li className="nav-item">
-                          <NavLink className="nav-link scrollto" to="/review">
-                            Review
+                          <NavLink className="nav-link scrollto" to="/orderdata">
+                            Orderdata
                           </NavLink>
                         </li>
 
@@ -189,8 +194,18 @@ function Header({ cart }) {
                           </Link>
                         </li>
                       </ul>
-
                     </nav>
+                  </div>
+                  <div className="select-box-one">
+                    <Link to={"/orderdata"}>
+                      <select value= "select">
+                        <option value="0">select</option>
+                        {order.order.map((v) => {
+                          console.log(v);
+                          return <option value={v.id}>{v.status}</option>
+                        })}
+                      </select>
+                    </Link>
                   </div>
                   <div class="header-item item-right">
                     <form className="form-inline">
@@ -209,7 +224,6 @@ function Header({ cart }) {
                   </div>
                 </div>
               </ul>
-
             </div>
           </nav>
         </div>
