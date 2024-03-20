@@ -1,72 +1,74 @@
-
-
-@import url("https://fonts.googleapis.com/css?family=Work+Sans");
-.no-margin {
-  margin: 0;
+.ul-data {
+  margin-left: 17%;
+  margin-right: 17%;
+  display: flex;
+  justify-content: space-between;
 }
 
-a {
-  color: inherit;
+.product-data {
+  margin-left: 17%;
+  margin-right: 17%;
+  margin-top: 6%;
+  border: 1px solid;
+  padding: 10px;
 }
 
-.clearfix,
-.clearfix:before {
-  content: "";
-  clear: both;
-  display: table;
+h5{
+      margin-top: 0vh;
+      font-weight: 600;
+}
+.product-data h4 {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+  margin-bottom: 1.5rem;
+}
+.product-data p{
+  font-weight: 700;
 }
 
-.order {
-  background-color: #f4f4f4;
-  font-family: "Work Sans", sans-serif;
-  font-size: 14px;
-  padding: 105px;
-  /* max-width: 320px; */
-}
-.order .order__title {
-  float: left;
-  margin-bottom: 20px;
-}
-.order #svg-summary {
-  float: right;
-}
-.order .order__subtitles {
+.pro-img {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #efefef;
+  padding: 10px;
   margin-bottom: 10px;
-  line-height: 1em;
 }
-.order__sub-sections {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  width: 100%;
+
+.img-data img {
+  width: 100px;
+  height: 100px;
+  
 }
-.order__subtotal__table {
-  border-spacing: 0;
-  /* width: 320px; */
+
+.pro-detail {
+  justify-content: space-between;
+  align-items: center;
+  background-color: #efefef;
+    padding: 10px;
 }
-.order__subtotal__table tbody {
-  background-color: #fff;
-  border: 1px solid #000;
+
+.freight {
+  justify-content: space-between;
+  align-items: center;
 }
-.order__subtotal__table tbody tr:first-child td {
-  border-top: 1px solid #000;
+
+.user-detail {
+  margin-left: 17%;
+  margin-right: 17%;
+  margin-top: 6%;
+  display: flex;
+    justify-content: space-between;
 }
-.order__subtotal__table tbody tr td {
-  padding: 5px;
+.user-detail h4{
+  font-weight: 600;
 }
-.order__subtotal__table tbody .values--discounts {
-  color: #6fa450;
-  font-weight: bold;
+.user-detail{
+  background-color: #efefef;
+  padding: 10px;
+  border: 1px solid;
 }
-.order__subtotal__table tfoot tr:first-child td {
-  border-top: 1px solid #000;
-  padding: 5px 0;
+p  span{
+  font-weight: 600;
 }
-.order__subtotal__table tfoot .values--total-text,
-.order__subtotal__table tfoot .values--total-price {
-  font-size: 1.857rem;
-  font-weight: bolder;
-  white-space: pre;
-}
-/* .order img{
-    width: 60px;
-} */

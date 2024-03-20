@@ -18,6 +18,7 @@ import View from "../container/View/View";
 import Quiz from "../component/Quiz/Quiz";
 import Review from "../container/Review/Review";
 import Orderdata from "../container/Orderdata/Orderdata";
+import Orderlist from "../container/Orderlist/Orderlist";
 
 function Userroute(props) {
 
@@ -40,6 +41,7 @@ function Userroute(props) {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/quiz" element={<Quiz />} />
         <Route exact path="/orderdata" element={<Orderdata />} />
+        <Route exact path="/orderlist" element={<Orderlist />} />
         <Route exact path="/auth" element={<Auth />} />
       </Routes>
 

@@ -174,8 +174,8 @@ function Header({ cart }) {
                         </li>
 
                         <li className="nav-item">
-                          <NavLink className="nav-link scrollto" to="/orderdata">
-                            Orderdata
+                          <NavLink className="nav-link scrollto" to="/orderlist">
+                            Orderlist
                           </NavLink>
                         </li>
 
@@ -198,11 +198,13 @@ function Header({ cart }) {
                   </div>
                   <div className="select-box-one">
                     <Link to={"/orderdata"}>
-                      <select value= "select">
+                      <select value="select">
                         <option value="0">select</option>
                         {order.order.map((v) => {
-                          console.log(v);
-                          return <option value={v.id}>{v.status}</option>
+                       
+                            console.log(v);
+                            return <option value={v.id}>{v.status}</option>
+                        
                         })}
                       </select>
                     </Link>
