@@ -76,11 +76,11 @@ function Cart(props) {
     console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
     let obj = {
       address: [address],
-      
-      
+
+
     }
-    dispatch(addOrder({ ...obj,cart: cart.cart,uid: auth.user.uid, status: process}))
-    
+    dispatch(addOrder({ ...obj, cart: cart.cart, uid: auth.user.uid, status: process }))
+
     console.log(obj);
   }
 
@@ -110,7 +110,7 @@ function Cart(props) {
     validationSchema: cartSchema,
     onSubmit: (data, action) => {
       handledata(data)
-      
+
     },
   });
 
@@ -185,7 +185,7 @@ function Cart(props) {
                                 </div>
 
                                 <div className="col">
-                                  <span onClick={() => handleDelete(v.id)}><DeleteIcon/></span>
+                                  <span onClick={() => handleDelete(v.id)}><DeleteIcon /></span>
                                 </div>
                               </div>
                             </div>
@@ -372,44 +372,45 @@ function Cart(props) {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-md-4 summary">
-                              <div>
-                                <h5>
-                                  <b>Summary</b>
-                                </h5>
-                              </div>
-                              <hr />
-                              <div className="row">
-                                <div className="col" style={{ paddingLeft: 0 }}>
-                                  ITEMS {v.qty}
-                                </div>
-                                <div className="col text-right">{ }</div>
-                              </div>
-                              <form>
-                                <p>SHIPPING</p>
-                                <select>
-                                  <option className="text-muted">
-                                    Standard-Delivery- €5.00
-                                  </option>
-                                </select>
-                                <p>GIVE CODE</p>
-                                <input id="code" placeholder="Enter your code" />
-                              </form>
-                              <div
-                                className="row"
-                                style={{
-                                  borderTop: "1px solid rgba(0,0,0,.1)",
-                                  padding: "2vh 0",
-                                }}
-                              >
-                                <div className="col">TOTAL PRICE</div>
-                                <div className="col text-right">€ {totalPrice}</div>
-                              </div>
-                              {/* <button className="btn1">CHECKOUT</button> */}
-                            </div>
+
                           </>
                         );
                       })}
+                      <div className="col-md-4 summary">
+                        <div>
+                          <h5>
+                            <b>Summary</b>
+                          </h5>
+                        </div>
+                        <hr />
+                        <div className="row">
+                          <div className="col" style={{ paddingLeft: 0 }}>
+                            {/* ITEMS {v.qty} */}
+                          </div>
+                          <div className="col text-right">{ }</div>
+                        </div>
+                        <form>
+                          <p>SHIPPING</p>
+                          <select>
+                            <option className="text-muted">
+                              Standard-Delivery- €5.00
+                            </option>
+                          </select>
+                          <p>GIVE CODE</p>
+                          <input id="code" placeholder="Enter your code" />
+                        </form>
+                        <div
+                          className="row"
+                          style={{
+                            borderTop: "1px solid rgba(0,0,0,.1)",
+                            padding: "2vh 0",
+                          }}
+                        >
+                          <div className="col">TOTAL PRICE</div>
+                          <div className="col text-right">€ {totalPrice}</div>
+                        </div>
+                        {/* <button className="btn1">CHECKOUT</button> */}
+                      </div>
                     </div>
                   </div>
                 </div>

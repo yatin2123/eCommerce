@@ -14,13 +14,13 @@ function Orderlist() {
     const auth = useSelector(state => state.auth);
     console.log(auth);
 
-    const cartdata = product.product.map((v) => {
-        // console.log(v);
-        let med = order.order.find((m) => m.cart.some((c) => c.id === v.id));
-        // console.log(med);
-        return { ...med, data: v };
-    });
-    console.log(cartdata);
+    // const cartdata = product.product.map((v) => {
+    //     // console.log(v);
+    //     let med = order.order.find((m) => m.cart.some((c) => c.id === v.id));
+    //     // console.log(med);
+    //     return { ...med, data: v };
+    // });
+    // console.log(cartdata);
 
     const handleclick = (v) => {
         navigate('/orderdata', { state: { fdata: v } });
@@ -30,7 +30,7 @@ function Orderlist() {
         <div>
             <h1>The Order of Operations</h1>
             {
-                cartdata.map((v) => {
+                order.order.map((v) => {
                     console.log(v);
                     if (v.uid === auth.user.uid) {
                         return (

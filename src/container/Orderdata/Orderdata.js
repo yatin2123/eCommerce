@@ -18,11 +18,17 @@ function Orderdata() {
     const auth = useSelector(state => state.auth);
     console.log(auth);
 
-    
+    const cartdata = product.product.map((v) => {
+        // console.log(v);
+        let med = order.order.find((m) => m.cart.some((c) => c.id === v.id));
+        // console.log(med);
+        return { ...med, data: v };
+    });
+    console.log(cartdata);
 
-    const totaldis = location.state.fdata.data.discount * location.state.fdata.data.pro_price / 100;
-    console.log(totaldis);
-       
+    // const totaldis = cartdata.data.discount * cartdata.data.pro_price / 100;
+    // console.log(totaldis);
+
     return (
         <div >
             <div className='container'>
@@ -46,40 +52,57 @@ function Orderdata() {
 
                 <div className='product-data'>
                     <h4>Product Details</h4>
-                    <div className='pro-img'>
-                        <div className='img-data'>
-                            <img src={location.state.fdata.data.file}></img>
-                        </div>
+                    {
+                        cartdata.map((v) => {
+                            console.log(v);
+                            const totaldis = v.data.discount * v.data.pro_price / 100;
+                            console.log(totaldis);
+                            if(v.uid === auth.user.uid){
+                                return (
+                                    <>
+    
+                                        <div className='pro-img'>
+                                            <div className='img-data'>
+                                                <img src={v.data.file}></img>
+                                            </div>
+    
+                                            <div className='pro-name'>
+                                                <div>{v.data.pro_name}</div>
+                                            </div>
+                                        </div>
+    
+                                        <div className='row pro-detail'>
+                                            <h5>Product</h5>
+                                            <p>{v.data.pro_price}</p>
+                                        </div>
+                                        <div className='row pro-detail'>
+                                            <h5>Freight</h5>
+                                            <p>Free</p>
+                                        </div>
+                                        <div className='row pro-detail'>
+                                            <h5>Discount</h5>
+                                            <p>{v.data.discount}</p>
+                                        </div>
+                                        <div className='row pro-detail'>
+                                            <h5>Discount Type of Payment:</h5>
+                                            <p>{v.data.discount}</p>
+                                        </div>
+                                        <div className='row pro-detail'>
+                                            <h5>Total Payment:</h5>
+                                            <p>{v.data.discount}</p>
+                                        </div>
+                                        <div className='row pro-detail'>
+                                            <h5>Total :</h5>
+                                            <p>{v.data.pro_price - totaldis}</p>
+                                        </div>
+    
+                                    </>
+                                )
+                            }
+                            
+                        })
+                    }
 
-                        <div className='pro-name'>
-                            <div>{location.state.fdata.data.pro_name}</div>
-                        </div>
-                    </div>
-
-                    <div className='row pro-detail'>
-                        <h5>Product</h5>
-                        <p>{location.state.fdata.data.pro_price}</p>
-                    </div>
-                    <div className='row pro-detail'>
-                        <h5>Freight</h5>
-                        <p>Free</p>
-                    </div>
-                    <div className='row pro-detail'>
-                        <h5>Discount</h5>
-                        <p>{location.state.fdata.data.discount}</p>
-                    </div>
-                    <div className='row pro-detail'>
-                        <h5>Discount Type of Payment:</h5>
-                        <p>{location.state.fdata.data.discount}</p>
-                    </div>
-                    <div className='row pro-detail'>
-                        <h5>Total Payment:</h5>
-                        <p>{location.state.fdata.data.discount}</p>
-                    </div>
-                    <div className='row pro-detail'>
-                        <h5>Total :</h5>
-                        <p>{location.state.fdata.data.pro_price - totaldis}</p>
-                    </div>
                 </div>
 
                 <div className='user-detail'>
