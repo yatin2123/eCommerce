@@ -2,6 +2,27 @@
     margin-right: 90px;
 }
 
+input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+    width: 35% !important;
+}
+
+select {
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 0.9vh 1vh;
+    /* margin-bottom: 4vh; */
+    outline: none;
+    width: 41% !important;
+    background-color: rgb(247, 247, 247);
+    margin-left: 20% !important;
+    border: none !important;
+}
+
 
 @media screen and (max-width:768px) {
     .detail-box {

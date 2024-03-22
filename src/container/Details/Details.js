@@ -18,6 +18,8 @@ import { getOrder } from '../slice/cartform.slice';
 import { getuser, getuserdata } from '../slice/auth.slice';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import FlashOnIcon from '@mui/icons-material/FlashOn';
 
 function Details() {
 
@@ -122,7 +124,6 @@ function Details() {
                             console.log(v.id);
                             return (
                                 <>
-                                    {/* <Review onupdate={update}></Review> */}
                                     <div className="perimeter">
                                         <div className="image">
                                             <ReactImageMagnify
@@ -144,6 +145,14 @@ function Details() {
                                                     isHintEnabled: true
                                                 }}
                                             />
+                                            <div className='btn-combo'>
+                                                <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
+                                                    <AddShoppingCartIcon /> Add to Cart
+                                                </button>
+                                                <button type="button" className="btn-buy" onClick={() => handleaddtocart(v.id)}>
+                                                    <FlashOnIcon /> Buy Now
+                                                </button>
+                                            </div>
                                         </div>
                                         <div className="copy">
                                             <div className="product-content">
@@ -167,9 +176,7 @@ function Details() {
                                                     <button onClick={() => handleincrement(v.id)}>+</button>
                                                     <span>{cart.cart.find(item => item.id === v.id)?.qty || 0}</span>
                                                     <button onClick={() => handledecrement(v.id)}>-</button>
-                                                    <button type="button" className="btn" onClick={() => handleaddtocart(v.id)}>
-                                                        Add to Cart
-                                                    </button>
+
                                                 </div>
                                                 <Review id={v.id} onupdate={update} >
 

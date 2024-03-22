@@ -55,7 +55,29 @@ body {
 .img-item:hover {
     opacity: 0.8;
 }
+.image .btn{
+    border: 1px solid;
+    margin-top: 14px;
+    background-color: #f64749;
+    color: white;
+    padding: 11px 43px;
+    font-weight: bold;
+}
+.btn-combo{
+    display: flex;
 
+}
+.btn-combo .btn-buy{
+    border: 1px solid;
+    margin-top: 14px;
+    background-color: #015d58b3;
+    color: white;
+    padding: 11px  55px;;
+    font-weight: bold;
+    margin-left: 23px;
+    border-radius: 4px !important;
+    
+}
 .product-content {
     /* padding: 2rem 1rem; */
 }

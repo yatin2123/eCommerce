@@ -12,6 +12,7 @@ import './Review.css'
 import { setConsent } from 'firebase/analytics';
 
 function Review({ id, onupdate }) {
+    console.log(id, onupdate);
     const [comment, setComment] = useState('');
     const [dupdate, setDupdate] = useState(false);
     const [value, setValue] = useState(0);

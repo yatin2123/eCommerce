@@ -10,6 +10,9 @@
     position: relative;
     z-index: 999;   
 }
+.ovaery h1{
+    margin-right: 16% !important;
+}
 @media screen and (max-width:480px) {
     /* .detail-box{
         position: fixed;

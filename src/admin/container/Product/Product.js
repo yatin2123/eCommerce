@@ -253,8 +253,7 @@ const ProductForm = () => {
                                             here. We will send updates occasionally.
                                         </DialogContentText>
 
-                                        <select
-
+                                        <select 
                                             id="cart_id"
                                             onChange={(event) => {
                                                 handleChange(event);

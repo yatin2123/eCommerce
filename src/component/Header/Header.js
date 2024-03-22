@@ -12,11 +12,13 @@ import "./Header.css";
 import { getproduct } from "../../container/slice/product.slice";
 import { logoutReqwest } from "../../redux/action/auth.action";
 import { getOrder } from "../../container/slice/cartform.slice";
+import SearchIcon from '@mui/icons-material/Search';
 
 function Header({ cart }) {
   const [search, setSearch] = useState('')
   const auth = useSelector(state => state.auth);
   const shop = useSelector((state) => state.shop);
+
   // console.log(auth);
   const sbucategory = useSelector((state) => state.sbucategory);
   // console.log(sbucategory);
@@ -76,6 +78,10 @@ function Header({ cart }) {
 
   const final = handleSearch()
 
+  // const handleclick = () => {
+  //   navigate('/orderdata')
+  // }
+
   return (
     <div>
       <header class="header">
@@ -114,7 +120,7 @@ function Header({ cart }) {
                         </li>
 
                         <li class="menu-item-has-children nav-item">
-                          <NavLink className="nav-link">Shop <i class="fa fa-angle-down"></i></NavLink>
+                          <NavLink className="nav-link">Shop </NavLink>
                           <div class="sub-menu mega-menu mega-menu-column-5">
 
                             {
@@ -153,7 +159,7 @@ function Header({ cart }) {
                         </li>
                         <li className="nav-item">
                           <NavLink className="nav-link scrollto" to="/why">
-                            Why Us
+                            Whyus
                           </NavLink>
                         </li>
                         <li className="nav-item">
@@ -197,23 +203,24 @@ function Header({ cart }) {
                     </nav>
                   </div>
                   <div className="select-box-one">
-                    <Link to={"/orderdata"}>
-                      <select value="select">
-                        <option value="0">select</option>
-                        {order.order.map((v) => {
-                       
-                            console.log(v);
-                            return <option value={v.id}>{v.status}</option>
-                        
-                        })}
-                      </select>
-                    </Link>
+                    {/* <select value="select">
+                      <option value="0">select</option>
+                      {order.order.map((v) => {
+                        if (v.uid === auth.user.uid) {
+                          console.log(v);
+                          return (
+                            <>
+                              <option value={v.id}>{v.status}</option>
+                            </>
+                          )
+                        }
+                      })}
+                    </select> */}
                   </div>
                   <div class="header-item item-right">
                     <form className="form-inline">
-                      <input type="text" placeholder="Search" onChange={(event) => setSearch(event.target.value)}></input>
+                      <span  onChange={(event) => setSearch(event.target.value)}><SearchIcon/></span>
                     </form>
-
                     {auth.user ? (
                       <NavLink to={"/"}>
                         <span onClick={handleLogout}>Logout</span>
