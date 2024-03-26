@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import { addOrder, deleteorder } from "../slice/cartform.slice";
 import Button from "../../component/Button/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { setAlert } from "../slice/alert.slice";
 
 function Cart(props) {
   const product = useSelector((state) => state.product);
@@ -36,8 +37,8 @@ function Cart(props) {
   console.log(cart);
 
   const dispatch = useDispatch();
-
-
+  
+  
   const cartdata = cart.cart.map((v) => {
     console.log(v);
     let med = product.product.find((m) => v.id == m.id);
@@ -62,6 +63,19 @@ function Cart(props) {
 
   const [step, setStep] = useState(1);
 
+  // useEffect(() => {
+  
+   
+
+  //     dispatch(setAlert({ text: 'message', color: 'success' }));
+    
+  // }, []);
+
+  const handlePayment = () => {
+    dispatch(setAlert({ text: 'payment ssuccessfull!', color: 'success' })) 
+  };
+
+
   const handleNextStep = () => {
     if (step < 3) {
       setStep(step + 1);
@@ -76,13 +90,12 @@ function Cart(props) {
     console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
     let obj = {
       address: [address],
-
-
     }
     dispatch(addOrder({ ...obj, cart: cart.cart, uid: auth.user.uid, status: process }))
 
     console.log(obj);
   }
+
 
   let cartSchema = Yup.object().shape({
     name: Yup.string().required("please enter your name."),
@@ -128,6 +141,7 @@ function Cart(props) {
 
       >
         {({ isSubmitting, }) => (
+
           // console.log(values),
           // dispatch(addOrder(values)),
           <Form onSubmit={handleSubmit}>
@@ -437,9 +451,11 @@ function Cart(props) {
                   </Button>
                 )}
                 {step === 3 && (
-                  <Button type="submit" btntype='secondry' disabled={isSubmitting}>
-                    Payment
-                  </Button>
+                  <>
+                    <Button type="submit" btntype='secondry' onClick={handlePayment} disabled={isSubmitting} >
+                      Payment
+                    </Button>
+                  </>
                 )}
               </div>
             </div>
