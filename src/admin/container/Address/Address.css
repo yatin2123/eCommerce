@@ -1,7 +1,7 @@
 body{
     /* background:#eee; */
 }
-.card-ad {
+/* .card-ad {
     box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
 }
 .card-ad {
@@ -18,26 +18,23 @@ body{
 .text-reset {
     --bs-text-opacity: 1;
     color: inherit!important;
-}
+} */
 a {
     /* color: #5465ff; */
     text-decoration: none;
 }
 
-.card-body p {
+/* .card-body p {
     padding: 4px 10px 
-}
+} */
 
 .select-box select {
     width: 108px;
     padding: 6px 8px;
     margin-left: 87%;
 }
-.btn-box button{
-    padding: 3px 20px;
-    font-size: 18px;
-    /* border: 1px solid; */
-    background-color: white;
-    border: 1px solid;
-    border-radius: 5px;
+span{
+    margin-left: 20px;
+    margin-top: 15px; 
+
 }
