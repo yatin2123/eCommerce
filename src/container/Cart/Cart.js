@@ -117,6 +117,7 @@ function Cart(props) {
       flat_no: '',
       landmark: '',
       area: '',
+      house:'',
       amount: totalPrice,
     },
 
@@ -328,6 +329,16 @@ function Cart(props) {
                     value={values.landmark}
                   />
                   {errors.landmark && touched.landmark ? <span>{errors.landmark}</span> : null}
+                  <input
+                    type=""
+                    id="house"
+                    name="house"
+                    placeholder="house"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.house}
+                  />
+                  {errors.house && touched.house ? <span>{errors.house}</span> : null}
                 </div>
               )}
 

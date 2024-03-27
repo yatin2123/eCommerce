@@ -14,7 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrder } from '../../../container/slice/cartform.slice';
 import PreviewIcon from '@mui/icons-material/Preview';
 import { IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getproduct } from '../../../container/slice/product.slice';
 
 function Order(props) {
 
@@ -27,9 +28,23 @@ function Order(props) {
     const auth = useSelector(state => state.auth);
     console.log(auth);
 
+    const product = useSelector(state => state.product);
+    console.log(product);
+
+    const navigate = useNavigate()
+
     useEffect(() => {
-        dispatch(getOrder())
+        dispatch(getOrder());
+        dispatch(getproduct())
     }, [])
+
+    const cartdata = product.product.map((v) => {
+        // console.log(v);
+        let med = order.order.find((m) => m.cart.some((c) => c.id === v.id));
+        // console.log(med);
+        return { ...med, data: v };
+    });
+    console.log(cartdata);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -51,6 +66,7 @@ function Order(props) {
 
     const handlealldata = (data) => {
         console.log(data);
+        navigate('/admin/address',{ state: {  proData: data, fdata : cartdata, id: order} })
     }
 
     const columns = [
@@ -129,16 +145,17 @@ function Order(props) {
             width: 110,
             editable: true,
             renderCell: (params) => {
+                console.log(params);
                 return (
                     <>
-                        <Link to={'/admin/address'}>
+                        {/* <Link to={'/admin/address'}> */}
                             <IconButton
                                 aria-label="delete"
                                 onClick={() => handlealldata(params.row)}
                             >
                                 <PreviewIcon />
                             </IconButton>
-                        </Link>
+                        {/* </Link> */}
                     </>
                 )
             }
