@@ -100,7 +100,7 @@ function Header({ cart }) {
                   <div class="header-item item-left">
                     <div class="logo nav-item">
                       {/* <a href="#">logo</a> */}
-                      <img src="https://www.shutterstock.com/image-vector/shop-logo-good-260nw-1290022027.jpg"></img>
+                      <img src="https://www.shutterstock.com/image-vector/creative-modern-abstract-ecommerce-logo-260nw-2134594701.jpg"></img>
                     </div>
                   </div>
 

@@ -19,22 +19,107 @@ body{
     --bs-text-opacity: 1;
     color: inherit!important;
 } */
-a {
-    /* color: #5465ff; */
-    text-decoration: none;
-}
+
 
 /* .card-body p {
     padding: 4px 10px 
 } */
 
 .select-box select {
-    width: 108px;
-    padding: 6px 8px;
-    margin-left: 87%;
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 0.9vh 1vh;
+        /* margin-bottom: 4vh; */
+        outline: none;
+        width: 18% !important;
+        background-color: rgb(247, 247, 247);
+        margin-left: 81% !important;
+        border: none !important;
 }
 span{
     margin-left: 20px;
-    margin-top: 15px; 
-
+    margin-top: 15px;
 }
+
+.btn-box{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.add-card{
+    width: 50%;
+    padding: 20px;
+    background-color: #f6f6f6;
+}
+.form-outline img{
+    width: 100px;
+    height: 100px;
+}
+.row-des{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px;
+}
+.m-box{
+    width: 100%;
+    /* border: 1px solid; */
+    /* height: 100%; */
+    display: flex;
+    margin-top: 25px;
+    border-radius: 5px;
+}
+.add-box{
+    width: 50%;
+    /* border: 1px solid; */
+    /* height: 100%; */
+    padding: 50px 0px;
+    background-color: #f7f7f7;
+}
+.user-box{
+    width: 45%;
+    /* border: 1px solid red; */
+    /* height: 100%; */
+    padding: 50px 0px;
+    margin-left: 44px;
+    background-color: #f7f7f7;
+}
+.name-box,.email-box, .city-box, .pincode-box{
+    margin: 10px 0px;
+}
+.name-box span{
+    margin-left: 40%;
+}
+.email-box span{
+    margin-left: 40%;
+}
+.city-box span{
+    margin-left: 43%;
+}
+.pincode-box span{
+    margin-left: 36%;
+}
+h3{
+    margin-bottom: 30px;
+    padding: 0px 20px;
+}
+.user-n-box, .user-r-box {
+    margin: 10px 0 ;
+}
+.user-n-box span, .user-r-box span{
+    margin-left: 36%;
+}
+.add-d-box{
+    padding: 20px;
+}
+.user-d-box{
+    padding: 20px;
+}
+.btn-box button{
+    margin-left: 91% !important;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f7f7f7;
+}
+
+

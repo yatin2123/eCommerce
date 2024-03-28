@@ -114,6 +114,13 @@ a {
 .select-box-one{
 	margin-right: 55px;
 }
+span {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+}
+.css-i4bv87-MuiSvgIcon-root {
+    font-size: 20px !important;
+}
 .select-box-one select{
 	
 		border: 1px solid rgba(0, 0, 0, 0.137);

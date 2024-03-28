@@ -19,6 +19,7 @@ import Quiz from "../component/Quiz/Quiz";
 import Review from "../container/Review/Review";
 import Orderdata from "../container/Orderdata/Orderdata";
 import Orderlist from "../container/Orderlist/Orderlist";
+import Message from "../container/Message/Message";
 
 function Userroute(props) {
 
@@ -43,6 +44,7 @@ function Userroute(props) {
         <Route exact path="/orderdata" element={<Orderdata />} />
         <Route exact path="/orderlist" element={<Orderlist />} />
         <Route exact path="/auth" element={<Auth />} />
+        <Route exact path="/message" element={<Message />} />
       </Routes>
 
       <Footer />

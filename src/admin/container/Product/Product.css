@@ -4,6 +4,9 @@ form .btn-box{
     margin-bottom: 25px;
     margin-left: 89%;
 }
+.btn-box button {
+    margin-left: 26% !important;
+}
 
 img{
     /* width: 3.5rem; */

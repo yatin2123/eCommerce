@@ -39,10 +39,11 @@ function Order(props) {
     }, [])
 
     const cartdata = product.product.map((v) => {
-        // console.log(v);
         let med = order.order.find((m) => m.cart.some((c) => c.id === v.id));
-        // console.log(med);
+
+        console.log(med);
         return { ...med, data: v };
+
     });
     console.log(cartdata);
 
@@ -66,7 +67,8 @@ function Order(props) {
 
     const handlealldata = (data) => {
         console.log(data);
-        navigate('/admin/address',{ state: {  proData: data, fdata : cartdata, id: order} })
+
+        navigate('/admin/address', { state: { proData: data, fdata: cartdata } })
     }
 
     const columns = [
@@ -149,12 +151,12 @@ function Order(props) {
                 return (
                     <>
                         {/* <Link to={'/admin/address'}> */}
-                            <IconButton
-                                aria-label="delete"
-                                onClick={() => handlealldata(params.row)}
-                            >
-                                <PreviewIcon />
-                            </IconButton>
+                        <IconButton
+                            aria-label="delete"
+                            onClick={() => handlealldata(params.row)}
+                        >
+                            <PreviewIcon />
+                        </IconButton>
                         {/* </Link> */}
                     </>
                 )

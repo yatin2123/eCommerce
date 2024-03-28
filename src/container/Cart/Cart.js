@@ -10,6 +10,7 @@ import { addOrder, deleteorder } from "../slice/cartform.slice";
 import Button from "../../component/Button/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { setAlert } from "../slice/alert.slice";
+import { useNavigate } from "react-router-dom";
 
 function Cart(props) {
   const product = useSelector((state) => state.product);
@@ -19,6 +20,7 @@ function Cart(props) {
 
   const auth = useSelector(state => state.auth)
   console.log(auth.user.uid);
+  const navigate = useNavigate()
 
   const categoryOptions = [];
   categoryOptions.push(product.product);
@@ -63,16 +65,9 @@ function Cart(props) {
 
   const [step, setStep] = useState(1);
 
-  // useEffect(() => {
-  
-   
-
-  //     dispatch(setAlert({ text: 'message', color: 'success' }));
-    
-  // }, []);
-
   const handlePayment = () => {
-    dispatch(setAlert({ text: 'payment ssuccessfull!', color: 'success' })) 
+    dispatch(setAlert({ text: 'payment ssuccessfull!', color: 'success' })) ;
+    // navigate('/container/message')
   };
 
 
@@ -358,7 +353,7 @@ function Cart(props) {
                                     </h4>
                                   </div>
                                   <div className="col align-self-center text-right text-muted">
-                                    3 items
+                                    {v.qty}
                                   </div>
                                 </div>
                               </div>
@@ -463,6 +458,7 @@ function Cart(props) {
                 )}
                 {step === 3 && (
                   <>
+                  
                     <Button type="submit" btntype='secondry' onClick={handlePayment} disabled={isSubmitting} >
                       Payment
                     </Button>

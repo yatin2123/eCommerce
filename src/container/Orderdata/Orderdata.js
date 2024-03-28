@@ -106,7 +106,7 @@ function Orderdata() {
 
                                 <tr>
                                     <td>Shipping</td>
-                                    <td>{   }</td>
+                                    <td>{location.state.fdata.status}</td>
                                 </tr>
                             </table><br />
                             <div>
